@@ -1,13 +1,19 @@
-﻿namespace DoomMapGuessr.ViewModels
+﻿using CommunityToolkit.Mvvm.Input;
+
+using DoomMapGuessr.Services;
+
+
+namespace DoomMapGuessr.ViewModels
 {
 
-	public class HomePageViewModel : ViewModelBase
-	{
+    public partial class HomePageViewModel(INavigationService? navigationService = null) : ViewModelBase
+    {
 
-		public HomePageViewModel() { }
+        private INavigationService? NavigationService { get; } = navigationService;
 
+        [RelayCommand]
+        private void NavigateToUnlockables() => NavigationService?.NavigateTo("AchievementsUnlockables");
 
-
-	}
+    }
 
 }

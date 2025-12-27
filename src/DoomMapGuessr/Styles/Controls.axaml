@@ -100,6 +100,19 @@
 					<TextBox Width="300" Classes="italic bold">Regular TextBlock formatting is available. By the way, these regular text boxes have word wrap enabled! Pretty good for when you have long text in such a short text box, like this one.</TextBox>
 					<TextBox Classes="code" Text="def this_is_code(x: int, y: int) -> int:&#10;    # this stupid function sums numbers&#10;    return x + y" />
 				</StackPanel>
+
+
+
+				<!--
+				<StackPanel Grid.Column="2" Grid.Row="0" Margin="8" Orientation="Vertical" Spacing="4">
+					<TextBlock Classes="title">CodeBlock (Border)</TextBlock>
+					<ScrollViewer>
+						<Border Classes="code">
+							<TextBlock Text="using System;&#10;&#10;internal class Program&#10;{&#10;    static void Main(string[] args)&#10;    {&#10;        Console.WriteLine(&#34;Hello, everyone! This is Controls.axaml, a file with styles for most of the Avalonia pre-built controls! :)&#34;);&#10;    }&#10;}" />
+						</Border>
+					</ScrollViewer>
+				</StackPanel>
+				-->
 			</Grid>
 		</Border>
 	</Design.PreviewWith>

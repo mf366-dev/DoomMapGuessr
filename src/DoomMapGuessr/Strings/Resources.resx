@@ -211,13 +211,9 @@
     <value>Your Items</value>
   </data>
   <data name="Flavor_Unlockables_Description" xml:space="preserve">
-    <value>Watch your achievements
-turn into items!
-The more you play,
-the more you get!
-From backgrounds to
-game modes, it's rip
-and tear until it is done.</value>
+    <value>Watch your achievements turn into items!
+The more you play, the more you get!
+From backgrounds to game modes, it's rip and tear until it is done.</value>
   </data>
   <data name="NoConnection" xml:space="preserve">
     <value>No connection available</value>

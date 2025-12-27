@@ -5,5 +5,6 @@
     <File Path="LICENSE.txt" />
     <File Path="README.md" />
   </Folder>
+  <Project Path="DoomMapGuessr.CommonServices/DoomMapGuessr.CommonServices.csproj" Id="d05c366a-03a6-477f-9ba2-deaafffecdda" />
   <Project Path="src/DoomMapGuessr/DoomMapGuessr.csproj" />
 </Solution>

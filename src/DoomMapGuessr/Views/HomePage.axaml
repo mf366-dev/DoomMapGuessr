@@ -11,39 +11,37 @@
 		<vm:HomePageViewModel />
 	</Design.DataContext>
 
-	<Grid ColumnDefinitions="*, Auto">
-		<Grid Grid.Column="0" RowDefinitions="Auto, Auto, *, Auto">
+	<ScrollViewer>
+		<Grid RowDefinitions="Auto, Auto, *, Auto">
 			<Border Grid.Row="0" Classes="card">
 				<Border.Background>
 					<ImageBrush Source="avares://DoomMapGuessr/Assets/Backgrounds/DOOM_TITLEPIC.png"
 								Opacity="0.3"
 								Stretch="UniformToFill"/>
 				</Border.Background>
-				<StackPanel Orientation="Horizontal"
-							Spacing="8"
-							VerticalAlignment="Bottom"
-							HorizontalAlignment="Stretch">
-					<PathIcon Data="{DynamicResource Geometry.Trophy_600}" Width="64" Height="64" />
-					<StackPanel>
-						<TextBlock Classes="display" Text="{x:Static strings:Resources.Flavor_Unlockables}" />
-						<TextBlock Text="{x:Static strings:Resources.Flavor_Unlockables_Description}" />
+				<Grid ColumnDefinitions="Auto, *, Auto">
+					<PathIcon Grid.Column="0"
+							  Margin="16"
+							  Data="{DynamicResource Geometry.Trophy_600}"
+							  Width="64"
+							  Height="64" />
+					<StackPanel Grid.Column="1" Margin="16">
+						<TextBlock Classes="display"
+								   Text="{x:Static strings:Resources.Flavor_Unlockables}" />
+						<TextBlock Text="{x:Static strings:Resources.Flavor_Unlockables_Description}"
+								   TextWrapping="Wrap" />
 					</StackPanel>
-					<Button Classes="circle" Width="64" Height="64" HorizontalAlignment="Right">
-						<PathIcon Data="{DynamicResource Geometry.ArrowForward_600}" Width="32" Height="32" />
-						<!-- todo: this bs -->
+					<Button Grid.Column="2"
+							Margin="16"
+							Classes="circle"
+							HorizontalContentAlignment="Center"
+							Width="36"
+							Height="36"
+							Command="{Binding NavigateToUnlockablesCommand}">
+						<PathIcon Data="{DynamicResource Geometry.ArrowForward_600}" Width="16" Height="16" />
 					</Button>
-				</StackPanel>
+				</Grid>
 			</Border>
 		</Grid>
-		<Grid Grid.Column="1" RowDefinitions="*, Auto, Auto, *">
-			<Border Grid.Row="0" Classes="card">
-				<StackPanel Orientation="Vertical" Spacing="2">
-					<StackPanel Orientation="Horizontal" Spacing="4">
-						<TextBlock Classes="h2" FontFamily="{StaticResource MaterialRounded}">brush</TextBlock>
-						<TextBlock Classes="h2" Text="{x:Static strings:Resources.Settings_AppInterface}" />
-					</StackPanel>
-				</StackPanel>
-			</Border>
-		</Grid>
-	</Grid>
+	</ScrollViewer>
 </UserControl>

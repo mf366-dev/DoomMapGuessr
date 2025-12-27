@@ -16,7 +16,7 @@ namespace DoomMapGuessr.Services
     {
 
         public static ApplicationSettings Shared { get; } = new ApplicationSettings(
-            Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "mf366.dev.DoomMapGuessr")
+            Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.DoomMapGuessr")
         ).PrepareDirectory();
 
         public ApplicationCache? Cache { get; internal set; }

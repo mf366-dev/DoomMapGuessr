@@ -211,13 +211,8 @@
     <value>Os teus itens</value>
   </data>
   <data name="Flavor_Unlockables_Description" xml:space="preserve">
-    <value>Quanto mais jogares,
-mais desbloqueias!
-Desde imagens
-de fundo a novos
-modos de jogo,
-é rip and tear
-until it is done!</value>
+    <value>Quanto mais jogares, mais desbloqueias!
+Desde imagens de fundo a novos modos de jogo, é rip and tear until it is done!</value>
   </data>
   <data name="NoConnection" xml:space="preserve">
     <value>Sem ligação de rede</value>

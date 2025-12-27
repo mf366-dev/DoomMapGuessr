@@ -30,36 +30,7 @@ namespace DoomMapGuessr
 
 			// remove each entry found
 			foreach (var plugin in dataValidationPluginsToRemove)
-                _ = BindingPlugins.DataValidators.Remove(plugin);
-
-		}
-
-		private static void PrepareAppSettings()
-		{
-
-			// IMPORTANT: APPLICATION SETTINGS SETUP
-			if (!ApplicationSettings.Shared.Settings.Sections.ContainsSection("Language"))
-				ApplicationSettings.Shared.Settings.Sections.Add(new("Language"));
-
-			if (!ApplicationSettings.Shared.Settings.Sections.ContainsSection("GUI"))
-				ApplicationSettings.Shared.Settings.Sections.Add(new("GUI"));
-
-			if (!ApplicationSettings.Shared.Settings["Language"].ContainsKey("Culture"))
-			{
-
-				ApplicationSettings.Shared.Settings["Language"]["Culture"] = allowedCultures.Contains(systemCulture, StringComparer.OrdinalIgnoreCase)
-																				 ? systemCulture
-																				 : allowedCultures[0];
-
-			}
-
-			if (!ApplicationSettings.Shared.Settings["GUI"].ContainsKey("FollowSystem"))
-				ApplicationSettings.Shared.Settings["GUI"]["FollowSystem"] = "1";
-
-			if (!ApplicationSettings.Shared.Settings["GUI"].ContainsKey("DarkMode"))
-				ApplicationSettings.Shared.Settings["GUI"]["DarkMode"] = "1";
-
-			ApplicationSettings.Shared.Save("config");
+				_ = BindingPlugins.DataValidators.Remove(plugin);
 
 		}
 
@@ -67,8 +38,6 @@ namespace DoomMapGuessr
 
 		public override void OnFrameworkInitializationCompleted()
 		{
-
-			PrepareAppSettings();
 
 			RequestedThemeVariant = ApplicationSettings.Shared.Settings["GUI"]["FollowSystem"] == "1"
 										? ThemeVariant.Default

@@ -19,8 +19,7 @@
 					   HorizontalAlignment="Center" />
 			<Button Classes="primary"
 					HorizontalAlignment="Center"
-					Content="{x:Static strings:Resources.Retry}"
-					Click="OnRetryButtonClick" />
+					Content="{x:Static strings:Resources.Retry}" />
 		</StackPanel>
 	</Border>
 </Window>
