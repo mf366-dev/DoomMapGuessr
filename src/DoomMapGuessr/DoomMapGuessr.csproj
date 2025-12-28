@@ -43,7 +43,7 @@
 		</Compile>
 
 		<Compile Update="Views\AchievementsUnlockablesPage.axaml.cs">
-		  <DependentUpon>AchievementsUnlockablesPage.axaml</DependentUpon>
+			<DependentUpon>AchievementsUnlockablesPage.axaml</DependentUpon>
 		</Compile>
 
 		<EmbeddedResource Update="Strings\Resources.pt-PT.resx">
@@ -75,6 +75,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\DoomMapGuessr.CommonServices\DoomMapGuessr.CommonServices.csproj" />
+		<ProjectReference Include="..\DoomMapGuessr.CommonServices\DoomMapGuessr.CommonServices.csproj" />
 	</ItemGroup>
 </Project>

@@ -195,7 +195,7 @@ namespace DoomMapGuessr.Services.Markdown
                 1 => FontWeight.Black,
                 2 => FontWeight.Bold,
                 3 => FontWeight.Bold,
-                _ => ((FontWeight?)(int?)(Application.Current?.FindResource("Font.IdealWeight"))) ?? FontWeight.Normal, // holy shiiit
+                _ => FontWeight.Normal, // just assume normal instead of IdealWeight
 
             };
 
