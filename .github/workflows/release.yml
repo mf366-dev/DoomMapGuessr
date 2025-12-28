@@ -1,4 +1,4 @@
-name: Release new version on GitHub (does not generate release body)
+name: Automated Release on GitHub (does not generate release body)
 
 on:
   push:
@@ -7,10 +7,21 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        rid: [win-x64, win-arm64, linux-x64, macos-x64, macos-arm64]
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        include:
+          - os: windows-latest
+            rid: win-x64
+          - os: windows-latest
+            rid: win-arm64
+          - os: ubuntu-latest
+            rid: linux-x64
+          - os: macos-latest
+            rid: macos-x64
+          - os: macos-latest
+            rid: macos-arm64
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -43,7 +54,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifacts
+      - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
           path: release_assets
