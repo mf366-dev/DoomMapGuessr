@@ -105,12 +105,12 @@
 
 				<!--
 				<StackPanel Grid.Column="2" Grid.Row="0" Margin="8" Orientation="Vertical" Spacing="4">
-					<TextBlock Classes="title">CodeBlock (Border)</TextBlock>
-					<ScrollViewer>
-						<Border Classes="code">
-							<TextBlock Text="using System;&#10;&#10;internal class Program&#10;{&#10;    static void Main(string[] args)&#10;    {&#10;        Console.WriteLine(&#34;Hello, everyone! This is Controls.axaml, a file with styles for most of the Avalonia pre-built controls! :)&#34;);&#10;    }&#10;}" />
-						</Border>
-					</ScrollViewer>
+				<TextBlock Classes="title">CodeBlock (Border)</TextBlock>
+				<ScrollViewer>
+				<Border Classes="code">
+				<TextBlock Text="using System;&#10;&#10;internal class Program&#10;{&#10;    static void Main(string[] args)&#10;    {&#10;        Console.WriteLine(&#34;Hello, everyone! This is Controls.axaml, a file with styles for most of the Avalonia pre-built controls! :)&#34;);&#10;    }&#10;}" />
+				</Border>
+				</ScrollViewer>
 				</StackPanel>
 				-->
 			</Grid>
@@ -222,54 +222,65 @@
 		<Setter Property="Foreground" Value="{DynamicResource Color.Text}" />
 		<Setter Property="FontWeight" Value="{DynamicResource Font.IdealWeight}" />
 		<Setter Property="FontSize" Value="14" />
+		<Setter Property="TextWrapping" Value="Wrap" />
 		<!-- Display size -->
 		<Style Selector="^.display">
 			<Setter Property="FontWeight" Value="Bold" />
 			<Setter Property="FontSize" Value="32" />
+			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Heading 1 -->
 		<Style Selector="^.h1, ^.title">
 			<Setter Property="FontWeight" Value="Black" />
 			<Setter Property="FontSize" Value="28" />
+			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Heading 2 -->
 		<Style Selector="^.h2">
 			<Setter Property="FontWeight" Value="Bold" />
 			<Setter Property="FontSize" Value="24" />
+			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Heading 3 -->
 		<Style Selector="^.h3">
 			<Setter Property="FontWeight" Value="Bold" />
 			<Setter Property="FontSize" Value="20" />
+			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Caption Text -->
 		<Style Selector="^.caption, ^.small">
 			<Setter Property="FontWeight" Value="Normal" />
 			<Setter Property="FontSize" Value="10" />
 			<Setter Property="Foreground" Value="{DynamicResource Brush.Gray500}" />
+			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Disabled Text -->
 		<Style Selector="^.disabled, ^:disabled, ^[IsEnabled=false]">
 			<Setter Property="Foreground" Value="{DynamicResource Gray700}" />
+			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Bold Text -->
 		<Style Selector="^.bold">
 			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Light Text -->
 		<Style Selector="^.light">
 			<Setter Property="FontWeight" Value="Light" />
+			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Italic Text -->
 		<Style Selector="^.italic">
 			<Setter Property="FontStyle" Value="Italic" />
+			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Monospace Text -->
-		<Style Selector="^.mono, ^.code">
+		<Style Selector="^.mono, ^.code, ^.CodeBlock">
 			<Setter Property="FontFamily" Value="{StaticResource CascadiaCode}" />
 			<Setter Property="FontWeight" Value="SemiBold" />
 			<Setter Property="FontSize" Value="14" />
 			<Setter Property="LineSpacing" Value="1.4" />
+			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Icon -->
 		<Style Selector="^.icon">

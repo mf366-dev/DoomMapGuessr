@@ -1,11 +1,11 @@
 ﻿namespace DoomMapGuessr.ViewModels
 {
 
-	public class AchievementsUnlockablesViewModel : ViewModelBase
-	{
+    public class AchievementsUnlockablesViewModel : ViewModelBase
+    {
 
-		public AchievementsUnlockablesViewModel() { }
+        public AchievementsUnlockablesViewModel() { }
 
-	}
+    }
 
 }

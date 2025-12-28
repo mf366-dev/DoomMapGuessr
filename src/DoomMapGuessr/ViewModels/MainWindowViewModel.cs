@@ -9,103 +9,103 @@ using DoomMapGuessr.Views;
 namespace DoomMapGuessr.ViewModels
 {
 
-	public partial class MainWindowViewModel : ViewModelBase, INavigationService
-	{
+    public partial class MainWindowViewModel : ViewModelBase, INavigationService
+    {
 
-		[ObservableProperty]
-		private UserControl currentPage;
+        [ObservableProperty]
+        private UserControl currentPage;
 
-		[ObservableProperty]
-		private bool isSidebarOpen = true;
+        [ObservableProperty]
+        private bool isSidebarOpen = true;
 
-		public MainWindowViewModel()
-		{
+        public MainWindowViewModel()
+        {
 
-			HomePageViewModel dataCtx = new(this);
-			ViewModelArchive.Set(dataCtx);
+            HomePageViewModel dataCtx = new(this);
+            ViewModelArchive.Set(dataCtx);
 
-			CurrentPage = new HomePage
-			{
-				DataContext = dataCtx
-			};
+            CurrentPage = new HomePage
+            {
+                DataContext = dataCtx
+            };
 
-		}
+        }
 
-		public void NavigateTo(string pageName)
-		{
+        public void NavigateTo(string pageName)
+        {
 
-			switch (pageName)
-			{
+            switch (pageName)
+            {
 
-				case "Home":
-					if (!ViewModelArchive.TryGet<HomePageViewModel>(out var homePageViewModel))
-					{
+                case "Home":
+                    if (!ViewModelArchive.TryGet<HomePageViewModel>(out var homePageViewModel))
+                    {
 
-						homePageViewModel = new(this);
-						ViewModelArchive.Set(homePageViewModel);
+                        homePageViewModel = new(this);
+                        ViewModelArchive.Set(homePageViewModel);
 
-					}
+                    }
 
-					CurrentPage = new HomePage
-					{
-						DataContext = homePageViewModel
-					};
+                    CurrentPage = new HomePage
+                    {
+                        DataContext = homePageViewModel
+                    };
 
-					break;
+                    break;
 
-				case "AchievementsUnlockables":
-					if (!ViewModelArchive.TryGet<AchievementsUnlockablesViewModel>(out var achievementsUnlockablesViewModel))
-					{
+                case "AchievementsUnlockables":
+                    if (!ViewModelArchive.TryGet<AchievementsUnlockablesViewModel>(out var achievementsUnlockablesViewModel))
+                    {
 
-						achievementsUnlockablesViewModel = new();
-						ViewModelArchive.Set(achievementsUnlockablesViewModel);
+                        achievementsUnlockablesViewModel = new();
+                        ViewModelArchive.Set(achievementsUnlockablesViewModel);
 
-					}
+                    }
 
-					CurrentPage = new AchievementsUnlockablesPage
-					{
-						DataContext = achievementsUnlockablesViewModel
-					};
+                    CurrentPage = new AchievementsUnlockablesPage
+                    {
+                        DataContext = achievementsUnlockablesViewModel
+                    };
 
-					break;
+                    break;
 
-				case "Settings":
-					if (!ViewModelArchive.TryGet<SettingsPageViewModel>(out var settingsPageViewModel))
-					{
+                case "Settings":
+                    if (!ViewModelArchive.TryGet<SettingsPageViewModel>(out var settingsPageViewModel))
+                    {
 
-						settingsPageViewModel = new();
-						ViewModelArchive.Set(settingsPageViewModel);
+                        settingsPageViewModel = new();
+                        ViewModelArchive.Set(settingsPageViewModel);
 
-					}
+                    }
 
-					CurrentPage = new SettingsPage
-					{
-						DataContext = settingsPageViewModel
-					};
+                    CurrentPage = new SettingsPage
+                    {
+                        DataContext = settingsPageViewModel
+                    };
 
-					break;
+                    break;
 
-				case "CloseSidebarPane":
-					IsSidebarOpen = false;
+                case "CloseSidebarPane":
+                    IsSidebarOpen = false;
 
-					break;
+                    break;
 
-				case "OpenSidebarPane":
-					IsSidebarOpen = true;
+                case "OpenSidebarPane":
+                    IsSidebarOpen = true;
 
-					break;
+                    break;
 
-				case "ToggleSidebarPane":
-					IsSidebarOpen = !IsSidebarOpen;
+                case "ToggleSidebarPane":
+                    IsSidebarOpen = !IsSidebarOpen;
 
-					break;
+                    break;
 
-			}
+            }
 
-		}
+        }
 
-		public void NavigateTo(string pageName, object? parameter) => NavigateTo(pageName);
+        public void NavigateTo(string pageName, object? parameter) => NavigateTo(pageName);
 
-	}
+    }
 
 }

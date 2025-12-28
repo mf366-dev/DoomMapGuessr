@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 using IniParser.Model;
@@ -14,6 +15,10 @@ namespace DoomMapGuessr.Services
         string directoryPath
     ) : IEquatable<ApplicationSettings>
     {
+
+        public static Version? AssemblyVersion => Assembly.GetEntryAssembly()?.GetName().Version;
+
+        public static string? AppVersion => AssemblyVersion is null ? null : $"{AssemblyVersion.Major}{AssemblyVersion.Minor}{AssemblyVersion.Build}";
 
         public static ApplicationSettings Shared { get; } = new ApplicationSettings(
             Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.DoomMapGuessr")

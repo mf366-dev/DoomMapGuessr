@@ -9,9 +9,17 @@
 
 		<Title>DoomMapGuessr</Title>
 		<PackageTitle>matt-doommapguessr</PackageTitle>
-		<ApplicationVersion>1.0.0</ApplicationVersion>
+		<!-- Used for actual versioning -->
+		<Version>3.0.0-dev</Version>
 		<Authors>Matthew</Authors>
-		<SourceRevisionId></SourceRevisionId>
+		
+		<!--
+		Used internally for version checks
+		The last number refers to "revision":
+		- 0 if stable
+		- 1 if beta/dev/alpha
+		-->
+		<AssemblyVersion>3.0.0.1</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -65,9 +73,13 @@
 
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="AvaloniaUI.DiagnosticsSupport" Version="2.1.1" />
 
+		<PackageReference Include="ColorTextBlock.Avalonia" Version="11.0.3-a1" />
+
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 
 		<PackageReference Include="ini-parser" Version="2.5.2" />
+
+		<PackageReference Include="Markdown.Avalonia" Version="11.0.3-a1" />
 	</ItemGroup>
 
 	<ItemGroup>

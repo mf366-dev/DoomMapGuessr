@@ -7,7 +7,7 @@
         },
         "Version": {
             "$type": "msbuild",
-            "property": "ApplicationVersion"
+            "property": "Version"
         },
         "PackageName": {
             "$type": "msbuild",

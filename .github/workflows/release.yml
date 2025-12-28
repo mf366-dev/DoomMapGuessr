@@ -1,0 +1,63 @@
+name: Release new version on GitHub (does not generate release body)
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rid: [win-x64, win-arm64, linux-x64, macos-x64, macos-arm64]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 10 SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore src/DoomMapGuessr.slnx
+
+      - name: Publish self-contained NativeAOT app
+        run: |
+          dotnet publish src/DoomMapGuessr/DoomMapGuessr.csproj \
+            -c Release \
+            -r ${{ matrix.rid }} \
+            /p:PublishAot=true \
+            /p:PublishSingleFile=true \
+            /p:TrimUnusedDependencies=true \
+            -o publish/${{ matrix.rid }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: DoomMapGuessr-${{ matrix.rid }}
+          path: publish/${{ matrix.rid }}
+
+  create_release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release_assets
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Assets
+        run: |
+          for f in release_assets/*; do
+            gh release upload ${{ github.ref_name }} "$f" --clobber
+          done

@@ -6,25 +6,34 @@ using DoomMapGuessr.Services;
 namespace DoomMapGuessr.ViewModels
 {
 
-	public partial class HomePageViewModel(INavigationService? navigationService = null) : ViewModelBase
-	{
+    public partial class HomePageViewModel(INavigationService? navigationService = null) : ViewModelBase
+    {
 
-		private INavigationService? NavigationService { get; } = navigationService;
+        private INavigationService? NavigationService { get; } = navigationService;
 
-		[RelayCommand]
-		private void NavigateToUnlockables() => NavigationService?.NavigateTo("AchievementsUnlockables");
+        public string LatestReleaseBody =>
+            ApplicationSettings.Shared.Cache?.SavedRelease?.Body is null
+                ? "# No release data found.\nSomething went wrong."
+                : (ApplicationSettings.Shared.Cache.SavedRelease.TagName[1..] == ApplicationSettings.AppVersion
+                    ? $"# What's new in this version?\n> DoomMapGuessr {ApplicationSettings.Shared.Cache.SavedRelease.TagName}\n{ApplicationSettings.Shared.Cache.SavedRelease.Body}"
+                    : (ApplicationSettings.AssemblyVersion?.Revision == 1
+                        ? $"# You're using a dev build of DoomMapGuessr\nUpdate to a stable build to see release info."
+                        : $"# New version available! What's new?\n> DoomMapGuessr {ApplicationSettings.Shared.Cache.SavedRelease.TagName}\n{ApplicationSettings.Shared.Cache.SavedRelease.Body}"));
 
-		[RelayCommand]
-		private void OpenGitHubRepo()
-		{
+        [RelayCommand]
+        private void NavigateToUnlockables() => NavigationService?.NavigateTo("AchievementsUnlockables");
 
-			if (ApplicationSettings.Shared.Cache?.SavedRelease?.HtmlUrl is null)
-				return;
+        [RelayCommand]
+        private void OpenGitHubRepo()
+        {
 
-			_ = WebBrowser.OpenUrl(ApplicationSettings.Shared.Cache.SavedRelease.HtmlUrl);
+            if (ApplicationSettings.Shared.Cache?.SavedRelease?.HtmlUrl is null)
+                return;
 
-		}
+            _ = WebBrowserService.OpenUrl(ApplicationSettings.Shared.Cache.SavedRelease.HtmlUrl);
 
-	}
+        }
+
+    }
 
 }

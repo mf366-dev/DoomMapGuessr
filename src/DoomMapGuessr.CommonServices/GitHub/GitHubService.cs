@@ -13,21 +13,21 @@ namespace DoomMapGuessr.CommonServices.GitHub
     {
 
         private readonly HttpClient client;
-		private readonly JsonSerializerOptions options = new()
-		{
+        private readonly JsonSerializerOptions options = new()
+        {
 
-			PropertyNameCaseInsensitive = true
+            PropertyNameCaseInsensitive = true
 
-		};
+        };
 
-		/// <summary>
-		/// Initializes a new GitHub service.
-		/// </summary>
-		/// <param name="owner">The repo owner</param>
-		/// <param name="repo">The repo name</param>
-		/// <param name="tag">The tag name or <c>latest</c> if <c>null</c></param>
-		/// <param name="userAgent">The user agent; mark <c>null</c> to use the default</param>
-		public GitHubService(string owner, string repo, string? tag = null, string? userAgent = null)
+        /// <summary>
+        /// Initializes a new GitHub service.
+        /// </summary>
+        /// <param name="owner">The repo owner</param>
+        /// <param name="repo">The repo name</param>
+        /// <param name="tag">The tag name or <c>latest</c> if <c>null</c></param>
+        /// <param name="userAgent">The user agent; mark <c>null</c> to use the default</param>
+        public GitHubService(string owner, string repo, string? tag = null, string? userAgent = null)
         {
 
             Owner = owner;
