@@ -20,6 +20,13 @@
 		- 1 if beta/dev/alpha
 		-->
 		<AssemblyVersion>3.0.0.1</AssemblyVersion>
+
+		<!--
+		Do not warn about "oh ini-parser .net framework"
+		nuget stop bitching
+		fucking do your job
+		-->
+		<NoWarn>$(NoWarn);NU1701</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -80,13 +87,11 @@
 		<PackageReference Include="ini-parser" Version="2.5.2" />
 
 		<PackageReference Include="Markdown.Avalonia" Version="11.0.3-a1" />
+
+		<PackageReference Include="Octokit" Version="14.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<UpToDateCheckInput Remove="Resources\Fonts.axaml" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\DoomMapGuessr.CommonServices\DoomMapGuessr.CommonServices.csproj" />
 	</ItemGroup>
 </Project>

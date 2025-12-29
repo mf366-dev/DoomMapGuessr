@@ -22,8 +22,8 @@
 						<md:MarkdownScrollViewer.Styles>
 							<Style Selector="ctxt|CTextBlock.Heading1">
 								<Setter Property="FontFamily" Value="Inter" />
-								<Setter Property="FontWeight" Value="Black" />
-								<Setter Property="FontSize" Value="28" />
+								<Setter Property="FontWeight" Value="Bold" />
+								<Setter Property="FontSize" Value="32" />
 							</Style>
 
 							<Style Selector=".Blockquote ctxt|CTextBlock.Heading1">
@@ -33,8 +33,8 @@
 
 							<Style Selector="ctxt|CTextBlock.Heading2">
 								<Setter Property="FontFamily" Value="Inter" />
-								<Setter Property="FontWeight" Value="Bold" />
-								<Setter Property="FontSize" Value="24" />
+								<Setter Property="FontWeight" Value="ExtraBold" />
+								<Setter Property="FontSize" Value="28" />
 							</Style>
 
 							<Style Selector=".Blockquote ctxt|CTextBlock.Heading2">
@@ -45,13 +45,25 @@
 							<Style Selector="ctxt|CTextBlock.Heading3">
 								<Setter Property="FontFamily" Value="Inter" />
 								<Setter Property="FontWeight" Value="Bold" />
-								<Setter Property="FontSize" Value="20" />
+								<Setter Property="FontSize" Value="24" />
 							</Style>
 
 							<Style Selector=".Blockquote ctxt|CTextBlock.Heading3">
 								<Setter Property="FontWeight" Value="SemiLight"/>
 								<Setter Property="FontStyle" Value="Italic"/>
 							</Style>
+
+							<Style Selector="ctxt|CTextBlock.Heading4">
+								<Setter Property="FontFamily" Value="Inter" />
+								<Setter Property="FontWeight" Value="Bold" />
+								<Setter Property="FontSize" Value="20" />
+							</Style>
+
+							<Style Selector=".Blockquote ctxt|CTextBlock.Heading4">
+								<Setter Property="FontWeight" Value="SemiLight"/>
+								<Setter Property="FontStyle" Value="Italic"/>
+							</Style>
+
 						</md:MarkdownScrollViewer.Styles>
 					</md:MarkdownScrollViewer>
 					<Button Grid.Row="1"

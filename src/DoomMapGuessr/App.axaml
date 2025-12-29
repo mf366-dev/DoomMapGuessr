@@ -1,11 +1,13 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="DoomMapGuessr.App"
+             xmlns:helpers="clr-namespace:DoomMapGuessr.Helpers"
+			 x:Class="DoomMapGuessr.App"
              RequestedThemeVariant="Default">
 	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
 	<Application.Resources>
 		<ResourceDictionary>
+			<!-- merged dicts -->
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="avares://DoomMapGuessr/Styles/ColorsFonts.axaml" />
 				<ResourceInclude Source="avares://DoomMapGuessr/Styles/MaterialSymbols.axaml" />
@@ -27,6 +29,9 @@
 			<FontFamily x:Key="CascadiaCode">
 				avares://DoomMapGuessr/Assets/Fonts/cascadia-code.ttf#Cascadia Code
 			</FontFamily>
+
+			<!-- converters -->
+			<helpers:MultiplyConverter x:Key="MultiplyConverter" />
 		</ResourceDictionary>
 	</Application.Resources>
 

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using Avalonia.Data;
 
-using DoomMapGuessr.CommonServices.GitHub;
+using Octokit;
 
 
 namespace DoomMapGuessr.Services
@@ -15,7 +15,7 @@ namespace DoomMapGuessr.Services
     )
     {
 
-        public GitHubRelease? SavedRelease { get; set; } = null;
+        public Release? SavedRelease { get; set; } = null;
 
         public string AppCacheDirectory => Path.Join(applicationSettings.DirectoryPath, cacheDirName);
 

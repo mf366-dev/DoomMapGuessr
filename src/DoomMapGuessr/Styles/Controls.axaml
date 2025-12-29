@@ -231,7 +231,7 @@
 		</Style>
 		<!-- Heading 1 -->
 		<Style Selector="^.h1, ^.title">
-			<Setter Property="FontWeight" Value="Black" />
+			<Setter Property="FontWeight" Value="ExtraBold" />
 			<Setter Property="FontSize" Value="28" />
 			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
