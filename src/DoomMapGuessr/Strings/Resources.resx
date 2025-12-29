@@ -199,10 +199,10 @@
     <value>Save</value>
   </data>
   <data name="GuesserMode" xml:space="preserve">
-    <value>Guesser Mode</value>
+    <value>Classic Mode</value>
   </data>
   <data name="GeoMode" xml:space="preserve">
-    <value>Coordinate Mode</value>
+    <value>GeoGuessr Mode</value>
   </data>
   <data name="AchievementsUnlockables" xml:space="preserve">
     <value>Achievements &amp; Items</value>
@@ -220,5 +220,16 @@ From backgrounds to game modes, it's rip and tear until it is done.</value>
   </data>
   <data name="Retry" xml:space="preserve">
     <value>Retry</value>
+  </data>
+  <data name="Flavor_InclusionOfLegacyOfRust" xml:space="preserve">
+    <value>Legacy of Rust joins the alignment!</value>
+  </data>
+  <data name="Flavor_InclusionOfLegacyOfRust_Description" xml:space="preserve">
+    <value>The latest WAD to be developed by id Software joins the alignment of guessable WADs in this major DoomMapGuessr update!
+What are you waiting for?
+Start guessing now!</value>
+  </data>
+  <data name="ComingSoon" xml:space="preserve">
+    <value>Coming Soon</value>
   </data>
 </root>

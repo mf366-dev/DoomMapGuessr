@@ -24,6 +24,9 @@ namespace DoomMapGuessr.ViewModels
         private void NavigateToUnlockables() => NavigationService?.NavigateTo("AchievementsUnlockables");
 
         [RelayCommand]
+        private void NavigateToClassicMode() => NavigationService?.NavigateTo("GuesserMode");
+
+		[RelayCommand]
         private void OpenGitHubRepo()
         {
 

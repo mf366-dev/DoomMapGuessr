@@ -199,10 +199,10 @@
     <value>Salvar</value>
   </data>
   <data name="GuesserMode" xml:space="preserve">
-    <value>Modo de Adivinha</value>
+    <value>Modo Clássico</value>
   </data>
   <data name="GeoMode" xml:space="preserve">
-    <value>Modo de Coordenadas</value>
+    <value>Modo de GeoGuessr</value>
   </data>
   <data name="AchievementsUnlockables" xml:space="preserve">
     <value>Conquistas &amp; Itens</value>
@@ -219,5 +219,16 @@ Desde imagens de fundo a novos modos de jogo, é rip and tear until it is done!<
   </data>
   <data name="Retry" xml:space="preserve">
     <value>Tentar de novo</value>
+  </data>
+  <data name="Flavor_InclusionOfLegacyOfRust" xml:space="preserve">
+    <value>Agora com 'Legacy of Rust'</value>
+  </data>
+  <data name="Flavor_InclusionOfLegacyOfRust_Description" xml:space="preserve">
+    <value>O WAD mais recentemente desenvolvido pela id Software se juntou à lista de WADs adivinháveis nessa enorme atualização de DoomMapGuessr!
+Do que você está à espera?!
+Comece adivinhando já!</value>
+  </data>
+  <data name="ComingSoon" xml:space="preserve">
+    <value>Disponível em breve</value>
   </data>
 </root>

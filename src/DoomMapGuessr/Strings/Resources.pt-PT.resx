@@ -220,4 +220,15 @@ Desde imagens de fundo a novos modos de jogo, é rip and tear until it is done!<
   <data name="Retry" xml:space="preserve">
     <value>Tentar de novo</value>
   </data>
+  <data name="Flavor_InclusionOfLegacyOfRust" xml:space="preserve">
+    <value>Agora com 'Legacy of Rust'</value>
+  </data>
+  <data name="Flavor_InclusionOfLegacyOfRust_Description" xml:space="preserve">
+    <value>O WAD mais recentemente desenvolvido pela id Software juntou-se à lista de WADs que pode adivinhar, nesta enorme atualização do DoomMapGuessr!
+Do que estás à espera?!
+Começa a jogar já!</value>
+  </data>
+  <data name="ComingSoon" xml:space="preserve">
+    <value>Disponível brevemente</value>
+  </data>
 </root>

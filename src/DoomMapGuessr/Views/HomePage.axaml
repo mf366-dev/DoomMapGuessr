@@ -15,7 +15,7 @@
 	</Design.DataContext>
 
 	<ScrollViewer>
-		<Grid RowDefinitions="Auto, Auto, *, Auto">
+		<Grid RowDefinitions="Auto, Auto, Auto, Auto">
 			<Border Grid.Row="0" Classes="card">
 				<Grid RowDefinitions="*, Auto" Margin="8">
 					<md:MarkdownScrollViewer Grid.Row="0" Markdown="{Binding LatestReleaseBody}">
@@ -92,6 +92,63 @@
 					</Button>
 				</Grid>
 			</Border>
+			<Border Grid.Row="2" Classes="card">
+				<Border.Background>
+					<ImageBrush Source="avares://DoomMapGuessr/Assets/Backgrounds/LEGACY-OF-RUST_TITLEPIC.png"
+								Opacity="0.3"
+								Stretch="UniformToFill"/>
+				</Border.Background>
+				<Grid ColumnDefinitions="Auto, *, Auto">
+					<PathIcon Grid.Column="0"
+							  Margin="16"
+							  Data="{DynamicResource Geometry.ReleaseAlert_600}"
+							  Width="64"
+							  Height="64" />
+					<StackPanel Grid.Column="1" Margin="16">
+						<TextBlock Classes="display"
+								   Text="{x:Static strings:Resources.Flavor_InclusionOfLegacyOfRust}" />
+						<TextBlock Text="{x:Static strings:Resources.Flavor_InclusionOfLegacyOfRust_Description}"
+								   TextWrapping="Wrap" />
+					</StackPanel>
+					<Button Grid.Column="2"
+							Margin="16"
+							Classes="circle"
+							HorizontalContentAlignment="Center"
+							Width="36"
+							Height="36"
+							Command="{Binding NavigateToClassicModeCommand}">
+						<PathIcon Data="{DynamicResource Geometry.ArrowForward_600}" Width="16" Height="16" />
+					</Button>
+				</Grid>
+			</Border>
+			<Grid Grid.Row="3" ColumnDefinitions="*, *">
+				<Border Grid.Column="0" Classes="card">
+					<Grid ColumnDefinitions="Auto, *" HorizontalAlignment="Center">
+						<PathIcon Grid.Column="0"
+								  Margin="16"
+								  Data="{DynamicResource Geometry.Upcoming_600}"
+								  Width="64"
+								  Height="64" />
+						<TextBlock Grid.Column="1"
+								   Classes="display"
+								   VerticalAlignment="Center"
+								   Text="{x:Static strings:Resources.ComingSoon}" />
+					</Grid>
+				</Border>
+				<Border Grid.Column="1" Classes="card">
+					<Grid ColumnDefinitions="Auto, *" HorizontalAlignment="Center">
+						<PathIcon Grid.Column="0"
+								  Margin="16"
+								  Data="{DynamicResource Geometry.Upcoming_600}"
+								  Width="64"
+								  Height="64" />
+						<TextBlock Grid.Column="1"
+								   Classes="display"
+								   VerticalAlignment="Center"
+								   Text="{x:Static strings:Resources.ComingSoon}" />
+					</Grid>
+				</Border>
+			</Grid>
 		</Grid>
 	</ScrollViewer>
 </UserControl>

@@ -115,11 +115,40 @@ namespace DoomMapGuessr.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Coming Soon.
+        /// </summary>
+        public static string ComingSoon {
+            get {
+                return ResourceManager.GetString("ComingSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legacy of Rust joins the alignment!.
+        /// </summary>
+        public static string Flavor_InclusionOfLegacyOfRust {
+            get {
+                return ResourceManager.GetString("Flavor_InclusionOfLegacyOfRust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The latest WAD to be developed by id Software joins the alignment of guessable WADs in this major DoomMapGuessr update!
+        ///What are you waiting for?
+        ///Start guessing now!.
+        /// </summary>
+        public static string Flavor_InclusionOfLegacyOfRust_Description {
+            get {
+                return ResourceManager.GetString("Flavor_InclusionOfLegacyOfRust_Description", resourceCulture);
             }
         }
         
@@ -144,7 +173,7 @@ namespace DoomMapGuessr.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Coordinate Mode.
+        ///   Looks up a localized string similar to GeoGuessr Mode.
         /// </summary>
         public static string GeoMode {
             get {
@@ -162,7 +191,7 @@ namespace DoomMapGuessr.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guesser Mode.
+        ///   Looks up a localized string similar to Classic Mode.
         /// </summary>
         public static string GuesserMode {
             get {
