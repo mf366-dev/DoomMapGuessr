@@ -17,21 +17,21 @@ namespace DoomMapGuessr.ViewModels
     {
 
         [ObservableProperty]
-        private int currentIndex = Array.IndexOf(App.allowedCultures, ApplicationSettings.Shared.Settings["Language"]["Culture"]) +
+        private int currentIndex = Array.IndexOf(App.allowedCultures, ApplicationState.Shared.Settings.Data["Language"]["Culture"]) +
                                    1;
 
         [ObservableProperty]
-        private int proportions = Int32.TryParse(ApplicationSettings.Shared.Settings["Screenshots"]["Proportions"], out int result)
+        private int proportions = Int32.TryParse(ApplicationState.Shared.Settings.Data["Screenshots"]["Proportions"], out int result)
                                       ? (result is > 3 or < 0 // invalid result either ways lol
                                              ? 0
                                              : result)
                                       : 0;
 
         [ObservableProperty]
-        private bool customTheme = ApplicationSettings.Shared.Settings["GUI"]["FollowSystem"] == "0";
+        private bool customTheme = ApplicationState.Shared.Settings.Data["GUI"]["FollowSystem"] == "0";
 
         [ObservableProperty]
-        private bool darkMode = ApplicationSettings.Shared.Settings["GUI"]["DarkMode"] == "1";
+        private bool darkMode = ApplicationState.Shared.Settings.Data["GUI"]["DarkMode"] == "1";
 
         [ObservableProperty]
         private string[] languageComboBoxItems =
@@ -40,7 +40,7 @@ namespace DoomMapGuessr.ViewModels
         ];
 
         private void RunLanguageChangeProtocol() =>
-            ApplicationSettings.Shared.Settings["Language"]["Culture"] = CurrentIndex == 0 // same as system
+            ApplicationState.Shared.Settings.Data["Language"]["Culture"] = CurrentIndex == 0 // same as system
                                                                              ? App.allowedCultures.Contains(App.systemCulture, StringComparer.OrdinalIgnoreCase) // same as system is allowed
                                                                                    ? App.systemCulture      // same as system
                                                                                    : App.allowedCultures[0] // en-US
@@ -49,8 +49,8 @@ namespace DoomMapGuessr.ViewModels
         private void RunThemeChangeProtocol()
         {
 
-            ApplicationSettings.Shared.Settings["GUI"]["FollowSystem"] = CustomTheme ? "0" : "1";
-            ApplicationSettings.Shared.Settings["GUI"]["DarkMode"] = DarkMode ? "1" : "0";
+            ApplicationState.Shared.Settings.Data["GUI"]["FollowSystem"] = CustomTheme ? "0" : "1";
+            ApplicationState.Shared.Settings.Data["GUI"]["DarkMode"] = DarkMode ? "1" : "0";
 
             _ = (Application.Current?.RequestedThemeVariant = !CustomTheme
                                                                 ? ThemeVariant.Default
@@ -66,7 +66,7 @@ namespace DoomMapGuessr.ViewModels
 
             RunLanguageChangeProtocol();
             RunThemeChangeProtocol();
-            ApplicationSettings.Shared.Save("config");
+            ApplicationState.Shared.Settings.Save("config");
 
         }
 

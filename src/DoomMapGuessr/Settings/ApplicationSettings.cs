@@ -66,8 +66,7 @@ namespace DoomMapGuessr.Settings
         public override int GetHashCode() => DirectoryPath.GetHashCode();
 
 		/// <summary>
-		/// Saves the settings to a file that can be outside the actual
-		/// settings directory.
+		/// Saves the settings to a file.
 		/// </summary>
 		/// <param name="filename">The path to the file</param>
         public void Save(string filename) => SetConfigFile(filename, Data);

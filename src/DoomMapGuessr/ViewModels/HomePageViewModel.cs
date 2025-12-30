@@ -22,13 +22,13 @@ namespace DoomMapGuessr.ViewModels
         private INavigationService? NavigationService { get; }
 
         public string LatestReleaseBody =>
-            ApplicationSettings.Shared.Cache?.LatestRelease?.Body is null
+            ApplicationState.Shared.SavedRelease?.Body is null
                 ? "# No release data found.\nSomething went wrong."
-                : (ApplicationSettings.Shared.Cache.LatestRelease.TagName[1..] == ApplicationSettings.AppVersion
-                    ? $"# What's new in this version?\n**DoomMapGuessr {ApplicationSettings.Shared.Cache.LatestRelease.TagName}**\n\n{ApplicationSettings.Shared.Cache.LatestRelease.Body}"
-                    : (ApplicationSettings.AssemblyVersion?.Revision == 1
+                : (ApplicationState.Shared.SavedRelease.TagName[1..] == ApplicationState.Shared.VersionInfo.ApplicationVersion
+                    ? $"# What's new in this version?\n**DoomMapGuessr {ApplicationState.Shared.SavedRelease.TagName}**\n\n{ApplicationState.Shared.SavedRelease.Body}"
+                    : (ApplicationState.Shared.VersionInfo.IsDevVersion // now we actually have a property named "IsDevVersioN" how fucking cool right?
                         ? $"# You're using a dev build of DoomMapGuessr\nUpdate to a stable build to see release info."
-                        : $"# New version available! What's new?\n**DoomMapGuessr {ApplicationSettings.Shared.Cache.LatestRelease.TagName}**\n\n{ApplicationSettings.Shared.Cache.LatestRelease.Body}"));
+                        : $"# New version available! What's new?\n**DoomMapGuessr {ApplicationState.Shared.SavedRelease.TagName}**\n\n{ApplicationState.Shared.SavedRelease.Body}"));
 
         [RelayCommand]
         private void NavigateToUnlockables() => NavigationService?.NavigateTo("AchievementsUnlockables");
@@ -40,10 +40,10 @@ namespace DoomMapGuessr.ViewModels
         private void OpenGitHubRepo()
         {
 
-            if (ApplicationSettings.Shared.Cache?.LatestRelease?.HtmlUrl is null)
+            if (ApplicationState.Shared.SavedRelease?.HtmlUrl is null)
                 return;
 
-            _ = WebBrowserService.OpenUrl(ApplicationSettings.Shared.Cache.LatestRelease.HtmlUrl);
+            _ = WebBrowserService.OpenUrl(ApplicationState.Shared.SavedRelease.HtmlUrl);
 
         }
 

@@ -37,12 +37,12 @@ namespace DoomMapGuessr
         public override void OnFrameworkInitializationCompleted()
         {
 
-            RequestedThemeVariant = ApplicationSettings.Shared.Settings["GUI"]["FollowSystem"] == "1"
+            RequestedThemeVariant = ApplicationState.Shared.Settings.Data["GUI"]["FollowSystem"] == "1"
                                         ? ThemeVariant.Default
-                                        : (ApplicationSettings.Shared.Settings["GUI"]["DarkMode"] == "1"
+                                        : (ApplicationState.Shared.Settings.Data["GUI"]["DarkMode"] == "1"
                                                ? ThemeVariant.Dark
                                                : ThemeVariant.Light);
-            Strings.Resources.Culture = new(ApplicationSettings.Shared.Settings["Language"]["Culture"]);
+            Strings.Resources.Culture = new(ApplicationState.Shared.Settings.Data["Language"]["Culture"]);
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
