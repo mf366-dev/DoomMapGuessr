@@ -1,5 +1,4 @@
-﻿using Avalonia.Animation;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -13,7 +12,7 @@ namespace DoomMapGuessr.ViewModels
     public partial class MainWindowViewModel : ViewModelBase, INavigationService
     {
 
-		/*
+        /*
 		 * todo:
 		 * this is a big "to fucking do"
 		 * 1. we need to restructure this service bullshit
@@ -22,7 +21,7 @@ namespace DoomMapGuessr.ViewModels
 		 *    cuz it's getting ugly
 		 */
 
-		[ObservableProperty]
+        [ObservableProperty]
         private UserControl currentPage;
 
         [ObservableProperty]

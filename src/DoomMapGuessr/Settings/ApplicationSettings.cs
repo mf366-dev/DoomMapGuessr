@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using System.Text;
 
 using IniParser.Model;
@@ -8,39 +7,31 @@ using IniParser.Model.Formatting;
 using IniParser.Parser;
 
 
-namespace DoomMapGuessr.Services
+namespace DoomMapGuessr.Settings
 {
 
+	/// <summary>
+	/// Settings for an application.
+	/// </summary>
+	/// <param name="directoryPath">The directory of the settings</param>
     public sealed class ApplicationSettings(
         string directoryPath
     ) : IEquatable<ApplicationSettings>
     {
 
-        public static Version? AssemblyVersion => Assembly.GetEntryAssembly()?.GetName().Version;
-
-        public static string? AppVersion => AssemblyVersion is null ? null : $"{AssemblyVersion.Major}{AssemblyVersion.Minor}{AssemblyVersion.Build}";
-
-        public static ApplicationSettings Shared { get; } = new ApplicationSettings(
-            Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.DoomMapGuessr")
-        ).PrepareDirectory();
-
-        public ApplicationCache? Cache { get; internal set; }
-
+		/// <summary>
+		/// The directory for this app's settings.
+		/// </summary>
         public string DirectoryPath { get; } = directoryPath;
 
+		/// <summary>
+		/// The actual settings, in INI format.
+		/// </summary>
         public IniData Settings { get; private set; } = new();
 
-        public ApplicationCache? Temp { get; internal set; }
-
-        public void Clear()
-        {
-
-            Cache?.Clear();
-            Temp?.Clear();
-
-        }
-
-
+		/// <summary>
+		/// Creates a settings subdirectory.
+		/// </summary>
         public void CreateDirectory() => Directory.CreateDirectory(DirectoryPath);
 
         /// <inheritdoc />
@@ -74,19 +65,22 @@ namespace DoomMapGuessr.Services
         /// <inheritdoc />
         public override int GetHashCode() => DirectoryPath.GetHashCode();
 
+		/// <summary>
+		/// Saves the settings to a file that can be outside the actual
+		/// settings directory.
+		/// </summary>
+		/// <param name="filename">The path to the file</param>
         public void Save(string filename) => SetConfigFile(filename, Settings);
 
         /// <inheritdoc />
         public override string ToString() => $"{nameof(DirectoryPath)}: {DirectoryPath}";
 
-        private void CreateCacheAndTemp()
-        {
-
-            Cache = new(this);
-            Temp = new(this, "TempFiles");
-
-        }
-
+		/// <summary>
+		/// Gets a config file by its name.
+		/// </summary>
+		/// <param name="name">The config file's nameparam>
+		/// <param name="defaults">THe default data to fill in in case the file is missing</param>
+		/// <returns>The settings data, as INI</returns>
         private IniData GetConfigFile(string name, IniData? defaults = null)
         {
 
@@ -117,17 +111,29 @@ namespace DoomMapGuessr.Services
 
         }
 
-        private ApplicationSettings PrepareDirectory()
+		/// <summary>
+		/// Prepares the directory for the default usage of this class.
+		/// Recommended if you do not know how to use this class
+		/// or if you simply want quick setup.<br/>
+		/// It is also recommended to not use this directly and instead use
+		/// <see cref="ApplicationState.Shared"/> for an even faster setup.
+		/// </summary>
+		/// <returns>The prepared settings</returns>
+        public ApplicationSettings PrepareDirectoryForDefaultUsage()
         {
 
             CreateDirectory();
-            CreateCacheAndTemp();
             Settings = GetConfigFile("config");
 
             return this;
 
         }
 
+		/// <summary>
+		/// Saves or adds a config file.
+		/// </summary>
+		/// <param name="name">The file's name</param>
+		/// <param name="resources">The resources, as INI, to fill it with</param>
         private void SetConfigFile(string name, IniData resources)
         {
 
@@ -149,9 +155,25 @@ namespace DoomMapGuessr.Services
 
         }
 
-        public static bool operator ==(ApplicationSettings? left, ApplicationSettings? right) => Equals(left, right);
+		/// <summary>
+		/// Checks if two instances of 
+		/// <see cref="ApplicationSettings"/>
+		/// are <strong>equals</strong>.
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator ==(ApplicationSettings? left, ApplicationSettings? right) => Equals(left, right);
 
-        public static bool operator !=(ApplicationSettings? left, ApplicationSettings? right) => !Equals(left, right);
+		/// <summary>
+		/// Checks if two instances of 
+		/// <see cref="ApplicationSettings"/>
+		/// are <strong>different</strong>.
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator !=(ApplicationSettings? left, ApplicationSettings? right) => !Equals(left, right);
 
     }
 

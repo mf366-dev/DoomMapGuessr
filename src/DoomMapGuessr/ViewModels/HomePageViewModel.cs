@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 
 using DoomMapGuessr.Services;
+using DoomMapGuessr.Settings;
 
 
 namespace DoomMapGuessr.ViewModels
@@ -21,13 +22,13 @@ namespace DoomMapGuessr.ViewModels
         private INavigationService? NavigationService { get; }
 
         public string LatestReleaseBody =>
-            ApplicationSettings.Shared.Cache?.SavedRelease?.Body is null
+            ApplicationSettings.Shared.Cache?.LatestRelease?.Body is null
                 ? "# No release data found.\nSomething went wrong."
-                : (ApplicationSettings.Shared.Cache.SavedRelease.TagName[1..] == ApplicationSettings.AppVersion
-                    ? $"# What's new in this version?\n**DoomMapGuessr {ApplicationSettings.Shared.Cache.SavedRelease.TagName}**\n\n{ApplicationSettings.Shared.Cache.SavedRelease.Body}"
+                : (ApplicationSettings.Shared.Cache.LatestRelease.TagName[1..] == ApplicationSettings.AppVersion
+                    ? $"# What's new in this version?\n**DoomMapGuessr {ApplicationSettings.Shared.Cache.LatestRelease.TagName}**\n\n{ApplicationSettings.Shared.Cache.LatestRelease.Body}"
                     : (ApplicationSettings.AssemblyVersion?.Revision == 1
                         ? $"# You're using a dev build of DoomMapGuessr\nUpdate to a stable build to see release info."
-                        : $"# New version available! What's new?\n**DoomMapGuessr {ApplicationSettings.Shared.Cache.SavedRelease.TagName}**\n\n{ApplicationSettings.Shared.Cache.SavedRelease.Body}"));
+                        : $"# New version available! What's new?\n**DoomMapGuessr {ApplicationSettings.Shared.Cache.LatestRelease.TagName}**\n\n{ApplicationSettings.Shared.Cache.LatestRelease.Body}"));
 
         [RelayCommand]
         private void NavigateToUnlockables() => NavigationService?.NavigateTo("AchievementsUnlockables");
@@ -35,14 +36,14 @@ namespace DoomMapGuessr.ViewModels
         [RelayCommand]
         private void NavigateToClassicMode() => NavigationService?.NavigateTo("GuesserMode");
 
-		[RelayCommand]
+        [RelayCommand]
         private void OpenGitHubRepo()
         {
 
-            if (ApplicationSettings.Shared.Cache?.SavedRelease?.HtmlUrl is null)
+            if (ApplicationSettings.Shared.Cache?.LatestRelease?.HtmlUrl is null)
                 return;
 
-            _ = WebBrowserService.OpenUrl(ApplicationSettings.Shared.Cache.SavedRelease.HtmlUrl);
+            _ = WebBrowserService.OpenUrl(ApplicationSettings.Shared.Cache.LatestRelease.HtmlUrl);
 
         }
 

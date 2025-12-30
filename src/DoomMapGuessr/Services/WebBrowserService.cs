@@ -6,17 +6,21 @@ namespace DoomMapGuessr.Services
 {
 
     /// <summary>
-    /// Service for webbrowser usage.
+    /// Service for default webbrowser usage.
     /// </summary>
     public static class WebBrowserService
     {
 
+		/// <summary>
+		/// Opens a URL in the default browser.
+		/// </summary>
+		/// <param name="url">The URL</param>
+		/// <returns><c>true</c> if successful</returns>
         public static bool OpenUrl(string url)
         {
 
             try
             {
-
                 ProcessStartInfo psi = new()
                 {
 
@@ -28,23 +32,24 @@ namespace DoomMapGuessr.Services
                 using Process? _ = Process.Start(psi);
 
                 return true;
-
             }
             catch
             {
-
                 return false;
-
             }
 
         }
 
+		/// <summary>
+		/// Opens a URL in the default browser, async.
+		/// </summary>
+		/// <param name="url">The URL to open</param>
+		/// <returns></returns>
         public static async Task<Process?> OpenUrlAsync(string url)
         {
 
             try
             {
-
                 ProcessStartInfo psi = new()
                 {
 
@@ -54,13 +59,10 @@ namespace DoomMapGuessr.Services
                 };
 
                 return await Task.Run(() => Process.Start(psi));
-
             }
             catch
             {
-
                 return null;
-
             }
 
         }

@@ -3,8 +3,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 
 using Avalonia;
-
-using DoomMapGuessr.Services;
+using DoomMapGuessr.Settings;
 using Octokit;
 
 
@@ -69,7 +68,7 @@ namespace DoomMapGuessr
 
             PrepareApplicationSettings();
             PrepareApplicationCache();
-            ApplicationSettings.Shared.Cache!.SavedRelease = await new GitHubClient(new ProductHeaderValue("DoomMapGuessr")).Repository.Release.GetLatest("MF366-Coding", "DoomMapGuessr");
+            ApplicationSettings.Shared.Cache!.LatestRelease = await new GitHubClient(new ProductHeaderValue("DoomMapGuessr")).Repository.Release.GetLatest("MF366-Coding", "DoomMapGuessr");
 
             BuildAvaloniaApp()
 #if DEBUG
