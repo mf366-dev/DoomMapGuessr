@@ -57,10 +57,6 @@
 			<DependentUpon>Resources.resx</DependentUpon>
 		</Compile>
 
-		<Compile Update="Views\AchievementsUnlockablesPage.axaml.cs">
-			<DependentUpon>AchievementsUnlockablesPage.axaml</DependentUpon>
-		</Compile>
-
 		<EmbeddedResource Update="Strings\Resources.pt-PT.resx">
 			<DependentUpon>Resources.resx</DependentUpon>
 		</EmbeddedResource>

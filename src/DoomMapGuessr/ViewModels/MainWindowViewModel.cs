@@ -28,7 +28,7 @@ namespace DoomMapGuessr.ViewModels
         {
 
             HomePageViewModel dataCtx = new(this);
-            ViewModelArchive.Set(dataCtx);
+            ViewModelArchive.Archive(dataCtx);
 
             CurrentPage = new HomePage
             {
@@ -49,7 +49,7 @@ namespace DoomMapGuessr.ViewModels
                     {
 
                         homePageViewModel = new(this);
-                        ViewModelArchive.Set(homePageViewModel);
+                        ViewModelArchive.Archive(homePageViewModel);
 
                     }
 
@@ -60,12 +60,44 @@ namespace DoomMapGuessr.ViewModels
 
                     break;
 
-                case "AchievementsUnlockables":
+				case "ClassicMode":
+					if (!ViewModelArchive.TryGet<ClassicModeViewModel>(out var classicModeViewModel))
+					{
+
+						classicModeViewModel = new();
+						ViewModelArchive.Archive(classicModeViewModel);
+
+					}
+
+					CurrentPage = new ClassicModePage
+					{
+						DataContext = classicModeViewModel
+					};
+
+					break;
+
+				case "GeoMode":
+					if (!ViewModelArchive.TryGet<GeoModeViewModel>(out var geoModeViewModel))
+					{
+
+						geoModeViewModel = new();
+						ViewModelArchive.Archive(geoModeViewModel);
+
+					}
+
+					CurrentPage = new GeoModePage
+					{
+						DataContext = geoModeViewModel
+					};
+
+					break;
+
+				case "AchievementsUnlockables":
                     if (!ViewModelArchive.TryGet<AchievementsUnlockablesViewModel>(out var achievementsUnlockablesViewModel))
                     {
 
                         achievementsUnlockablesViewModel = new();
-                        ViewModelArchive.Set(achievementsUnlockablesViewModel);
+                        ViewModelArchive.Archive(achievementsUnlockablesViewModel);
 
                     }
 
@@ -81,7 +113,7 @@ namespace DoomMapGuessr.ViewModels
                     {
 
                         settingsPageViewModel = new();
-                        ViewModelArchive.Set(settingsPageViewModel);
+                        ViewModelArchive.Archive(settingsPageViewModel);
 
                     }
 

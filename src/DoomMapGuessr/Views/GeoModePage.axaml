@@ -2,13 +2,13 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:DoomMapGuessr.ViewModels"
+			 xmlns:vm="clr-namespace:DoomMapGuessr.ViewModels"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-			 x:Class="DoomMapGuessr.Views.AchievementsUnlockablesPage"
-			 x:DataType="vm:AchievementsUnlockablesViewModel">
+			 x:Class="DoomMapGuessr.Views.GeoModePage"
+			 x:DataType="vm:GeoModeViewModel">
 	<Design.DataContext>
-		<vm:AchievementsUnlockablesViewModel />
+		<vm:GeoModeViewModel />
 	</Design.DataContext>
 	
-	This works I guess.
+	Coming soon (maybe? hopefully!!)
 </UserControl>

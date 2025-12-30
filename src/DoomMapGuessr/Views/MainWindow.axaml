@@ -39,10 +39,10 @@
 					</StackPanel>
 				</Button>
 
-				<Button Grid.Row="2" Classes="nav" Command="{Binding NavigateTo}" CommandParameter="GuesserMode">
+				<Button Grid.Row="2" Classes="nav" Command="{Binding NavigateTo}" CommandParameter="ClassicMode">
 					<StackPanel>
 						<PathIcon Data="{DynamicResource Geometry.CheckCircle_400}" Width="16" Height="16" />
-						<TextBlock Text="{x:Static strings:Resources.GuesserMode}" />
+						<TextBlock Text="{x:Static strings:Resources.ClassicMode}" />
 					</StackPanel>
 				</Button>
 

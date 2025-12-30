@@ -198,7 +198,7 @@
   <data name="Save" xml:space="preserve">
     <value>Guardar</value>
   </data>
-  <data name="GuesserMode" xml:space="preserve">
+  <data name="ClassicMode" xml:space="preserve">
     <value>Modo Clássico</value>
   </data>
   <data name="GeoMode" xml:space="preserve">

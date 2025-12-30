@@ -106,6 +106,15 @@ namespace DoomMapGuessr.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Classic Mode.
+        /// </summary>
+        public static string ClassicMode {
+            get {
+                return ResourceManager.GetString("ClassicMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color.
         /// </summary>
         public static string Color {
@@ -187,15 +196,6 @@ namespace DoomMapGuessr.Strings {
         public static string GreetingText {
             get {
                 return ResourceManager.GetString("GreetingText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Classic Mode.
-        /// </summary>
-        public static string GuesserMode {
-            get {
-                return ResourceManager.GetString("GuesserMode", resourceCulture);
             }
         }
         
