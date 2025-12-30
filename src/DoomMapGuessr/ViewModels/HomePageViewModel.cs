@@ -26,7 +26,7 @@ namespace DoomMapGuessr.ViewModels
                 ? "# No release data found.\nSomething went wrong."
                 : (ApplicationState.Shared.SavedRelease.TagName[1..] == ApplicationState.Shared.VersionInfo.ApplicationVersion
                     ? $"# What's new in this version?\n**DoomMapGuessr {ApplicationState.Shared.SavedRelease.TagName}**\n\n{ApplicationState.Shared.SavedRelease.Body}"
-                    : (ApplicationState.Shared.VersionInfo.IsDevVersion // now we actually have a property named "IsDevVersioN" how fucking cool right?
+                    : (ApplicationState.Shared.VersionInfo.IsDevVersion // now we actually have a property named "IsDevVersion" how fucking cool right?
                         ? $"# You're using a dev build of DoomMapGuessr\nUpdate to a stable build to see release info."
                         : $"# New version available! What's new?\n**DoomMapGuessr {ApplicationState.Shared.SavedRelease.TagName}**\n\n{ApplicationState.Shared.SavedRelease.Body}"));
 

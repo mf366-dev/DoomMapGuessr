@@ -10,28 +10,28 @@ using IniParser.Parser;
 namespace DoomMapGuessr.Settings
 {
 
-	/// <summary>
-	/// Settings for an application.
-	/// </summary>
-	/// <param name="directoryPath">The directory of the settings</param>
+    /// <summary>
+    /// Settings for an application.
+    /// </summary>
+    /// <param name="directoryPath">The directory of the settings</param>
     public sealed class ApplicationSettings(
         string directoryPath
     ) : IEquatable<ApplicationSettings>
     {
 
-		/// <summary>
-		/// The directory for this app's settings.
-		/// </summary>
+        /// <summary>
+        /// The directory for this app's settings.
+        /// </summary>
         public string DirectoryPath { get; } = directoryPath;
 
-		/// <summary>
-		/// The actual settings, in INI format.
-		/// </summary>
+        /// <summary>
+        /// The actual settings, in INI format.
+        /// </summary>
         public IniData Data { get; private set; } = new();
 
-		/// <summary>
-		/// Creates a settings subdirectory.
-		/// </summary>
+        /// <summary>
+        /// Creates a settings subdirectory.
+        /// </summary>
         public void CreateDirectory() => Directory.CreateDirectory(DirectoryPath);
 
         /// <inheritdoc />
@@ -65,21 +65,21 @@ namespace DoomMapGuessr.Settings
         /// <inheritdoc />
         public override int GetHashCode() => DirectoryPath.GetHashCode();
 
-		/// <summary>
-		/// Saves the settings to a file.
-		/// </summary>
-		/// <param name="filename">The path to the file</param>
+        /// <summary>
+        /// Saves the settings to a file.
+        /// </summary>
+        /// <param name="filename">The path to the file</param>
         public void Save(string filename) => SetConfigFile(filename, Data);
 
         /// <inheritdoc />
         public override string ToString() => $"{nameof(DirectoryPath)}: {DirectoryPath}";
 
-		/// <summary>
-		/// Gets a config file by its name.
-		/// </summary>
-		/// <param name="name">The config file's nameparam>
-		/// <param name="defaults">THe default data to fill in in case the file is missing</param>
-		/// <returns>The settings data, as INI</returns>
+        /// <summary>
+        /// Gets a config file by its name.
+        /// </summary>
+        /// <param name="name">The config file's nameparam>
+        /// <param name="defaults">THe default data to fill in in case the file is missing</param>
+        /// <returns>The settings data, as INI</returns>
         private IniData GetConfigFile(string name, IniData? defaults = null)
         {
 
@@ -110,14 +110,14 @@ namespace DoomMapGuessr.Settings
 
         }
 
-		/// <summary>
-		/// Prepares the directory for the default usage of this class.
-		/// Recommended if you do not know how to use this class
-		/// or if you simply want quick setup.<br/>
-		/// It is also recommended to not use this directly and instead use
-		/// <see cref="ApplicationState.Shared"/> for an even faster setup.
-		/// </summary>
-		/// <returns>The prepared settings</returns>
+        /// <summary>
+        /// Prepares the directory for the default usage of this class.
+        /// Recommended if you do not know how to use this class
+        /// or if you simply want quick setup.<br/>
+        /// It is also recommended to not use this directly and instead use
+        /// <see cref="ApplicationState.Shared"/> for an even faster setup.
+        /// </summary>
+        /// <returns>The prepared settings</returns>
         public ApplicationSettings PrepareDirectoryForDefaultUsage()
         {
 
@@ -128,11 +128,11 @@ namespace DoomMapGuessr.Settings
 
         }
 
-		/// <summary>
-		/// Saves or adds a config file.
-		/// </summary>
-		/// <param name="name">The file's name</param>
-		/// <param name="resources">The resources, as INI, to fill it with</param>
+        /// <summary>
+        /// Saves or adds a config file.
+        /// </summary>
+        /// <param name="name">The file's name</param>
+        /// <param name="resources">The resources, as INI, to fill it with</param>
         private void SetConfigFile(string name, IniData resources)
         {
 
@@ -154,25 +154,25 @@ namespace DoomMapGuessr.Settings
 
         }
 
-		/// <summary>
-		/// Checks if two instances of 
-		/// <see cref="ApplicationSettings"/>
-		/// are <strong>equals</strong>.
-		/// </summary>
-		/// <param name="left"></param>
-		/// <param name="right"></param>
-		/// <returns></returns>
-		public static bool operator ==(ApplicationSettings? left, ApplicationSettings? right) => Equals(left, right);
+        /// <summary>
+        /// Checks if two instances of 
+        /// <see cref="ApplicationSettings"/>
+        /// are <strong>equals</strong>.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator ==(ApplicationSettings? left, ApplicationSettings? right) => Equals(left, right);
 
-		/// <summary>
-		/// Checks if two instances of 
-		/// <see cref="ApplicationSettings"/>
-		/// are <strong>different</strong>.
-		/// </summary>
-		/// <param name="left"></param>
-		/// <param name="right"></param>
-		/// <returns></returns>
-		public static bool operator !=(ApplicationSettings? left, ApplicationSettings? right) => !Equals(left, right);
+        /// <summary>
+        /// Checks if two instances of 
+        /// <see cref="ApplicationSettings"/>
+        /// are <strong>different</strong>.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(ApplicationSettings? left, ApplicationSettings? right) => !Equals(left, right);
 
     }
 

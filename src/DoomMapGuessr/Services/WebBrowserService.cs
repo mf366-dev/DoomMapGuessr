@@ -11,11 +11,11 @@ namespace DoomMapGuessr.Services
     public static class WebBrowserService
     {
 
-		/// <summary>
-		/// Opens a URL in the default browser.
-		/// </summary>
-		/// <param name="url">The URL</param>
-		/// <returns><c>true</c> if successful</returns>
+        /// <summary>
+        /// Opens a URL in the default browser.
+        /// </summary>
+        /// <param name="url">The URL</param>
+        /// <returns><c>true</c> if successful</returns>
         public static bool OpenUrl(string url)
         {
 
@@ -40,11 +40,11 @@ namespace DoomMapGuessr.Services
 
         }
 
-		/// <summary>
-		/// Opens a URL in the default browser, async.
-		/// </summary>
-		/// <param name="url">The URL to open</param>
-		/// <returns></returns>
+        /// <summary>
+        /// Opens a URL in the default browser, async.
+        /// </summary>
+        /// <param name="url">The URL to open</param>
+        /// <returns></returns>
         public static async Task<Process?> OpenUrlAsync(string url)
         {
 

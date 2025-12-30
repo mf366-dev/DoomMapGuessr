@@ -1,11 +1,11 @@
 ﻿namespace DoomMapGuessr.ViewModels
 {
 
-	public partial class ClassicModeViewModel : ViewModelBase
-	{
+    public partial class ClassicModeViewModel : ViewModelBase
+    {
 
-		public ClassicModeViewModel() { }
+        public ClassicModeViewModel() { }
 
-	}
+    }
 
 }

@@ -4,11 +4,11 @@ using Avalonia.Controls;
 namespace DoomMapGuessr.Views
 {
 
-	public partial class GeoModePage : UserControl
-	{
+    public partial class GeoModePage : UserControl
+    {
 
-		public GeoModePage() { InitializeComponent(); }
+        public GeoModePage() { InitializeComponent(); }
 
-	}
+    }
 
 }

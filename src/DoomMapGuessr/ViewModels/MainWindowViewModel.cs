@@ -9,9 +9,9 @@ using DoomMapGuessr.Views;
 namespace DoomMapGuessr.ViewModels
 {
 
-	/// <summary>
-	/// View model for the <see cref="MainWindow"/>.
-	/// </summary>
+    /// <summary>
+    /// View model for the <see cref="MainWindow"/>.
+    /// </summary>
     public partial class MainWindowViewModel : ViewModelBase, INavigationService
     {
 
@@ -21,9 +21,9 @@ namespace DoomMapGuessr.ViewModels
         [ObservableProperty]
         private bool isSidebarOpen = true;
 
-		/// <summary>
-		/// Initializes the ViewModel for the <see cref="MainWindow"/>.
-		/// </summary>
+        /// <summary>
+        /// Initializes the ViewModel for the <see cref="MainWindow"/>.
+        /// </summary>
         public MainWindowViewModel()
         {
 
@@ -37,8 +37,8 @@ namespace DoomMapGuessr.ViewModels
 
         }
 
-		/// <inheritdoc />
-		public void NavigateTo(string pageName)
+        /// <inheritdoc />
+        public void NavigateTo(string pageName)
         {
 
             switch (pageName)
@@ -60,39 +60,39 @@ namespace DoomMapGuessr.ViewModels
 
                     break;
 
-				case "ClassicMode":
-					if (!ViewModelArchive.TryGet<ClassicModeViewModel>(out var classicModeViewModel))
-					{
+                case "ClassicMode":
+                    if (!ViewModelArchive.TryGet<ClassicModeViewModel>(out var classicModeViewModel))
+                    {
 
-						classicModeViewModel = new();
-						ViewModelArchive.Archive(classicModeViewModel);
+                        classicModeViewModel = new();
+                        ViewModelArchive.Archive(classicModeViewModel);
 
-					}
+                    }
 
-					CurrentPage = new ClassicModePage
-					{
-						DataContext = classicModeViewModel
-					};
+                    CurrentPage = new ClassicModePage
+                    {
+                        DataContext = classicModeViewModel
+                    };
 
-					break;
+                    break;
 
-				case "GeoMode":
-					if (!ViewModelArchive.TryGet<GeoModeViewModel>(out var geoModeViewModel))
-					{
+                case "GeoMode":
+                    if (!ViewModelArchive.TryGet<GeoModeViewModel>(out var geoModeViewModel))
+                    {
 
-						geoModeViewModel = new();
-						ViewModelArchive.Archive(geoModeViewModel);
+                        geoModeViewModel = new();
+                        ViewModelArchive.Archive(geoModeViewModel);
 
-					}
+                    }
 
-					CurrentPage = new GeoModePage
-					{
-						DataContext = geoModeViewModel
-					};
+                    CurrentPage = new GeoModePage
+                    {
+                        DataContext = geoModeViewModel
+                    };
 
-					break;
+                    break;
 
-				case "AchievementsUnlockables":
+                case "AchievementsUnlockables":
                     if (!ViewModelArchive.TryGet<AchievementsUnlockablesViewModel>(out var achievementsUnlockablesViewModel))
                     {
 
@@ -143,7 +143,7 @@ namespace DoomMapGuessr.ViewModels
 
         }
 
-		/// <inheritdoc />
+        /// <inheritdoc />
         public void NavigateTo(string pageName, object? parameter) => NavigateTo(pageName);
 
     }
