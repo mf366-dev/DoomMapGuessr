@@ -27,7 +27,7 @@ namespace DoomMapGuessr.Settings
 		/// <summary>
 		/// The actual settings, in INI format.
 		/// </summary>
-        public IniData Settings { get; private set; } = new();
+        public IniData Data { get; private set; } = new();
 
 		/// <summary>
 		/// Creates a settings subdirectory.
@@ -70,7 +70,7 @@ namespace DoomMapGuessr.Settings
 		/// settings directory.
 		/// </summary>
 		/// <param name="filename">The path to the file</param>
-        public void Save(string filename) => SetConfigFile(filename, Settings);
+        public void Save(string filename) => SetConfigFile(filename, Data);
 
         /// <inheritdoc />
         public override string ToString() => $"{nameof(DirectoryPath)}: {DirectoryPath}";
@@ -123,7 +123,7 @@ namespace DoomMapGuessr.Settings
         {
 
             CreateDirectory();
-            Settings = GetConfigFile("config");
+            Data = GetConfigFile("config");
 
             return this;
 

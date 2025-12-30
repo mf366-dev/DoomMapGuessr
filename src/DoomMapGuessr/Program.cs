@@ -26,36 +26,28 @@ namespace DoomMapGuessr
         public static void PrepareApplicationSettings()
         {
 
-            if (!ApplicationSettings.Shared.Settings.Sections.ContainsSection("Language"))
-                ApplicationSettings.Shared.Settings.Sections.Add(new("Language"));
+            if (!ApplicationState.Shared.Settings.Data.Sections.ContainsSection("Language"))
+                ApplicationState.Shared.Settings.Data.Sections.Add(new("Language"));
 
-            if (!ApplicationSettings.Shared.Settings.Sections.ContainsSection("GUI"))
-                ApplicationSettings.Shared.Settings.Sections.Add(new("GUI"));
+            if (!ApplicationState.Shared.Settings.Data.Sections.ContainsSection("GUI"))
+                ApplicationState.Shared.Settings.Data.Sections.Add(new("GUI"));
 
-            if (!ApplicationSettings.Shared.Settings["Language"].ContainsKey("Culture"))
+            if (!ApplicationState.Shared.Settings.Data["Language"].ContainsKey("Culture"))
             {
 
-                ApplicationSettings.Shared.Settings["Language"]["Culture"] = allowedCultures.Contains(systemCulture, StringComparer.OrdinalIgnoreCase)
+                ApplicationState.Shared.Settings.Data["Language"]["Culture"] = allowedCultures.Contains(systemCulture, StringComparer.OrdinalIgnoreCase)
                                                                                  ? systemCulture
                                                                                  : allowedCultures[0];
 
             }
 
-            if (!ApplicationSettings.Shared.Settings["GUI"].ContainsKey("FollowSystem"))
-                ApplicationSettings.Shared.Settings["GUI"]["FollowSystem"] = "1";
+            if (!ApplicationState.Shared.Settings.Data["GUI"].ContainsKey("FollowSystem"))
+                ApplicationState.Shared.Settings.Data["GUI"]["FollowSystem"] = "1";
 
-            if (!ApplicationSettings.Shared.Settings["GUI"].ContainsKey("DarkMode"))
-                ApplicationSettings.Shared.Settings["GUI"]["DarkMode"] = "1";
+            if (!ApplicationState.Shared.Settings.Data["GUI"].ContainsKey("DarkMode"))
+                ApplicationState.Shared.Settings.Data["GUI"]["DarkMode"] = "1";
 
-            ApplicationSettings.Shared.Save("config");
-
-        }
-
-        public static void PrepareApplicationCache()
-        {
-
-            ApplicationCache cache = new(ApplicationSettings.Shared);
-            ApplicationSettings.Shared.Cache = cache;
+            ApplicationState.Shared.Settings.Save("config");
 
         }
 
@@ -67,8 +59,7 @@ namespace DoomMapGuessr
         {
 
             PrepareApplicationSettings();
-            PrepareApplicationCache();
-            ApplicationSettings.Shared.Cache!.LatestRelease = await new GitHubClient(new ProductHeaderValue("DoomMapGuessr")).Repository.Release.GetLatest("MF366-Coding", "DoomMapGuessr");
+            ApplicationState.Shared.SavedRelease = await new GitHubClient(new ProductHeaderValue("DoomMapGuessr")).Repository.Release.GetLatest("MF366-Coding", "DoomMapGuessr");
 
             BuildAvaloniaApp()
 #if DEBUG
