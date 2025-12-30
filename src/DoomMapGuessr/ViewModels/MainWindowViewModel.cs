@@ -9,6 +9,9 @@ using DoomMapGuessr.Views;
 namespace DoomMapGuessr.ViewModels
 {
 
+	/// <summary>
+	/// View model for the <see cref="MainWindow"/>.
+	/// </summary>
     public partial class MainWindowViewModel : ViewModelBase, INavigationService
     {
 
@@ -18,6 +21,9 @@ namespace DoomMapGuessr.ViewModels
         [ObservableProperty]
         private bool isSidebarOpen = true;
 
+		/// <summary>
+		/// Initializes the ViewModel for the <see cref="MainWindow"/>.
+		/// </summary>
         public MainWindowViewModel()
         {
 
@@ -31,7 +37,8 @@ namespace DoomMapGuessr.ViewModels
 
         }
 
-        public void NavigateTo(string pageName)
+		/// <inheritdoc />
+		public void NavigateTo(string pageName)
         {
 
             switch (pageName)
@@ -104,6 +111,7 @@ namespace DoomMapGuessr.ViewModels
 
         }
 
+		/// <inheritdoc />
         public void NavigateTo(string pageName, object? parameter) => NavigateTo(pageName);
 
     }
