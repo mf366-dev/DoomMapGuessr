@@ -6,6 +6,8 @@
 
         public GeoModeViewModel() { }
 
+		// todo: handle the geoguessr mode
+
     }
 
 }

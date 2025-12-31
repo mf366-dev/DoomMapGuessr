@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-
+using Microsoft.Data.Sqlite;
 using Octokit;
 
 
@@ -29,24 +29,12 @@ namespace DoomMapGuessr.Settings
             new ApplicationSettings(
                 Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.DoomMapGuessr"))
                 .PrepareDirectoryForDefaultUsage()
-        ).WithCache();
+        ).WithCache("AppCache");
 
         /// <summary>
         /// The application's cache or <c>null</c>.
         /// </summary>
         public ApplicationCache? Cache { get; private set; } = null;
-
-        /// <summary>
-        /// Sets up cache for this state.
-        /// </summary>
-        /// <returns>The state, now with cache set up</returns>
-        public ApplicationState WithCache()
-        {
-
-            Cache = new(Settings);
-            return this;
-
-        }
 
         /// <summary>
         /// Sets up cache for this state, with a custom directory for the cache.
@@ -64,6 +52,13 @@ namespace DoomMapGuessr.Settings
 
         }
 
+		public ApplicationState WithSqliteConnection(Uri url)
+		{
+
+			SqliteConnection = new("Data Source=")
+
+		}
+
         /// <summary>
         /// Versioning information for this assembly.
         /// </summary>
@@ -74,6 +69,10 @@ namespace DoomMapGuessr.Settings
         /// </summary>
         public Release? SavedRelease { get; set; } = null;
 
+		/// <summary>
+		/// The connection to <c>MAPDAT3.db</c>.
+		/// </summary>
+		public SqliteConnection SqliteConnection { get; set; }
 
     }
 

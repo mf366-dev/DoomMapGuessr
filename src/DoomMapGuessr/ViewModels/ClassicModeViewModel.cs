@@ -6,6 +6,8 @@
 
         public ClassicModeViewModel() { }
 
+		// todo: handle the classic mode
+
     }
 
 }

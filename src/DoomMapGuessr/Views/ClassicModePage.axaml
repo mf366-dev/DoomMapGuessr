@@ -3,12 +3,26 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="clr-namespace:DoomMapGuessr.ViewModels"
+			 xmlns:strings="clr-namespace:DoomMapGuessr.Strings"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Class="DoomMapGuessr.Views.ClassicModePage"
 			 x:DataType="vm:ClassicModeViewModel">
 	<Design.DataContext>
 		<vm:ClassicModeViewModel />
 	</Design.DataContext>
-	
-	This is the Classic Guessing Mode page - coming very soon (hopefully)
+
+	<Grid ColumnDefinitions="*, Auto">
+		<Border Grid.Column="0">
+			<Image x:Name="DoomScreenshot" Source="avares://DoomMapGuessr/Assets/Backgrounds/DOOM-64_DANGEROUS-ENCOUNTER.jpg" Stretch="UniformToFill" />
+		</Border>
+
+		<Grid Grid.Column="1" RowDefinitions="Auto, Auto, Auto, Auto, *" Margin="4">
+			<StackPanel Grid.Row="0" Orientation="Vertical" Spacing="4">
+				<TextBlock Classes="h2">Game</TextBlock>
+				<ComboBox ItemsSource="{Binding Games}" PlaceholderText="Select a game" />
+			</StackPanel>
+		</Grid>
+
+	</Grid>
+
 </UserControl>
