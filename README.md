@@ -3,10 +3,10 @@
 
 > **DoomMapGuessr - the GeoGuesser of Doom.** Guess the game, the episode, the map, the exact location...
 
-[![Latest Version](https://img.shields.io/github/v/release/MF366-Coding/DoomMapGuessr?sort=semver&display_name=tag&style=for-the-badge&logo=github&color=red)](https://github.com/MF366-Coding/DoomMapGuessr/releases/latest)
-[![License](https://img.shields.io/github/license/MF366-Coding/DoomMapGuessr?style=for-the-badge&color=blue)](https://raw.githubusercontent.com/MF366-Coding/DommMapGuesser/main/LICENSE)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/MF366-Coding/DoomMapGuessr/total?style=for-the-badge&logo=github&color=yellow)
-![GitHub top language](https://img.shields.io/github/languages/top/MF366-Coding/DoomMapGuessr?style=for-the-badge&logo=.net&logoSize=auto&label=%20&labelColor=purple&color=purple)
+[![Latest Version](https://img.shields.io/github/v/release/matty-the-dev/DoomMapGuessr?sort=semver&display_name=tag&style=for-the-badge&logo=github&color=red)](https://github.com/matty-the-dev/DoomMapGuessr/releases/latest)
+[![License](https://img.shields.io/github/license/matty-the-dev/DoomMapGuessr?style=for-the-badge&color=blue)](https://raw.githubusercontent.com/matty-the-dev/DommMapGuesser/main/LICENSE)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/matty-the-dev/DoomMapGuessr/total?style=for-the-badge&logo=github&color=yellow)
+![GitHub top language](https://img.shields.io/github/languages/top/matty-the-dev/DoomMapGuessr?style=for-the-badge&logo=.net&logoSize=auto&label=%20&labelColor=purple&color=purple)
 <a href="https://mf366.itch.io/doommapguessr"><img src="https://static.itch.io/images/badge-color.svg" alt="Available on itch.io" height="40"></a>
 <a href="about:blank"><img src="https://m.gjcdn.net/content/700/7396569-ll-vyefefsu-v4.webp" alt="Available on GameJolt" height="40"></a>(soon)
 
@@ -57,12 +57,12 @@ DoomMapGuessr can be installed in several ways. Below you can find the most comm
 ### Installer *(recommended)*
 You can use the official DoomMapGuessr installer to install it on Windows, macOS *(untested)* and Linux.
 
-**Get the installer at:** [itch.io](https://mf366.itch.io/doommapguessr) | [ModDB Download Section](https://www.moddb.com/games/doommapguessr/downloads) | GameJolt *(soon)* | [GitHub Releases](https://github.com/MF366-Coding/DoomMapGuessr/releases/latest)
+**Get the installer at:** [itch.io](https://mf366.itch.io/doommapguessr) | [ModDB Download Section](https://www.moddb.com/games/doommapguessr/downloads) | GameJolt *(soon)* | [GitHub Releases](https://github.com/matty-the-dev/DoomMapGuessr/releases/latest)
 
 ### Portable Version
 If you wish to play DoomMapGuessr without having to install it, but you also don't want to have to go through the boring process of compiling yourself, the portable version is the best way to play the game. Available for Windows.
 
-**Get the portable version at:** [itch.io](https://mf366.itch.io/doommapguessr) | [ModDB Download Section](https://www.moddb.com/games/doommapguessr/downloads) | **GameJolt** *(soon)* | [GitHub Releases](https://github.com/MF366-Coding/DoomMapGuessr/releases/latest)
+**Get the portable version at:** [itch.io](https://mf366.itch.io/doommapguessr) | [ModDB Download Section](https://www.moddb.com/games/doommapguessr/downloads) | **GameJolt** *(soon)* | [GitHub Releases](https://github.com/matty-the-dev/DoomMapGuessr/releases/latest)
 
 ### Build it yourself!
 You can also build the game yourself, for whatever machine you have *(as long as it supports .NET 10.0)*.
@@ -70,7 +70,7 @@ You can also build the game yourself, for whatever machine you have *(as long as
 You will need to install the [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-10.0.101-windows-x64-installer). Then run:
 
 ```
-git clone https://github.com/MF366-Coding/DoomMapGuessr.git
+git clone https://github.com/matty-the-dev/DoomMapGuessr.git
 cd src/DoomMapGuessr
 dotnet publish -r <rid> -c Release DoomMapGuessr.csproj
 ```
