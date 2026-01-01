@@ -77,7 +77,7 @@
 			</Border>
 			<Border Grid.Row="1" Classes="card">
 				<Border.Background>
-					<ImageBrush Source="avares://DoomMapGuessr/Assets/Backgrounds/DOOM_TITLEPIC.png"
+					<ImageBrush Source="avares://DoomMapGuessr.App/Assets/Backgrounds/DOOM_TITLEPIC.png"
 								Opacity="0.3"
 								Stretch="UniformToFill"/>
 				</Border.Background>
@@ -106,7 +106,7 @@
 			</Border>
 			<Border Grid.Row="2" Classes="card">
 				<Border.Background>
-					<ImageBrush Source="avares://DoomMapGuessr/Assets/Backgrounds/LEGACY-OF-RUST_TITLEPIC.png"
+					<ImageBrush Source="avares://DoomMapGuessr.App/Assets/Backgrounds/LEGACY-OF-RUST_TITLEPIC.png"
 								Opacity="0.3"
 								Stretch="UniformToFill"/>
 				</Border.Background>

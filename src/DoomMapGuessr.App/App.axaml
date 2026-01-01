@@ -9,29 +9,26 @@
 		<ResourceDictionary>
 			<!-- merged dicts -->
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceInclude Source="avares://DoomMapGuessr/Styles/ColorsFonts.axaml" />
-				<ResourceInclude Source="avares://DoomMapGuessr/Styles/MaterialSymbols.axaml" />
+				<ResourceInclude Source="avares://DoomMapGuessr.App/Styles/ColorsFonts.axaml" />
+				<ResourceInclude Source="avares://DoomMapGuessr.App/Styles/MaterialSymbols.axaml" />
 			</ResourceDictionary.MergedDictionaries>
 
 			<!-- fonts -->
 			<FontFamily x:Key="MaterialRounded">
-				avares://DoomMapGuessr/Assets/Fonts/material-rounded.ttf#Material Symbols Rounded Regular
+				avares://DoomMapGuessr.App/Assets/Fonts/material-rounded.ttf#Material Symbols Rounded Regular
 			</FontFamily>
 
 			<FontFamily x:Key="MaterialOutlined">
-				avares://DoomMapGuessr/Assets/Fonts/material-outline.ttf#Material Symbols Outlined Regular
+				avares://DoomMapGuessr.App/Assets/Fonts/material-outline.ttf#Material Symbols Outlined Regular
 			</FontFamily>
 
 			<FontFamily x:Key="MaterialSharp">
-				avares://DoomMapGuessr/Assets/Fonts/material-sharp.ttf#Material Symbols Sharp Regular
+				avares://DoomMapGuessr.App/Assets/Fonts/material-sharp.ttf#Material Symbols Sharp Regular
 			</FontFamily>
 
 			<FontFamily x:Key="CascadiaCode">
-				avares://DoomMapGuessr/Assets/Fonts/cascadia-code.ttf#Cascadia Code
+				avares://DoomMapGuessr.App/Assets/Fonts/cascadia-code.ttf#Cascadia Code
 			</FontFamily>
-
-			<!-- converters -->
-			<helpers:MultiplyConverter x:Key="MultiplyConverter" />
 		</ResourceDictionary>
 	</Application.Resources>
 
@@ -39,8 +36,8 @@
 		<FluentTheme />
 
 		<!-- Custom Styles -->
-		<StyleInclude Source="avares://DoomMapGuessr/Styles/Controls.axaml" />
-		<StyleInclude Source="avares://DoomMapGuessr/Styles/Card.axaml" />
+		<StyleInclude Source="avares://DoomMapGuessr.App/Styles/Controls.axaml" />
+		<StyleInclude Source="avares://DoomMapGuessr.App/Styles/Card.axaml" />
 	</Application.Styles>
 
 </Application>

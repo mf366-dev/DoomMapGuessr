@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-
 using IniParser.Model;
 using IniParser.Model.Formatting;
 using IniParser.Parser;

@@ -6,7 +6,6 @@ using Avalonia.Styling;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DoomMapGuessr.Settings;
 using DoomMapGuessr.Strings;
 
 

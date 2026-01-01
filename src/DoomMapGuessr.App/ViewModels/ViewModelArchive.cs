@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 
-
 namespace DoomMapGuessr.ViewModels
 {
 

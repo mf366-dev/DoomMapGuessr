@@ -18,6 +18,11 @@ namespace DoomMapGuessr.Settings
     )
     {
 
+		/// <summary>
+		/// Creates the directory.
+		/// </summary>
+		public void CreateDirectory() => Directory.CreateDirectory(CacheDirectory);
+
         /// <summary>
         /// The cache directory.
         /// </summary>

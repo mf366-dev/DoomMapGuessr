@@ -1,6 +1,6 @@
 {
     "GeneralSettings": {
-        "NetProjectPath": "DoomMapGuessr.csproj",
+        "NetProjectPath": "DoomMapGuessr.App.csproj",
         "ApplicationName": {
             "$type": "msbuild",
             "property": "Title"
@@ -19,7 +19,7 @@
         }
     },
     "LinuxSettings": {
-        "AppIcon": "Assets/Icon.png",
+        "AppIcon": "../../assets/Icon.png",
         "Maintainer": {
             "$type": "msbuild",
             "property": "Authors"
@@ -28,22 +28,31 @@
         "DesktopCategory": "Game"
     },
     "Win32Settings": {
-        "InstallerIcon": "Assets/Icon.ico",
-        "Company": "mf366.dev",
-        "CompanyFolder": "True",
-        "InstallerLicense": "../LICENSE.txt",
+        "InstallerIcon": "../../assets/Icon.png",
+        "Company": {
+            "$type": "msbuild",
+            "property": "Authors"
+        },
+        "InstallerLicense": "../../LICENSE.txt",
         "InstallerRequiresAdmin": "False",
         "IncludeUninstaller": "True"
     },
     "MacOsSettings": {
         "CreateBundle": true,
-        "BundleIdentifier": "dev.mf366.DoomMapGuessr",
+        "BundleIdentifier": {
+            "$type": "msbuild",
+            "property": "PackageTitle"
+        },
         "BundleCategory": "Games",
-        "AppIcon": "Assets/Icon.png",
+        "Permissions": {
+            "Network": "This application uses network access to connect to online services."
+        },
+        "AppIcon": "../../assets/Icon.png",
         "SigningCredentialsType": "AdHoc"
     },
     "PublishSettings": {
         "Configuration": "Release",
+        "PublishSingleFile": "True",
         "PublishTrimmed": "True",
         "PublishAot": "True",
         "ExtraBuildProperties": {}

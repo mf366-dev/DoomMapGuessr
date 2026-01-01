@@ -16,20 +16,23 @@ namespace DoomMapGuessr.Settings
     public sealed class ApplicationState(Assembly? assembly, ApplicationSettings settings)
     {
 
-        /// <summary>
-        /// The application's settings.
-        /// </summary>
-        public ApplicationSettings Settings { get; } = settings;
+		private static readonly ApplicationState shared =
+			new ApplicationState(
+				Assembly.GetEntryAssembly(),
+				new ApplicationSettings(
+					Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.DoomMapGuessr"))
+					.PrepareDirectoryForDefaultUsage()
+			).WithCache("AppCache");
 
-        /// <summary>
-        /// A ready-to-use shared instance of <see cref="ApplicationState"/>.
-        /// </summary>
-        public static ApplicationState Shared => new ApplicationState(
-            Assembly.GetEntryAssembly(),
-            new ApplicationSettings(
-                Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.DoomMapGuessr"))
-                .PrepareDirectoryForDefaultUsage()
-        ).WithCache("AppCache");
+		/// <summary>
+		/// The application's settings.
+		/// </summary>
+		public ApplicationSettings Settings { get; } = settings;
+
+		/// <summary>
+		/// A ready-to-use shared instance of <see cref="ApplicationState"/>.
+		/// </summary>
+		public static ApplicationState Shared => shared;
 
         /// <summary>
         /// The application's cache or <c>null</c>.
@@ -52,10 +55,11 @@ namespace DoomMapGuessr.Settings
 
         }
 
-		public ApplicationState WithSqliteConnection(Uri url)
+		public ApplicationState WithSqliteConnection(string path)
 		{
 
-			SqliteConnection = new("Data Source=")
+			SqliteConnection = new($"Data Source={path}");
+			return this;
 
 		}
 
@@ -72,7 +76,7 @@ namespace DoomMapGuessr.Settings
 		/// <summary>
 		/// The connection to <c>MAPDAT3.db</c>.
 		/// </summary>
-		public SqliteConnection SqliteConnection { get; set; }
+		public SqliteConnection? SqliteConnection { get; set; }
 
     }
 

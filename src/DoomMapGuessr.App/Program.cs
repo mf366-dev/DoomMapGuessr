@@ -1,13 +1,25 @@
-﻿using System;
+﻿/*
+ * ________                   ______  ___           _________                            
+ * ___  ___\_______________ _____   |/ _/_____________  ____/__  ________________________
+ * __  / /_/ ___\ ___\  __ `___\  /|_/ /  __ `/_  ___\ / ___  / /_/ __\  ___/  ___/  ___/
+ * _  /_/ / /_////_/_/ / / / /_/ /  / // /_/ /_  /_////_/ // /_/ /  __(__  )(__  )  /    
+ * /_____/\____\____/_/ /_/ /_/_/  /_/ \__,_/_  .___\____/ \__,_/\___/____//____//_/     
+ *                                           /_/                             
+ *                                           
+ * Copyright (c) 2024-2026 Matthew
+ * MIT License
+ * 
+ * DoomMapGuessr - the GeoGuessr of DOOM
+ *                                           
+ */
+
+using System;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 using Avalonia;
-
-using DoomMapGuessr.Settings;
-
 using Octokit;
 
 
@@ -66,8 +78,8 @@ namespace DoomMapGuessr
 			var bytes = await client.GetByteArrayAsync(DBUrl);
 			await ApplicationState.Shared.Cache!.SetAsync("__cached_db", bytes);
 
-			ApplicationState.Shared.SqliteConnection = new($"Data Source={Path.Join(ApplicationState.Shared.Cache!.CacheDirectory, "__cached_db")}");
-			await ApplicationState.Shared.SqliteConnection.OpenAsync();
+			ApplicationState.Shared.SqliteConnection = new Microsoft.Data.Sqlite.SqliteConnection($"Data Source={Path.Join(ApplicationState.Shared.Cache!.CacheDirectory, "__cached_db")}");
+			ApplicationState.Shared.SqliteConnection.Open();
 
 		}
 
@@ -79,6 +91,7 @@ namespace DoomMapGuessr
 		{
 
 			PrepareApplicationSettings();
+			ApplicationState.Shared.Cache?.CreateDirectory();
 			ApplicationState.Shared.SavedRelease = await new GitHubClient(new ProductHeaderValue("DoomMapGuessr")).Repository.Release.GetLatest("MF366-Coding", "DoomMapGuessr");
 
 			await DownloadSqliteDatabaseAsync();

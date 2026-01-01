@@ -6,7 +6,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
-using DoomMapGuessr.Settings;
 using DoomMapGuessr.ViewModels;
 using DoomMapGuessr.Views;
 

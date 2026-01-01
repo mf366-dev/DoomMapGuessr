@@ -1,8 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 
-using DoomMapGuessr.Services;
-using DoomMapGuessr.Settings;
-
 
 namespace DoomMapGuessr.ViewModels
 {

@@ -1,66 +1,91 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
+		<!-- Basic Properties -->
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<RootNamespace>DoomMapGuessr</RootNamespace>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
+		<!-- Application manifest for Windows 10 and 11 -->
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+
+		<!-- Package Metadata (for Parcel usage) -->
 		<Title>DoomMapGuessr</Title>
-		<PackageTitle>matt-doommapguessr</PackageTitle>
-		<!-- Used for actual versioning -->
-		<Version>3.0.0-dev</Version>
+		<PackageTitle>dev.mf366.doommapguessr</PackageTitle>
 		<Authors>Matthew</Authors>
-		
+
+		<!-- Used for the actual versioning and Parcel as well -->
+		<Version>3.0.0-dev</Version>
+
 		<!--
-		Used internally for version checks
+		Used internally only, for quick Reflection-free version checks
 		The last number refers to "revision":
 		- 0 if stable
 		- 1 if beta/dev/alpha
 		-->
 		<AssemblyVersion>3.0.0.1</AssemblyVersion>
-
-		<!--
-		Do not warn about "oh ini-parser .net framework"
-		nuget stop bitching
-		fucking do your job
-		-->
-		<NoWarn>$(NoWarn);NU1701</NoWarn>
 	</PropertyGroup>
 
+	
+	<!-- Publish AOT if Release -->
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
 		<PublishAot>true</PublishAot>
+		<PublishSingleFile>true</PublishSingleFile>
+		<PublishTrimmed>true</PublishTrimmed>
+		<PublishReadyToRun>false</PublishReadyToRun> <!-- is conflicting with AOT -->
 	</PropertyGroup>
 
+	
+	<!-- Don't publish AOT if x86 -->
+	<PropertyGroup Condition="'$(Platform)' == 'x86' and '$(Configuration)' == 'Release'">
+		<PublishAot>false</PublishAot>
+		<PublishSingleFile>true</PublishSingleFile>
+		<PublishTrimmed>false</PublishTrimmed>
+		<PublishReadyToRun>true</PublishReadyToRun>
+	</PropertyGroup>
+
+	
+	<!-- Resources -->
 	<ItemGroup>
+		<!-- Styles are internal to the project -->
 		<AvaloniaResource Include="Styles\**\*">
 			<Link>Styles\%(RecursiveDir)%(Filename)%(Extension)</Link>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</AvaloniaResource>
 
-		<AvaloniaResource Include="Assets\**\*">
+		<!-- Assets are external to the project -->
+		<AvaloniaResource Include="..\..\assets\**\*">
 			<Link>Assets\%(RecursiveDir)%(Filename)%(Extension)</Link>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</AvaloniaResource>
 
+		<!-- Strings and Resources Setup -->
 		<EmbeddedResource Update="Strings\Resources.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
-
 		<Compile Update="Strings\Resources.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Resources.resx</DependentUpon>
 		</Compile>
 
+		<!-- Languages must be dependent on neutral strings -->
 		<EmbeddedResource Update="Strings\Resources.pt-PT.resx">
+			<DependentUpon>Resources.resx</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Strings\Resources.pt-br.resx">
 			<DependentUpon>Resources.resx</DependentUpon>
 		</EmbeddedResource>
 	</ItemGroup>
 
+	
+	<!-- Packages -->
 	<ItemGroup>
+		<!-- Avalonia Base Packages -->
 		<PackageReference Include="Avalonia" Version="11.2.7" />
 		<PackageReference Include="Avalonia.Desktop" Version="11.2.7" />
 		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.7" />
@@ -72,26 +97,29 @@
 			<PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
 		</PackageReference>
 
+		<!-- Condition below is needed to remove Avalonia Accelerate's Diagnostics from build output in Release configuration. -->
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="AvaloniaUI.DiagnosticsSupport" Version="2.1.1" />
 
+		<!-- Third-Party packages for Avalonia -->
 		<PackageReference Include="ColorTextBlock.Avalonia" Version="11.0.3-a1" />
-
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
-
-		<PackageReference Include="ini-parser" Version="2.5.2" />
-
 		<PackageReference Include="Markdown.Avalonia" Version="11.0.3-a1" />
 
-		<PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.1" />
+		<!-- Community Toolkit for MVVM -->
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 
+		<!-- Data and Others -->
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.1" />
 		<PackageReference Include="Octokit" Version="14.0.0" />
 	</ItemGroup>
 
+
+	<!-- Projects -->
+
+	
+	<!-- Others -->
 	<ItemGroup>
 		<UpToDateCheckInput Remove="Resources\Fonts.axaml" />
+		<Folder Include="Models\" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Models\" />
-	</ItemGroup>
+	
 </Project>
