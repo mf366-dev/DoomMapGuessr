@@ -21,7 +21,11 @@ namespace DoomMapGuessr.Services
 	/// Initializes this service with a path to the settings file.
 	/// </remarks>
 	/// <param name="filepath">The filepath</param>
-	public sealed class IniSettingsService(string filepath) : ISettingsService, IDisposable, IAsyncDisposable
+	public sealed class IniSettingsService(
+		string filepath
+	) : ISettingsService,
+		IDisposable,
+		IAsyncDisposable
 	{
 
 		private readonly IniParserConfiguration defaultConfiguration = new()
@@ -45,8 +49,10 @@ namespace DoomMapGuessr.Services
 		};
 
 		private readonly string pathToSettings = filepath;
-		private string stringifiedData = "";
 		private IniData? actualIni;
+
+		private bool disposedValue;
+		private string stringifiedData = "";
 
 		/// <summary>
 		/// Initializes this service with a representation of the settings file.
@@ -54,7 +60,163 @@ namespace DoomMapGuessr.Services
 		/// <param name="file">The file</param>
 		public IniSettingsService(FileInfo file) : this(file.FullName) { }
 
-		private bool disposedValue;
+		/// <summary>
+		/// Whether the data has been loaded and parsed.
+		/// </summary>
+		[MemberNotNullWhen(true, nameof(actualIni))]
+		public bool IsIniParsed => actualIni is not null;
+
+		/// <inheritdoc />
+		public async ValueTask DisposeAsync()
+		{
+
+			if (!disposedValue)
+			{
+
+				await SaveAsync();
+
+				actualIni = null;
+				stringifiedData = String.Empty;
+
+				disposedValue = true;
+
+			}
+
+			GC.SuppressFinalize(this);
+
+			await ValueTask.CompletedTask;
+
+		}
+
+		/// <inheritdoc />
+		public void Dispose()
+		{
+
+			if (!disposedValue)
+			{
+
+				Save();
+
+				actualIni = null;
+				stringifiedData = String.Empty;
+
+				disposedValue = true;
+
+			}
+
+			GC.SuppressFinalize(this);
+
+		}
+
+		/// <inheritdoc />
+		public void Add<T>(string key, T value)
+		{
+
+			EnsureIniParsed();
+
+			string[] longFormKey = key.Split('.', 2);
+
+			if (longFormKey.Length < 2)
+				throw new ArgumentException("The key must be in a <section>.<key> format", nameof(key));
+
+			actualIni[longFormKey[0]][longFormKey[1]] = value?.ToString() ?? "null";
+
+		}
+
+		/// <inheritdoc />
+		public bool Contains(string key)
+		{
+
+			EnsureIniParsed();
+
+			return actualIni.TryGetKey(key, out _);
+
+		}
+
+		/// <summary>
+		/// Not supported for INI.
+		/// </summary>
+		/// <exception cref="InvalidOperationException"></exception>
+		public T Get<T>(string key, T defaultValue = default!) =>
+			throw new InvalidOperationException("Cannot Get<T>() for INI. Try GetString() instead.");
+
+		/// <inheritdoc />
+		public bool GetBoolean(string key)
+		{
+
+			string? str = GetString(key);
+
+			if (String.IsNullOrEmpty(str))
+				return false;
+
+			if (Boolean.TryParse(str, out bool b))
+				return b;
+
+			if (Double.TryParse(str, out double d) && Math.Abs(d) == 1.0)
+				return true;
+
+			return Int32.TryParse(str, out int i) && Math.Abs(i) == 1;
+
+		}
+
+		/// <inheritdoc />
+		public double GetDouble(string key) => Double.TryParse(GetString(key), out double result) ? result : default;
+
+		/// <inheritdoc />
+		public int GetInt32(string key) => Int32.TryParse(GetString(key), out int result) ? result : default;
+
+		/// <inheritdoc />
+		public string? GetString(string key)
+		{
+
+			EnsureIniParsed();
+
+			return actualIni.TryGetKey(key, out string? value) ? value : null;
+
+		}
+
+		/// <inheritdoc />
+		public void Save()
+		{
+
+			EnsureIniParsed();
+
+			string? contents = actualIni.ToString(new DefaultIniDataFormatter(defaultConfiguration));
+
+			File.WriteAllText(pathToSettings, contents);
+
+		}
+
+		/// <inheritdoc />
+		public async Task SaveAsync()
+		{
+
+			EnsureIniParsed();
+
+			string? contents = actualIni.ToString(new DefaultIniDataFormatter(defaultConfiguration));
+
+			await File.WriteAllTextAsync(pathToSettings, contents);
+
+		}
+
+		/// <inheritdoc />
+		public void Set<T>(string key, T value) => throw new NotImplementedException();
+
+		/// <inheritdoc />
+		public bool TryGet<T>(string key, out T value) => throw new NotImplementedException();
+
+		/// <summary>
+		/// Gets a copy of the actual INI data.
+		/// </summary>
+		/// <returns>The copy</returns>
+		public IniData GetCopy()
+		{
+
+			EnsureIniParsed();
+
+			return new(actualIni);
+
+		}
 
 		/// <summary>
 		/// Loads the settings as a string.
@@ -70,7 +232,7 @@ namespace DoomMapGuessr.Services
 		public IniSettingsService Load(string defaultData)
 		{
 
-			var directoryPath = Path.GetDirectoryName(pathToSettings);
+			string? directoryPath = Path.GetDirectoryName(pathToSettings);
 
 			if (!File.Exists(pathToSettings) && directoryPath is not null)
 			{
@@ -110,172 +272,12 @@ namespace DoomMapGuessr.Services
 
 		}
 
-		/// <summary>
-		/// Whether or not the data has been loaded parsed.
-		/// </summary>
-		[MemberNotNullWhen(true, nameof(actualIni))]
-		public bool IsIniParsed => actualIni is not null;
-
 		[MemberNotNull(nameof(actualIni))]
 		private void EnsureIniParsed()
 		{
 
 			if (!IsIniParsed)
 				throw new InvalidDataException("The settings have not been parsed yet");
-
-		}
-
-		/// <inheritdoc/>
-		public void Add<T>(string key, T value)
-		{
-
-			EnsureIniParsed();
-
-			var longFormKey = key.Split('.', 2);
-
-			if (longFormKey.Length < 2)
-				throw new ArgumentException("The key must be in a <section>.<key> format", nameof(key));
-
-			actualIni[longFormKey[0]][longFormKey[1]] = value?.ToString() ?? "null";
-
-		}
-
-		/// <inheritdoc/>
-		public bool Contains(string key)
-		{
-
-			EnsureIniParsed();
-
-			return actualIni.TryGetKey(key, out _);
-
-		}
-
-		/// <summary>
-		/// Not supported for INI.
-		/// </summary>
-		/// <exception cref="InvalidOperationException"></exception>
-		public T Get<T>(string key, T defaultValue = default!) => throw new InvalidOperationException("Cannot Get<T>() for INI. Try GetString() instead.");
-
-		/// <inheritdoc/>
-		public bool GetBoolean(string key)
-		{
-
-			var str = GetString(key);
-
-			if (String.IsNullOrEmpty(str))
-				return false;
-
-			if (Boolean.TryParse(str, out var b))
-				return b;
-
-			if (Double.TryParse(str, out var d) && Math.Abs(d) == 1.0)
-				return true;
-
-			return Int32.TryParse(str, out var i) && Math.Abs(i) == 1;
-
-		}
-
-		/// <inheritdoc/>
-		public double GetDouble(string key) => Double.TryParse(GetString(key), out var result) ? result : default;
-
-		/// <summary>
-		/// Gets a copy of the actual INI data.
-		/// </summary>
-		/// <returns>The copy</returns>
-		public IniData GetCopy()
-		{
-
-			EnsureIniParsed();
-			return new(actualIni);
-
-		}
-
-		/// <inheritdoc/>
-		public int GetInt32(string key) => Int32.TryParse(GetString(key), out var result) ? result : default;
-
-		/// <inheritdoc/>
-		public string? GetString(string key)
-		{
-
-			EnsureIniParsed();
-
-			return actualIni.TryGetKey(key, out var value) ? value : null;
-
-		}
-
-		/// <inheritdoc/>
-		public void Save()
-		{
-
-			EnsureIniParsed();
-
-			var contents = actualIni.ToString(
-				new DefaultIniDataFormatter(defaultConfiguration)
-			);
-
-			File.WriteAllText(pathToSettings, contents);
-
-		}
-
-		/// <inheritdoc/>
-		public async Task SaveAsync()
-		{
-
-			EnsureIniParsed();
-
-			var contents = actualIni.ToString(
-				new DefaultIniDataFormatter(defaultConfiguration)
-			);
-
-			await File.WriteAllTextAsync(pathToSettings, contents);
-
-		}
-
-		/// <inheritdoc/>
-		public void Set<T>(string key, T value) => throw new NotImplementedException();
-
-		/// <inheritdoc/>
-		public bool TryGet<T>(string key, out T value) => throw new NotImplementedException();
-
-		/// <inheritdoc/>
-		public void Dispose()
-		{
-
-			if (!disposedValue)
-			{
-
-				Save();
-
-				actualIni = null;
-				stringifiedData = String.Empty;
-
-				disposedValue = true;
-
-			}
-
-			GC.SuppressFinalize(this);
-
-		}
-
-		/// <inheritdoc/>
-		public async ValueTask DisposeAsync()
-		{
-
-			if (!disposedValue)
-			{
-
-				await SaveAsync();
-
-				actualIni = null;
-				stringifiedData = String.Empty;
-
-				disposedValue = true;
-
-			}
-
-			GC.SuppressFinalize(this);
-
-			await ValueTask.CompletedTask;
 
 		}
 

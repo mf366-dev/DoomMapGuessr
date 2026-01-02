@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 
 
-namespace DoomMapGuessr
+namespace DoomMapGuessr.Views
 {
 
     public partial class NoInternetDialog : Window
