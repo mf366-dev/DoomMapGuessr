@@ -11,18 +11,11 @@ namespace DoomMapGuessr.Cache.Abstractions
 	{
 
 		/// <summary>
-		/// Clears one or multiple cache location (bitwise operations).
-		/// </summary>
-		/// <param name="target">The target</param>
-		Task ClearAsync(CacheTarget target);
-
-		/// <summary>
-		/// Gets a cached item async.
+		/// Gets a cached bytearray async.
 		/// </summary>
 		/// <param name="key">The key</param>
-		/// <typeparam name="T">The type of data to store</typeparam>
-		/// <returns>The value</returns>
-		Task<T> GetAsync<T>(string key);
+		/// <returns>The bytearray</returns>
+		Task<byte[]?> GetBytesAsync(string key);
 
 		/// <summary>
 		/// Gets a cached string async.
@@ -30,13 +23,6 @@ namespace DoomMapGuessr.Cache.Abstractions
 		/// <param name="key">The key</param>
 		/// <returns>The string</returns>
 		Task<string?> GetStringAsync(string key);
-
-		/// <summary>
-		/// Removes something from cache async.
-		/// </summary>
-		/// <param name="key">The key</param>
-		/// <returns></returns>
-		Task RemoveAsync(string key);
 
 		/// <summary>
 		/// Caches an item async.

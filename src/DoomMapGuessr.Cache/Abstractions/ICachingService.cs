@@ -19,7 +19,7 @@
 		/// <param name="key">The key</param>
 		/// <typeparam name="T">The type of data to store</typeparam>
 		/// <returns>The value</returns>
-		T Get<T>(string key);
+		T? Get<T>(string key);
 
 		/// <summary>
 		/// Gets a cached string.
@@ -27,6 +27,13 @@
 		/// <param name="key">The key</param>
 		/// <returns>The string</returns>
 		string? GetString(string key);
+
+		/// <summary>
+		/// Gets a cached bytearray.
+		/// </summary>
+		/// <param name="key">The key</param>
+		/// <returns>The bytearray</returns>
+		byte[]? GetBytes(string key);
 
 		/// <summary>
 		/// Removes something from cache.

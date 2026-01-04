@@ -14,14 +14,24 @@ namespace DoomMapGuessr.Cache
 	/// <summary>
 	/// The caching service used by DoomMapGuessr.
 	/// </summary>
-	/// <param name="cacheDirectory"></param>
-	public class GlobalCachingService(
-		string cacheDirectory
-	) : ICachingService,
-		ICachingServiceAsync
+	public class GlobalCachingService : ICachingService,
+										ICachingServiceAsync
 	{
 
-		private MemoryCache memory = new(
+		/// <summary>
+		/// Initializes a new global caching service.
+		/// </summary>
+		/// <param name="cacheDirectory"></param>
+		public GlobalCachingService(string cacheDirectory)
+		{
+
+			CacheDirectory = cacheDirectory;
+			TempCacheDirectory = Directory.CreateDirectory(Path.Join(cacheDirectory, "Temp"));
+			PersistentCacheDirectory = Directory.CreateDirectory(Path.Join(cacheDirectory, "__"));
+
+		}
+
+		private readonly MemoryCache memory = new(
 			new MemoryCacheOptions
 			{
 				Clock = new SystemClock(),
@@ -35,17 +45,45 @@ namespace DoomMapGuessr.Cache
 		/// <summary>
 		/// The directory used for persistent cache.
 		/// </summary>
-		public string CacheDirectory => cacheDirectory;
+		public string CacheDirectory { get; }
 
 		/// <summary>
 		/// The directory used for temporary cache.
 		/// </summary>
-		public string TempCacheDirectory => Path.Join(CacheDirectory, "Temp");
+		public DirectoryInfo TempCacheDirectory { get; }
 
-		private void ClearTemporaryCache() => throw new NotImplementedException("This is a WIP"); // todo: implement this
+		/// <summary>
+		/// The directory used for persistent cache.
+		/// </summary>
+		public DirectoryInfo PersistentCacheDirectory { get; }
 
-		private void ClearPersistentCache() => throw new NotImplementedException("This is a WIP"); // todo: implement this
+		/// <summary>
+		/// Clears temporary cache.
+		/// </summary>
+		private void ClearTemporaryCache()
+		{
 
+			foreach (var entry in TempCacheDirectory.EnumerateFileSystemInfos())
+				entry.Delete();
+
+		}
+
+		/// <summary>
+		/// Clears persistent cache.
+		/// </summary>
+		private void ClearPersistentCache()
+		{
+
+			foreach (var entry in TempCacheDirectory.EnumerateFileSystemInfos())
+				entry.Delete();
+
+		}
+
+		/// <summary>
+		/// Clears a target (does not support bitwise operations).
+		/// </summary>
+		/// <param name="target">The target</param>
+		/// <exception cref="ArgumentOutOfRangeException">Target not recognized</exception>
 		private void ClearNoFlagSupport(CacheTarget target)
 		{
 
@@ -54,14 +92,17 @@ namespace DoomMapGuessr.Cache
 
 				case CacheTarget.Memory:
 					memory.Clear();
+
 					break;
 
 				case CacheTarget.Temporary:
 					ClearTemporaryCache();
+
 					break;
 
 				case CacheTarget.Persistent:
 					ClearPersistentCache();
+
 					break;
 
 				default:
@@ -85,32 +126,243 @@ namespace DoomMapGuessr.Cache
 
 		}
 
-		/// <inheritdoc />
-		public T Get<T>(string key) => throw new NotImplementedException();
+		/// <summary>
+		/// Gets a cached item from memory.
+		/// If you wish to get a cached item from
+		/// another target, see <see cref="GetString"/> or <see cref="GetBytes"/>.
+		/// </summary>
+		/// <param name="key">The key</param>
+		/// <typeparam name="T">The type of data to store</typeparam>
+		/// <returns>The value</returns>
+		public T? Get<T>(string key) => memory.Get<T>(key);
 
 		/// <inheritdoc />
-		public string? GetString(string key) => throw new NotImplementedException();
+		public string? GetString(string key)
+		{
+
+			if (memory.TryGetValue(key, out string? value))
+				return value;
+
+			string pathToTempFile = Path.Join(TempCacheDirectory.FullName, key);
+
+			if (File.Exists(pathToTempFile))
+				return File.ReadAllText(pathToTempFile);
+
+			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
+
+			// ReSharper disable once ConvertIfStatementToReturnStatement
+			if (File.Exists(pathToPersistentFile))
+				return File.ReadAllText(pathToPersistentFile);
+
+			return null;
+
+		}
 
 		/// <inheritdoc />
-		public void Remove(string key) => throw new NotImplementedException();
+		public byte[]? GetBytes(string key)
+		{
+
+			if (memory.TryGetValue(key, out byte[]? value))
+				return value;
+
+			string pathToTempFile = Path.Join(TempCacheDirectory.FullName, key);
+
+			if (File.Exists(pathToTempFile))
+				return File.ReadAllBytes(pathToTempFile);
+
+			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
+
+			// ReSharper disable once ConvertIfStatementToReturnStatement
+			if (File.Exists(pathToPersistentFile))
+				return File.ReadAllBytes(pathToPersistentFile);
+
+			return null;
+
+		}
+
+		/// <inheritdoc cref="Remove" />
+		public void Delete(string key) => Remove(key);
 
 		/// <inheritdoc />
-		public void Set<T>(string key, T value, CacheTarget target) => throw new NotImplementedException();
+		public void Remove(string key)
+		{
+
+			// btw this method slightly differs
+			// as it deletes even if it's already found
+			// like lets say there's for some reason
+			// the same key in 2 cache storages
+			// it'll remove both :)
+			string pathToTempFile = Path.Join(TempCacheDirectory.FullName, key);
+			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
+
+			if (memory.TryGetValue<object?>(key, out _))
+				memory.Remove(key);
+
+			if (File.Exists(pathToTempFile))
+				File.Delete(pathToTempFile);
+
+			if (File.Exists(pathToPersistentFile))
+				File.Delete(pathToPersistentFile);
+
+		}
 
 		/// <inheritdoc />
-		public async Task ClearAsync(CacheTarget target) => throw new NotImplementedException();
+		public void Set<T>(string key, T value, CacheTarget target)
+		{
+
+			switch (target)
+			{
+
+				case CacheTarget.Memory:
+					memory.Set(key, value);
+
+					return;
+
+				case CacheTarget.Temporary:
+					switch (value)
+					{
+
+						case string str:
+							File.WriteAllText(Path.Join(TempCacheDirectory.FullName, key), str);
+
+							return;
+
+						case byte[] bytes:
+							File.WriteAllBytes(Path.Join(TempCacheDirectory.FullName, key), bytes);
+
+							return;
+
+						default:
+							throw new InvalidOperationException("Cannot use temporary cache with a type other than string or byte[]");
+
+					}
+
+				case CacheTarget.Persistent:
+					switch (value)
+					{
+
+						case string str:
+							File.WriteAllText(Path.Join(PersistentCacheDirectory.FullName, key), str);
+
+							return;
+
+						case byte[] bytes:
+							File.WriteAllBytes(Path.Join(PersistentCacheDirectory.FullName, key), bytes);
+
+							return;
+
+						default:
+							throw new InvalidOperationException("Cannot use temporary cache with a type other than string or byte[]");
+
+					}
+
+				default:
+					throw new ArgumentOutOfRangeException(nameof(target), target, "Unrecognized cache target");
+
+			}
+
+		}
 
 		/// <inheritdoc />
-		public async Task<T> GetAsync<T>(string key) => throw new NotImplementedException();
+		public async Task<byte[]?> GetBytesAsync(string key)
+		{
+
+			if (memory.TryGetValue(key, out byte[]? value))
+				return value;
+
+			string pathToTempFile = Path.Join(TempCacheDirectory.FullName, key);
+
+			if (File.Exists(pathToTempFile))
+				return await File.ReadAllBytesAsync(pathToTempFile);
+
+			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
+
+			// ReSharper disable once ConvertIfStatementToReturnStatement
+			if (File.Exists(pathToPersistentFile))
+				return await File.ReadAllBytesAsync(pathToPersistentFile);
+
+			return null;
+
+		}
 
 		/// <inheritdoc />
-		public async Task<string?> GetStringAsync(string key) => throw new NotImplementedException();
+		public async Task<string?> GetStringAsync(string key)
+		{
+
+			if (memory.TryGetValue(key, out string? value))
+				return value;
+
+			string pathToTempFile = Path.Join(TempCacheDirectory.FullName, key);
+
+			if (File.Exists(pathToTempFile))
+				return await File.ReadAllTextAsync(pathToTempFile);
+
+			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
+
+			// ReSharper disable once ConvertIfStatementToReturnStatement
+			if (File.Exists(pathToPersistentFile))
+				return await File.ReadAllTextAsync(pathToPersistentFile);
+
+			return null;
+
+		}
 
 		/// <inheritdoc />
-		public async Task RemoveAsync(string key) => throw new NotImplementedException();
+		public async Task SetAsync<T>(string key, T value, CacheTarget target)
+		{
 
-		/// <inheritdoc />
-		public async Task SetAsync<T>(string key, T value, CacheTarget target) => throw new NotImplementedException();
+			switch (target)
+			{
+
+				case CacheTarget.Temporary:
+					switch (value)
+					{
+
+						case string str:
+							await File.WriteAllTextAsync(Path.Join(TempCacheDirectory.FullName, key), str);
+
+							return;
+
+						case byte[] bytes:
+							await File.WriteAllBytesAsync(Path.Join(TempCacheDirectory.FullName, key), bytes);
+
+							return;
+
+						default:
+							throw new InvalidOperationException("Cannot use temporary cache with a type other than string or byte[]");
+
+					}
+
+				case CacheTarget.Persistent:
+					switch (value)
+					{
+
+						case string str:
+							await File.WriteAllTextAsync(Path.Join(PersistentCacheDirectory.FullName, key), str);
+
+							return;
+
+						case byte[] bytes:
+							await File.WriteAllBytesAsync(Path.Join(PersistentCacheDirectory.FullName, key), bytes);
+
+							return;
+
+						default:
+							throw new InvalidOperationException("Cannot use temporary cache with a type other than string or byte[]");
+
+					}
+
+				case CacheTarget.Memory:
+					Set(key, value, CacheTarget.Memory);
+
+					return;
+
+				default:
+					throw new ArgumentOutOfRangeException(nameof(target), target, "Unrecognized cache target");
+
+			}
+
+		}
 
 	}
 
