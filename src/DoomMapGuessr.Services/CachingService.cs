@@ -2,27 +2,28 @@
 using System.IO;
 using System.Threading.Tasks;
 
-using DoomMapGuessr.Cache.Abstractions;
+using DoomMapGuessr.Services.Abstractions;
+using DoomMapGuessr.Services.Enums;
 
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Internal;
 
 
-namespace DoomMapGuessr.Cache
+namespace DoomMapGuessr.Services
 {
 
 	/// <summary>
 	/// The caching service used by DoomMapGuessr.
 	/// </summary>
-	public class GlobalCachingService : ICachingService,
+	public class CachingService : ICachingService,
 										ICachingServiceAsync
 	{
 
 		/// <summary>
-		/// Initializes a new global caching service.
+		/// Initializes a new caching service.
 		/// </summary>
 		/// <param name="cacheDirectory"></param>
-		public GlobalCachingService(string cacheDirectory)
+		public CachingService(string cacheDirectory)
 		{
 
 			CacheDirectory = cacheDirectory;

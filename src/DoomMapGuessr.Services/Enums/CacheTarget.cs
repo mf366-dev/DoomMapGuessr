@@ -1,9 +1,7 @@
 ﻿using System;
 
-using DoomMapGuessr.Cache.Abstractions;
 
-
-namespace DoomMapGuessr.Cache
+namespace DoomMapGuessr.Services.Enums
 {
 
 	/// <summary>

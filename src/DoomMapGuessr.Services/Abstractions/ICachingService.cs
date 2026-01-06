@@ -1,4 +1,7 @@
-﻿namespace DoomMapGuessr.Cache.Abstractions
+﻿using DoomMapGuessr.Services.Enums;
+
+
+namespace DoomMapGuessr.Services.Abstractions
 {
 
 	/// <summary>

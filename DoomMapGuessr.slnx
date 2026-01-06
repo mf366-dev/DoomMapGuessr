@@ -7,7 +7,6 @@
     <File Path="README.md" />
   </Folder>
   <Project Path="src/DoomMapGuessr.App/DoomMapGuessr.App.csproj" />
-  <Project Path="src/DoomMapGuessr.Cache/DoomMapGuessr.Cache.csproj" Id="d8f3aa93-75c7-4dac-9fd3-b63486100d9f" />
   <Project Path="src/DoomMapGuessr.Common/DoomMapGuessr.Common.csproj" Id="9b20e786-7082-4ee5-bb6c-f99652119b6e" />
   <Project Path="src/DoomMapGuessr.Data/DoomMapGuessr.Data.csproj" Id="e527ab23-52cf-4b83-963d-de1ff9d8c75c" />
   <Project Path="src/DoomMapGuessr.Domain/DoomMapGuessr.Domain.csproj" Id="52b1fb1b-4c0c-4f8b-95a9-715851beb2fc" />

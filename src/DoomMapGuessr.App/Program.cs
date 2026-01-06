@@ -1,16 +1,16 @@
 ﻿/*
- * ________                   ______  ___           _________                            
+ * ________                   ______  ___           _________
  * ___  ___\_______________ _____   |/ _/_____________  ____/__  ________________________
  * __  / /_/ ___\ ___\  __ `___\  /|_/ /  __ `/_  ___\ / ___  / /_/ __\  ___/  ___/  ___/
- * _  /_/ / /_////_/_/ / / / /_/ /  / // /_/ /_  /_////_/ // /_/ /  __(__  )(__  )  /    
- * /_____/\____\____/_/ /_/ /_/_/  /_/ \__,_/_  .___\____/ \__,_/\___/____//____//_/     
- *                                           /_/                             
- *                                           
+ * _  /_/ / /_////_/_/ / / / /_/ /  / // /_/ /_  /_////_/ // /_/ /  __(__  )(__  )  /
+ * /_____/\____\____/_/ /_/ /_/_/  /_/ \__,_/_  .___\____/ \__,_/\___/____//____//_/
+ *                                           /_/
+ *
  * Copyright (c) 2024-2026 Matthew
  * MIT License
- * 
+ *
  * DoomMapGuessr - the GeoGuessr of DOOM
- *                                           
+ *
  */
 
 using System;
@@ -19,7 +19,15 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 using Avalonia;
+
+using DoomMapGuessr.Services;
+using DoomMapGuessr.Services.Abstractions;
+using DoomMapGuessr.Settings;
+
 using Octokit;
 
 
@@ -29,8 +37,13 @@ namespace DoomMapGuessr
 	internal sealed class Program
 	{
 
+		public static IHost Host { get; private set; } = null!;
+
+		public static string AppDataDirectory =>
+			Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.doommapguessr");
+
 		private static readonly HttpClient client = new();
-		private static readonly string[] allowedCultures = ["en-US", "pt-br", "pt-PT", "sk-sk"];
+		private static readonly string[] allowedCultures = [ "en-US", "pt-br", "pt-PT", "sk-sk" ];
 		private static readonly string systemCulture = CultureInfo.CurrentCulture.Name;
 
 		// Avalonia configuration, don't remove; also used by visual designer.
@@ -40,45 +53,64 @@ namespace DoomMapGuessr
 					  .WithInterFont()
 					  .LogToTrace();
 
-		public static void PrepareApplicationSettings()
+		public static IHostBuilder CreateHostBuilder(string[] args) =>
+			Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
+					 .ConfigureServices((ctx, services) =>
+						 {
+
+							 services.AddSingleton<ISettingsService>(_ => new IniSettingsService(Path.Join(AppDataDirectory, "config.ini")));
+							 services.AddSingleton<ICachingService>(_ => new CachingService(Path.Join(AppDataDirectory, "AppCache")));
+
+						 }
+					 );
+
+		public static async Task PrepareApplicationSettingsAsync(ISettingsService settings)
 		{
 
-			if (!ApplicationState.Shared.Settings.Data.Sections.ContainsSection("Language"))
-				ApplicationState.Shared.Settings.Data.Sections.Add(new("Language"));
+			if (settings is IniSettingsService { IsIniParsed: false } ini)
+				ini.Load().Parse();
 
-			if (!ApplicationState.Shared.Settings.Data.Sections.ContainsSection("GUI"))
-				ApplicationState.Shared.Settings.Data.Sections.Add(new("GUI"));
+			if (!settings.Contains("Language.?"))
+				settings.Set<string?>("Language.*", null);
 
-			if (!ApplicationState.Shared.Settings.Data["Language"].ContainsKey("Culture"))
+			if (!settings.Contains("GUI.?"))
+				settings.Set<string?>("GUI.*", null);
+
+			if (!settings.Contains("Language.Culture"))
 			{
 
-				ApplicationState.Shared.Settings.Data["Language"]["Culture"] = allowedCultures.Contains(systemCulture, StringComparer.OrdinalIgnoreCase)
-																				 ? systemCulture
-																				 : allowedCultures[0];
+				settings.Set(
+					"Language.Culture", allowedCultures.Contains(systemCulture, StringComparer.OrdinalIgnoreCase)
+											? systemCulture
+											: allowedCultures[0]
+				);
 
 			}
 
-			if (!ApplicationState.Shared.Settings.Data["GUI"].ContainsKey("FollowSystem"))
-				ApplicationState.Shared.Settings.Data["GUI"]["FollowSystem"] = "1";
+			if (!settings.Contains("GUI.FollowSystem"))
+				settings.Set("GUI.FollowSystem", 1);
 
-			if (!ApplicationState.Shared.Settings.Data["GUI"].ContainsKey("DarkMode"))
-				ApplicationState.Shared.Settings.Data["GUI"]["DarkMode"] = "1";
+			if (!settings.Contains("GUI.DarkMode"))
+				settings.Set("GUI.DarkMode", 1);
 
-			ApplicationState.Shared.Settings.Save("config");
+			await settings.SaveAsync();
 
 		}
 
-		private const string DBUrl = "https://raw.githubusercontent.com/MF366-Coding/DoomMapGuessr/refs/heads/main/data/MAPDAT3.db";
+		private const string DB_URL = "https://raw.githubusercontent.com/MF366-Coding/DoomMapGuessr/refs/heads/main/data/MAPDAT3.db";
 
 		public static async Task DownloadSqliteDatabaseAsync()
 		{
 
 			// for now this simply downloads even if its already cached
-			// todo: actually do the cache thing and the yknow what im talking bout
-			var bytes = await client.GetByteArrayAsync(DBUrl);
+			// todo: actually do the cache thing and the y'know what im talking bout
+			byte[] bytes = await client.GetByteArrayAsync(DB_URL);
 			await ApplicationState.Shared.Cache!.SetAsync("__cached_db", bytes);
 
-			ApplicationState.Shared.SqliteConnection = new Microsoft.Data.Sqlite.SqliteConnection($"Data Source={Path.Join(ApplicationState.Shared.Cache!.CacheDirectory, "__cached_db")}");
+			ApplicationState.Shared.SqliteConnection = new Microsoft.Data.Sqlite.SqliteConnection(
+				$"Data Source={Path.Join(ApplicationState.Shared.Cache!.CacheDirectory, "__cached_db")}"
+			);
+
 			ApplicationState.Shared.SqliteConnection.Open();
 
 		}
@@ -90,28 +122,32 @@ namespace DoomMapGuessr
 		public static async Task<int> Main(string[] args)
 		{
 
-			PrepareApplicationSettings();
+			Host = CreateHostBuilder(args).Build();
+			await Host.StartAsync();
+			ApplicationServices.Root = Host.Services;
+
+			await PrepareApplicationSettingsAsync(ApplicationServices.Get<ISettingsService>());
+
+			// todo: fix what's below this comment
+
 			ApplicationState.Shared.Cache?.CreateDirectory();
-			ApplicationState.Shared.SavedRelease = await new GitHubClient(new ProductHeaderValue("DoomMapGuessr")).Repository.Release.GetLatest("MF366-Coding", "DoomMapGuessr");
+
+			ApplicationState.Shared.SavedRelease =
+				await new GitHubClient(new ProductHeaderValue("DoomMapGuessr")).Repository.Release.GetLatest("MF366-Coding", "DoomMapGuessr");
 
 			await DownloadSqliteDatabaseAsync();
 
 			BuildAvaloniaApp()
-#if DEBUG
+				#if DEBUG
 				.WithDeveloperTools()
-#endif
+				#endif
 				.StartWithClassicDesktopLifetime(args);
 
 			return 0;
 
 		}
 
-		~Program()
-		{
-
-			ApplicationState.Shared.SqliteConnection.Close();
-
-		}
+		~Program() { ApplicationState.Shared.SqliteConnection?.Close(); }
 
 	}
 

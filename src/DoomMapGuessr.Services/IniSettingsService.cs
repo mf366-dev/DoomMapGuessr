@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
@@ -108,6 +109,10 @@ namespace DoomMapGuessr.Services
 
 		}
 
+		// ReSharper disable once EmptyDestructor
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		~IniSettingsService() { }
+
 		/// <inheritdoc />
 		public void Add<T>(string key, T value)
 		{
@@ -128,8 +133,19 @@ namespace DoomMapGuessr.Services
 		{
 
 			EnsureIniParsed();
+			string[] split = key.Split('.', 2);
 
-			return actualIni.TryGetKey(key, out _);
+			if (split.Length < 2)
+			{
+				throw new InvalidOperationException(
+					"Key must in format <section>.<key>. If instead you wish to check if a section exists, use <section>.?"
+				);
+			}
+
+			return split[1] == "?"
+					   ? // -> ? means any btw in this context
+					   actualIni.Sections.ContainsSection(split[0])
+					   : actualIni.TryGetKey(key, out _);
 
 		}
 
@@ -137,6 +153,7 @@ namespace DoomMapGuessr.Services
 		/// Not supported for INI.
 		/// </summary>
 		/// <exception cref="InvalidOperationException"></exception>
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public T Get<T>(string key, T defaultValue = default!) =>
 			throw new InvalidOperationException("Cannot Get<T>() for INI. Try GetString() instead.");
 
@@ -152,7 +169,7 @@ namespace DoomMapGuessr.Services
 			if (Boolean.TryParse(str, out bool b))
 				return b;
 
-			if (Double.TryParse(str, out double d) && Math.Abs(d) == 1.0)
+			if (Double.TryParse(str, out double d) && Math.Abs(Math.Abs(d) - 1.0) < 0.01)
 				return true;
 
 			return Int32.TryParse(str, out int i) && Math.Abs(i) == 1;
@@ -160,10 +177,10 @@ namespace DoomMapGuessr.Services
 		}
 
 		/// <inheritdoc />
-		public double GetDouble(string key) => Double.TryParse(GetString(key), out double result) ? result : default;
+		public double GetDouble(string key) => Double.TryParse(GetString(key), out double result) ? result : 0;
 
 		/// <inheritdoc />
-		public int GetInt32(string key) => Int32.TryParse(GetString(key), out int result) ? result : default;
+		public int GetInt32(string key) => Int32.TryParse(GetString(key), out int result) ? result : 0;
 
 		/// <inheritdoc />
 		public string? GetString(string key)
@@ -200,10 +217,31 @@ namespace DoomMapGuessr.Services
 		}
 
 		/// <inheritdoc />
-		public void Set<T>(string key, T value) => throw new NotImplementedException();
+		public void Set<T>(string key, T value)
+		{
+
+			EnsureIniParsed();
+			string[] split = key.Split('.', 2);
+
+			if (split.Length < 2)
+			{
+				throw new InvalidOperationException(
+					"Key must be in format <section>.<key>. If you wish to instead create a section, use <section>.*"
+				);
+			}
+
+			if (split[1] == "*") // in here we use * cuz it means ALL
+				actualIni.Sections.AddSection(split[0]); // value is ignored
+
+			else
+				actualIni[split[0]][split[1]] = value?.ToString() ?? "null";
+
+		}
 
 		/// <inheritdoc />
-		public bool TryGet<T>(string key, out T value) => throw new NotImplementedException();
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public bool TryGet<T>(string key, out T value) =>
+			throw new InvalidOperationException("TryGet<T> is not supported for INI. Use GetString instead.");
 
 		/// <summary>
 		/// Gets a copy of the actual INI data.

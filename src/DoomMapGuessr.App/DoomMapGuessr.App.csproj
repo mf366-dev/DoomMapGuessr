@@ -109,6 +109,8 @@
 
 		<!-- Data and Others -->
 		<PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
 		<PackageReference Include="Octokit" Version="14.0.0" />
 	</ItemGroup>
 
@@ -120,6 +122,9 @@
 	<ItemGroup>
 		<UpToDateCheckInput Remove="Resources\Fonts.axaml" />
 		<Folder Include="Models\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\DoomMapGuessr.Services\DoomMapGuessr.Services.csproj" />
 	</ItemGroup>
 	
 </Project>
