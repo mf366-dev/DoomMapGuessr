@@ -1,5 +1,5 @@
 # DoomMapGuessr
-<img src="src/DoomMapGuessr/Assets/Logo.png" alt="DoomMapGuessr's logo" align="right" width="150" height="150">
+<img src="assets/Logo.png" alt="DoomMapGuessr's logo" align="right" width="150" height="150">
 
 > **DoomMapGuessr - the GeoGuesser of Doom.** Guess the game, the episode, the map, the exact location...
 
