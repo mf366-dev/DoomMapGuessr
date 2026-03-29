@@ -13,7 +13,7 @@
 
 	<Grid ColumnDefinitions="*, Auto">
 		<Border Grid.Column="0">
-			<Image x:Name="DoomScreenshot" Source="avares://DoomMapGuessr.App/Assets/Backgrounds/DOOM-64_DANGEROUS-ENCOUNTER.jpg" Stretch="UniformToFill" />
+			<Image x:Name="DoomScreenshot" Source="avares://DoomMapGuessr.App/Assets/backgrounds/DOOM-64_DANGEROUS-ENCOUNTER.jpg" Stretch="UniformToFill" />
 		</Border>
 
 		<Grid Grid.Column="1" RowDefinitions="Auto, Auto, Auto, Auto, *" Margin="4">

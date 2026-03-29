@@ -76,7 +76,7 @@ namespace DoomMapGuessr.Settings
         /// <summary>
         /// Gets a config file by its name.
         /// </summary>
-        /// <param name="name">The config file's nameparam>
+        /// <param name="name">The config file's name</param>
         /// <param name="defaults">THe default data to fill in in case the file is missing</param>
         /// <returns>The settings data, as INI</returns>
         private IniData GetConfigFile(string name, IniData? defaults = null)

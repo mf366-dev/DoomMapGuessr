@@ -232,4 +232,16 @@ Start guessing now!</value>
   <data name="ComingSoon" xml:space="preserve">
     <value>Coming Soon</value>
   </data>
+  <data name="Greetings_Greeting1" xml:space="preserve">
+    <value>Ready to start guessing?</value>
+  </data>
+  <data name="Greetings_Greeting2" xml:space="preserve">
+    <value>These screenshots won't guess themselves...</value>
+  </data>
+  <data name="Greetings_CreepyHour1" xml:space="preserve">
+    <value>Brave yet foolish.</value>
+  </data>
+  <data name="Greetings_Sunset" xml:space="preserve">
+    <value>Sunset = DoomMapGuessr time!</value>
+  </data>
 </root>

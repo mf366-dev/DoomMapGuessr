@@ -1,4 +1,9 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System;
+using CommunityToolkit.Mvvm.Input;
+
+using DoomMapGuessr.Services;
+using DoomMapGuessr.Settings;
+using DoomMapGuessr.Strings;
 
 
 namespace DoomMapGuessr.ViewModels
@@ -9,14 +14,9 @@ namespace DoomMapGuessr.ViewModels
 
         public HomePageViewModel() { }
 
-        public HomePageViewModel(INavigationService navigationService)
-        {
+		public HomePageViewModel(INavigationService navigationService) => NavigationService = navigationService;
 
-            NavigationService = navigationService;
-
-        }
-
-        private INavigationService? NavigationService { get; }
+		private INavigationService? NavigationService { get; }
 
         public string LatestReleaseBody =>
             ApplicationState.Shared.SavedRelease?.Body is null
@@ -26,6 +26,18 @@ namespace DoomMapGuessr.ViewModels
                     : (ApplicationState.Shared.VersionInfo.IsDevVersion // now we actually have a property named "IsDevVersion" how fucking cool right?
                         ? $"# You're using a dev build of DoomMapGuessr\nUpdate to a stable build to see release info."
                         : $"# New version available! What's new?\n**DoomMapGuessr {ApplicationState.Shared.SavedRelease.TagName}**\n\n{ApplicationState.Shared.SavedRelease.Body}"));
+
+		private Random random = new();
+		private string[] greetings = [Resources.Greetings_Greeting1, Resources.Greetings_Greeting2];
+
+		public string RandomGreeting => DateTime.Now.Hour switch
+		{
+
+			3 => Resources.Greetings_CreepyHour1,
+			18 or 19 => Resources.Greetings_Sunset,
+			_ => random.GetItems(greetings, 1)[0]
+
+		};
 
         [RelayCommand]
         private void NavigateToUnlockables() => NavigationService?.NavigateTo("AchievementsUnlockables");

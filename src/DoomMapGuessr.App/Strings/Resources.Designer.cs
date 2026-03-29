@@ -191,6 +191,42 @@ namespace DoomMapGuessr.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brave yet foolish..
+        /// </summary>
+        public static string Greetings_CreepyHour1 {
+            get {
+                return ResourceManager.GetString("Greetings_CreepyHour1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready to start guessing?.
+        /// </summary>
+        public static string Greetings_Greeting1 {
+            get {
+                return ResourceManager.GetString("Greetings_Greeting1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These screenshots won&apos;t guess themselves....
+        /// </summary>
+        public static string Greetings_Greeting2 {
+            get {
+                return ResourceManager.GetString("Greetings_Greeting2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sunset = DoomMapGuessr time!.
+        /// </summary>
+        public static string Greetings_Sunset {
+            get {
+                return ResourceManager.GetString("Greetings_Sunset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello, world!.
         /// </summary>
         public static string GreetingText {

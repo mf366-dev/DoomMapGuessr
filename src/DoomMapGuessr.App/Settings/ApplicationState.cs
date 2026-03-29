@@ -16,14 +16,6 @@ namespace DoomMapGuessr.Settings
     public sealed class ApplicationState(Assembly? assembly, ApplicationSettings settings)
     {
 
-		private static readonly ApplicationState shared =
-			new ApplicationState(
-				Assembly.GetEntryAssembly(),
-				new ApplicationSettings(
-					Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.DoomMapGuessr"))
-					.PrepareDirectoryForDefaultUsage()
-			).WithCache("AppCache");
-
 		/// <summary>
 		/// The application's settings.
 		/// </summary>
@@ -32,12 +24,17 @@ namespace DoomMapGuessr.Settings
 		/// <summary>
 		/// A ready-to-use shared instance of <see cref="ApplicationState"/>.
 		/// </summary>
-		public static ApplicationState Shared => shared;
+		public static ApplicationState Shared { get; } = new ApplicationState(
+				Assembly.GetEntryAssembly(),
+				new ApplicationSettings(
+					Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.DoomMapGuessr"))
+					.PrepareDirectoryForDefaultUsage()
+			).WithCache("AppCache");
 
-        /// <summary>
-        /// The application's cache or <c>null</c>.
-        /// </summary>
-        public ApplicationCache? Cache { get; private set; } = null;
+		/// <summary>
+		/// The application's cache or <c>null</c>.
+		/// </summary>
+		public ApplicationCache? Cache { get; private set; } = null;
 
         /// <summary>
         /// Sets up cache for this state, with a custom directory for the cache.

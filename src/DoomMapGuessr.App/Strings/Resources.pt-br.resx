@@ -231,4 +231,16 @@ Comece adivinhando já!</value>
   <data name="ComingSoon" xml:space="preserve">
     <value>Disponível em breve</value>
   </data>
+  <data name="Greetings_Greeting1" xml:space="preserve">
+    <value>Pronto pra jogar?</value>
+  </data>
+  <data name="Greetings_Greeting2" xml:space="preserve">
+    <value>Essas imagens não se adivinham a si mesmas...</value>
+  </data>
+  <data name="Greetings_CreepyHour1" xml:space="preserve">
+    <value>Corajoso, mas tolo.</value>
+  </data>
+  <data name="Greetings_Sunset" xml:space="preserve">
+    <value>Pôr do sol = hora de DoomMapGuessr!</value>
+  </data>
 </root>
