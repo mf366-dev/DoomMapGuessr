@@ -61,92 +61,218 @@ namespace DoomMapGuessr.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Achievements &amp; Items.
-        /// </summary>
-        public static string AchievementsUnlockables {
-            get {
-                return ResourceManager.GetString("AchievementsUnlockables", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add.
-        /// </summary>
-        public static string Add {
-            get {
-                return ResourceManager.GetString("Add", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to MF366 (Matthew).
         /// </summary>
-        public static string App_CreatorName {
+        public static string App_AuthorName {
             get {
-                return ResourceManager.GetString("App_CreatorName", resourceCulture);
+                return ResourceManager.GetString("App.AuthorName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The GeoGuessr of Doom..
         /// </summary>
-        public static string App_Slogan {
+        public static string App_ShortDescription {
             get {
-                return ResourceManager.GetString("App_Slogan", resourceCulture);
+                return ResourceManager.GetString("App.ShortDescription", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to DoomMapGuessr.
         /// </summary>
-        public static string App_TitleName {
+        public static string App_Title {
             get {
-                return ResourceManager.GetString("App_TitleName", resourceCulture);
+                return ResourceManager.GetString("App.Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Classic Mode.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
-        public static string ClassicMode {
+        public static string Generics_Add {
             get {
-                return ResourceManager.GetString("ClassicMode", resourceCulture);
+                return ResourceManager.GetString("Generics.Add", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Color.
         /// </summary>
-        public static string Color {
+        public static string Generics_Color {
             get {
-                return ResourceManager.GetString("Color", resourceCulture);
+                return ResourceManager.GetString("Generics.Color", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Coming Soon.
         /// </summary>
-        public static string ComingSoon {
+        public static string Generics_ComingSoon {
             get {
-                return ResourceManager.GetString("ComingSoon", resourceCulture);
+                return ResourceManager.GetString("Generics.ComingSoon", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
-        public static string Edit {
+        public static string Generics_Edit {
             get {
-                return ResourceManager.GetString("Edit", resourceCulture);
+                return ResourceManager.GetString("Generics.Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Generics_Language {
+            get {
+                return ResourceManager.GetString("Generics.Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No connection available.
+        /// </summary>
+        public static string Generics_NoInternet {
+            get {
+                return ResourceManager.GetString("Generics.NoInternet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Generics_Remove {
+            get {
+                return ResourceManager.GetString("Generics.Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove All.
+        /// </summary>
+        public static string Generics_RemoveAll {
+            get {
+                return ResourceManager.GetString("Generics.RemoveAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retry.
+        /// </summary>
+        public static string Generics_Retry {
+            get {
+                return ResourceManager.GetString("Generics.Retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Generics_Save {
+            get {
+                return ResourceManager.GetString("Generics.Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brave yet foolish..
+        /// </summary>
+        public static string Greetings_CreepyHour01 {
+            get {
+                return ResourceManager.GetString("Greetings.CreepyHour01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello, world!.
+        /// </summary>
+        public static string Greetings_HelloWorld {
+            get {
+                return ResourceManager.GetString("Greetings.HelloWorld", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready to start guessing?.
+        /// </summary>
+        public static string Greetings_Regular01 {
+            get {
+                return ResourceManager.GetString("Greetings.Regular01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These screenshots won&apos;t guess themselves....
+        /// </summary>
+        public static string Greetings_Regular02 {
+            get {
+                return ResourceManager.GetString("Greetings.Regular02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sunset = DoomMapGuessr time!.
+        /// </summary>
+        public static string Greetings_Sunset01 {
+            get {
+                return ResourceManager.GetString("Greetings.Sunset01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Achievements &amp; Items.
+        /// </summary>
+        public static string Menu_Achievements {
+            get {
+                return ResourceManager.GetString("Menu.Achievements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classic Mode.
+        /// </summary>
+        public static string Menu_ClassicMode {
+            get {
+                return ResourceManager.GetString("Menu.ClassicMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GeoGuessr Mode.
+        /// </summary>
+        public static string Menu_GeoGuessrMode {
+            get {
+                return ResourceManager.GetString("Menu.GeoGuessrMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Menu_Home {
+            get {
+                return ResourceManager.GetString("Menu.Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Menu_Settings {
+            get {
+                return ResourceManager.GetString("Menu.Settings", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Legacy of Rust joins the alignment!.
         /// </summary>
-        public static string Flavor_InclusionOfLegacyOfRust {
+        public static string News_LegacyOfRustNew {
             get {
-                return ResourceManager.GetString("Flavor_InclusionOfLegacyOfRust", resourceCulture);
+                return ResourceManager.GetString("News.LegacyOfRustNew", resourceCulture);
             }
         }
         
@@ -155,18 +281,18 @@ namespace DoomMapGuessr.Strings {
         ///What are you waiting for?
         ///Start guessing now!.
         /// </summary>
-        public static string Flavor_InclusionOfLegacyOfRust_Description {
+        public static string News_LegacyOfRustNew_Description {
             get {
-                return ResourceManager.GetString("Flavor_InclusionOfLegacyOfRust_Description", resourceCulture);
+                return ResourceManager.GetString("News.LegacyOfRustNew.Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Your Items.
         /// </summary>
-        public static string Flavor_Unlockables {
+        public static string News_Unlockables {
             get {
-                return ResourceManager.GetString("Flavor_Unlockables", resourceCulture);
+                return ResourceManager.GetString("News.Unlockables", resourceCulture);
             }
         }
         
@@ -175,144 +301,9 @@ namespace DoomMapGuessr.Strings {
         ///The more you play, the more you get!
         ///From backgrounds to game modes, it&apos;s rip and tear until it is done..
         /// </summary>
-        public static string Flavor_Unlockables_Description {
+        public static string News_Unlockables_Description {
             get {
-                return ResourceManager.GetString("Flavor_Unlockables_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to GeoGuessr Mode.
-        /// </summary>
-        public static string GeoMode {
-            get {
-                return ResourceManager.GetString("GeoMode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Brave yet foolish..
-        /// </summary>
-        public static string Greetings_CreepyHour1 {
-            get {
-                return ResourceManager.GetString("Greetings_CreepyHour1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ready to start guessing?.
-        /// </summary>
-        public static string Greetings_Greeting1 {
-            get {
-                return ResourceManager.GetString("Greetings_Greeting1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to These screenshots won&apos;t guess themselves....
-        /// </summary>
-        public static string Greetings_Greeting2 {
-            get {
-                return ResourceManager.GetString("Greetings_Greeting2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sunset = DoomMapGuessr time!.
-        /// </summary>
-        public static string Greetings_Sunset {
-            get {
-                return ResourceManager.GetString("Greetings_Sunset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hello, world!.
-        /// </summary>
-        public static string GreetingText {
-            get {
-                return ResourceManager.GetString("GreetingText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Home.
-        /// </summary>
-        public static string Home {
-            get {
-                return ResourceManager.GetString("Home", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Language.
-        /// </summary>
-        public static string Language {
-            get {
-                return ResourceManager.GetString("Language", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No connection available.
-        /// </summary>
-        public static string NoConnection {
-            get {
-                return ResourceManager.GetString("NoConnection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remove.
-        /// </summary>
-        public static string Remove {
-            get {
-                return ResourceManager.GetString("Remove", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remove All.
-        /// </summary>
-        public static string RemoveAll {
-            get {
-                return ResourceManager.GetString("RemoveAll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Retry.
-        /// </summary>
-        public static string Retry {
-            get {
-                return ResourceManager.GetString("Retry", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save.
-        /// </summary>
-        public static string Save {
-            get {
-                return ResourceManager.GetString("Save", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Settings.
-        /// </summary>
-        public static string Settings {
-            get {
-                return ResourceManager.GetString("Settings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to App Interface.
-        /// </summary>
-        public static string Settings_AppInterface {
-            get {
-                return ResourceManager.GetString("Settings_AppInterface", resourceCulture);
+                return ResourceManager.GetString("News.Unlockables.Description", resourceCulture);
             }
         }
         
@@ -321,7 +312,7 @@ namespace DoomMapGuessr.Strings {
         /// </summary>
         public static string Settings_AspectRatio {
             get {
-                return ResourceManager.GetString("Settings_AspectRatio", resourceCulture);
+                return ResourceManager.GetString("Settings.AspectRatio", resourceCulture);
             }
         }
         
@@ -330,7 +321,7 @@ namespace DoomMapGuessr.Strings {
         /// </summary>
         public static string Settings_AspectRatio_MaintainProportions {
             get {
-                return ResourceManager.GetString("Settings_AspectRatio_MaintainProportions", resourceCulture);
+                return ResourceManager.GetString("Settings.AspectRatio.MaintainProportions", resourceCulture);
             }
         }
         
@@ -339,7 +330,7 @@ namespace DoomMapGuessr.Strings {
         /// </summary>
         public static string Settings_Color_Achromatopsia {
             get {
-                return ResourceManager.GetString("Settings_Color_Achromatopsia", resourceCulture);
+                return ResourceManager.GetString("Settings.Color.Achromatopsia", resourceCulture);
             }
         }
         
@@ -348,7 +339,7 @@ namespace DoomMapGuessr.Strings {
         /// </summary>
         public static string Settings_Color_Deuteranopia {
             get {
-                return ResourceManager.GetString("Settings_Color_Deuteranopia", resourceCulture);
+                return ResourceManager.GetString("Settings.Color.Deuteranopia", resourceCulture);
             }
         }
         
@@ -357,7 +348,7 @@ namespace DoomMapGuessr.Strings {
         /// </summary>
         public static string Settings_Color_MaintainColor {
             get {
-                return ResourceManager.GetString("Settings_Color_MaintainColor", resourceCulture);
+                return ResourceManager.GetString("Settings.Color.MaintainColor", resourceCulture);
             }
         }
         
@@ -366,7 +357,7 @@ namespace DoomMapGuessr.Strings {
         /// </summary>
         public static string Settings_Color_Protanopia {
             get {
-                return ResourceManager.GetString("Settings_Color_Protanopia", resourceCulture);
+                return ResourceManager.GetString("Settings.Color.Protanopia", resourceCulture);
             }
         }
         
@@ -375,7 +366,7 @@ namespace DoomMapGuessr.Strings {
         /// </summary>
         public static string Settings_Color_Tritanopia {
             get {
-                return ResourceManager.GetString("Settings_Color_Tritanopia", resourceCulture);
+                return ResourceManager.GetString("Settings.Color.Tritanopia", resourceCulture);
             }
         }
         
@@ -384,34 +375,16 @@ namespace DoomMapGuessr.Strings {
         /// </summary>
         public static string Settings_DoomScreenshots {
             get {
-                return ResourceManager.GetString("Settings_DoomScreenshots", resourceCulture);
+                return ResourceManager.GetString("Settings.DoomScreenshots", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Screenshot Source Blacklist.
         /// </summary>
-        public static string Settings_DoomScreenshots_SourcesBlacklist {
+        public static string Settings_DoomScreenshots_SourceBlacklist {
             get {
-                return ResourceManager.GetString("Settings_DoomScreenshots_SourcesBlacklist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dark Mode.
-        /// </summary>
-        public static string Settings_GUI_ThemingDarkMode {
-            get {
-                return ResourceManager.GetString("Settings_GUI_ThemingDarkMode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use custom theme.
-        /// </summary>
-        public static string Settings_GUI_UseCustomTheme {
-            get {
-                return ResourceManager.GetString("Settings_GUI_UseCustomTheme", resourceCulture);
+                return ResourceManager.GetString("Settings.DoomScreenshots.SourceBlacklist", resourceCulture);
             }
         }
         
@@ -420,16 +393,43 @@ namespace DoomMapGuessr.Strings {
         /// </summary>
         public static string Settings_Language_FollowSystem {
             get {
-                return ResourceManager.GetString("Settings_Language_FollowSystem", resourceCulture);
+                return ResourceManager.GetString("Settings.Language.FollowSystem", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to App Language:.
         /// </summary>
-        public static string Settings_Language_InputFieldTitle {
+        public static string Settings_Language_InputFieldPrompt {
             get {
-                return ResourceManager.GetString("Settings_Language_InputFieldTitle", resourceCulture);
+                return ResourceManager.GetString("Settings.Language.InputFieldPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App Interface.
+        /// </summary>
+        public static string Settings_UI {
+            get {
+                return ResourceManager.GetString("Settings.UI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark Theme.
+        /// </summary>
+        public static string Settings_UI_DarkTheme {
+            get {
+                return ResourceManager.GetString("Settings.UI.DarkTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use custom theme.
+        /// </summary>
+        public static string Settings_UI_UseCustomTheme {
+            get {
+                return ResourceManager.GetString("Settings.UI.UseCustomTheme", resourceCulture);
             }
         }
     }

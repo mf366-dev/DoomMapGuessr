@@ -15,11 +15,11 @@
 					  Height="64"
 					  Foreground="{DynamicResource Color.Text}" />
 			<TextBlock Classes="h3"
-					   Text="{x:Static strings:Resources.NoConnection}"
+					   Text="{x:Static strings:Resources.Generics_NoInternet}"
 					   HorizontalAlignment="Center" />
 			<Button Classes="primary"
 					HorizontalAlignment="Center"
-					Content="{x:Static strings:Resources.Retry}" />
+					Content="{x:Static strings:Resources.Generics_Retry}" />
 		</StackPanel>
 	</Border>
 </Window>

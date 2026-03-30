@@ -28,13 +28,13 @@ namespace DoomMapGuessr.ViewModels
                         : $"# New version available! What's new?\n**DoomMapGuessr {ApplicationState.Shared.SavedRelease.TagName}**\n\n{ApplicationState.Shared.SavedRelease.Body}"));
 
 		private Random random = new();
-		private string[] greetings = [Resources.Greetings_Greeting1, Resources.Greetings_Greeting2];
+		private string[] greetings = [Resources.Greetings_Regular01, Resources.Greetings_Regular02];
 
 		public string RandomGreeting => DateTime.Now.Hour switch
 		{
 
-			3 => Resources.Greetings_CreepyHour1,
-			18 or 19 => Resources.Greetings_Sunset,
+			3 => Resources.Greetings_CreepyHour01,
+			18 or 19 => Resources.Greetings_Sunset01,
 			_ => random.GetItems(greetings, 1)[0]
 
 		};

@@ -117,130 +117,130 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="App_TitleName" xml:space="preserve">
+  <data name="App.Title" xml:space="preserve">
     <value>DoomMapGuessr</value>
   </data>
-  <data name="App_CreatorName" xml:space="preserve">
+  <data name="App.AuthorName" xml:space="preserve">
     <value>MF366</value>
   </data>
-  <data name="GreetingText" xml:space="preserve">
+  <data name="Greetings.HelloWorld" xml:space="preserve">
     <value>Olá, mundo!</value>
   </data>
-  <data name="Home" xml:space="preserve">
+  <data name="Menu.Home" xml:space="preserve">
     <value>Início</value>
   </data>
-  <data name="Settings" xml:space="preserve">
+  <data name="Menu.Settings" xml:space="preserve">
     <value>Configurações</value>
   </data>
-  <data name="Language" xml:space="preserve">
+  <data name="Generics.Language" xml:space="preserve">
     <value>Idioma</value>
   </data>
-  <data name="App_Slogan" xml:space="preserve">
+  <data name="App.ShortDescription" xml:space="preserve">
     <value>GeoGuessr do DOOM.</value>
   </data>
-  <data name="Settings_Language_InputFieldTitle" xml:space="preserve">
+  <data name="Settings.Language.InputFieldPrompt" xml:space="preserve">
     <value>Idioma do Aplicativo:</value>
   </data>
-  <data name="Settings_Language_FollowSystem" xml:space="preserve">
+  <data name="Settings.Language.FollowSystem" xml:space="preserve">
     <value>Mesmo do sistema</value>
   </data>
-  <data name="Settings_AppInterface" xml:space="preserve">
+  <data name="Settings.UI" xml:space="preserve">
     <value>GUI</value>
   </data>
-  <data name="Settings_GUI_ThemingDarkMode" xml:space="preserve">
+  <data name="Settings.UI.DarkTheme" xml:space="preserve">
     <value>Tema Escuro</value>
   </data>
-  <data name="Settings_GUI_UseCustomTheme" xml:space="preserve">
+  <data name="Settings.UI.UseCustomTheme" xml:space="preserve">
     <value>Usar tema customizado</value>
   </data>
-  <data name="Settings_DoomScreenshots" xml:space="preserve">
+  <data name="Settings.DoomScreenshots" xml:space="preserve">
     <value>Capturas de Jogo</value>
   </data>
-  <data name="Settings_AspectRatio" xml:space="preserve">
+  <data name="Settings.AspectRatio" xml:space="preserve">
     <value>Proporções</value>
   </data>
-  <data name="Settings_AspectRatio_MaintainProportions" xml:space="preserve">
+  <data name="Settings.AspectRatio.MaintainProportions" xml:space="preserve">
     <value>Manter Proporções</value>
   </data>
-  <data name="Color" xml:space="preserve">
+  <data name="Generics.Color" xml:space="preserve">
     <value>Cor</value>
   </data>
-  <data name="Settings_Color_MaintainColor" xml:space="preserve">
+  <data name="Settings.Color.MaintainColor" xml:space="preserve">
     <value>Cor Original</value>
   </data>
-  <data name="Settings_Color_Achromatopsia" xml:space="preserve">
+  <data name="Settings.Color.Achromatopsia" xml:space="preserve">
     <value>Achromatopsia (visão em tons de cinza)</value>
   </data>
-  <data name="Settings_Color_Tritanopia" xml:space="preserve">
+  <data name="Settings.Color.Tritanopia" xml:space="preserve">
     <value>Tritanopia</value>
   </data>
-  <data name="Settings_Color_Protanopia" xml:space="preserve">
+  <data name="Settings.Color.Protanopia" xml:space="preserve">
     <value>Protanopia</value>
   </data>
-  <data name="Settings_Color_Deuteranopia" xml:space="preserve">
+  <data name="Settings.Color.Deuteranopia" xml:space="preserve">
     <value>Deuteranopia</value>
   </data>
-  <data name="Settings_DoomScreenshots_SourcesBlacklist" xml:space="preserve">
+  <data name="Settings.DoomScreenshots.SourceBlacklist" xml:space="preserve">
     <value>Fontes de Capturas Bloqueadas</value>
   </data>
-  <data name="Add" xml:space="preserve">
+  <data name="Generics.Add" xml:space="preserve">
     <value>Adicionar</value>
   </data>
-  <data name="Remove" xml:space="preserve">
+  <data name="Generics.Remove" xml:space="preserve">
     <value>Apagar</value>
   </data>
-  <data name="RemoveAll" xml:space="preserve">
+  <data name="Generics.RemoveAll" xml:space="preserve">
     <value>Apagar tudo</value>
   </data>
-  <data name="Edit" xml:space="preserve">
+  <data name="Generics.Edit" xml:space="preserve">
     <value>Editar</value>
   </data>
-  <data name="Save" xml:space="preserve">
+  <data name="Generics.Save" xml:space="preserve">
     <value>Salvar</value>
   </data>
-  <data name="ClassicMode" xml:space="preserve">
+  <data name="Menu.ClassicMode" xml:space="preserve">
     <value>Modo Clássico</value>
   </data>
-  <data name="GeoMode" xml:space="preserve">
+  <data name="Menu.GeoGuessrMode" xml:space="preserve">
     <value>Modo de GeoGuessr</value>
   </data>
-  <data name="AchievementsUnlockables" xml:space="preserve">
+  <data name="Menu.Achievements" xml:space="preserve">
     <value>Conquistas &amp; Itens</value>
   </data>
-  <data name="Flavor_Unlockables" xml:space="preserve">
+  <data name="News.Unlockables" xml:space="preserve">
     <value>Seus itens</value>
   </data>
-  <data name="Flavor_Unlockables_Description" xml:space="preserve">
+  <data name="News.Unlockables.Description" xml:space="preserve">
     <value>Quanto mais você jogar, mais você ganha!
 Desde imagens de fundo a novos modos de jogo, é rip and tear until it is done!</value>
   </data>
-  <data name="NoConnection" xml:space="preserve">
+  <data name="Generics.NoInternet" xml:space="preserve">
     <value>Sem ligação</value>
   </data>
-  <data name="Retry" xml:space="preserve">
+  <data name="Generics.Retry" xml:space="preserve">
     <value>Tentar de novo</value>
   </data>
-  <data name="Flavor_InclusionOfLegacyOfRust" xml:space="preserve">
+  <data name="News.LegacyOfRustNew" xml:space="preserve">
     <value>Agora com 'Legacy of Rust'</value>
   </data>
-  <data name="Flavor_InclusionOfLegacyOfRust_Description" xml:space="preserve">
+  <data name="News.LegacyOfRustNew.Description" xml:space="preserve">
     <value>O WAD mais recentemente desenvolvido pela id Software se juntou à lista de WADs adivinháveis nessa enorme atualização de DoomMapGuessr!
 Do que você está à espera?!
 Comece adivinhando já!</value>
   </data>
-  <data name="ComingSoon" xml:space="preserve">
+  <data name="Generics.ComingSoon" xml:space="preserve">
     <value>Disponível em breve</value>
   </data>
-  <data name="Greetings_Greeting1" xml:space="preserve">
+  <data name="Greetings.Regular01" xml:space="preserve">
     <value>Pronto pra jogar?</value>
   </data>
-  <data name="Greetings_Greeting2" xml:space="preserve">
+  <data name="Greetings.Regular02" xml:space="preserve">
     <value>Essas imagens não se adivinham a si mesmas...</value>
   </data>
-  <data name="Greetings_CreepyHour1" xml:space="preserve">
+  <data name="Greetings.CreepyHour01" xml:space="preserve">
     <value>Corajoso, mas tolo.</value>
   </data>
-  <data name="Greetings_Sunset" xml:space="preserve">
+  <data name="Greetings.Sunset01" xml:space="preserve">
     <value>Pôr do sol = hora de DoomMapGuessr!</value>
   </data>
 </root>
