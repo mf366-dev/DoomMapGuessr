@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	
 	<PropertyGroup>
+		
 		<!-- Basic Properties -->
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net10.0</TargetFramework>
@@ -27,6 +29,7 @@
 		- 1 if beta/dev/alpha
 		-->
 		<AssemblyVersion>3.0.0.1</AssemblyVersion>
+		
 	</PropertyGroup>
 
 	
@@ -50,6 +53,7 @@
 	
 	<!-- Resources -->
 	<ItemGroup>
+		
 		<!-- Styles are internal to the project -->
 		<AvaloniaResource Include="Styles\**\*">
 			<Link>Styles\%(RecursiveDir)%(Filename)%(Extension)</Link>
@@ -80,19 +84,21 @@
 		<EmbeddedResource Update="Strings\Resources.pt-br.resx">
 			<DependentUpon>Resources.resx</DependentUpon>
 		</EmbeddedResource>
+		
 	</ItemGroup>
 
 	
 	<!-- Packages -->
 	<ItemGroup>
+		
 		<!-- Avalonia Base Packages -->
-		<PackageReference Include="Avalonia" Version="11.2.7" />
-		<PackageReference Include="Avalonia.Desktop" Version="11.2.7" />
-		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.7" />
-		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.7" />
+		<PackageReference Include="Avalonia" Version="11.3.13" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.3.13" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.13" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.13" />
 
 		<!-- Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration. -->
-		<PackageReference Include="Avalonia.Diagnostics" Version="11.2.7">
+		<PackageReference Include="Avalonia.Diagnostics" Version="11.3.13">
 			<IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
 			<PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
 		</PackageReference>
@@ -105,26 +111,27 @@
 		<PackageReference Include="Markdown.Avalonia" Version="11.0.3-a1" />
 
 		<!-- Community Toolkit for MVVM -->
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
 
 		<!-- Data and Others -->
-		<PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.1" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.5" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.5" />
 		<PackageReference Include="Octokit" Version="14.0.0" />
+		
 	</ItemGroup>
 
 
 	<!-- Projects -->
-
+	<ItemGroup>
+		<ProjectReference Include="..\DoomMapGuessr.Services\DoomMapGuessr.Services.csproj" />
+	</ItemGroup>
 	
+
 	<!-- Others -->
 	<ItemGroup>
 		<UpToDateCheckInput Remove="Resources\Fonts.axaml" />
 		<Folder Include="Models\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\DoomMapGuessr.Services\DoomMapGuessr.Services.csproj" />
 	</ItemGroup>
 	
 </Project>
