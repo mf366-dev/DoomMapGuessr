@@ -15,8 +15,7 @@ namespace DoomMapGuessr.Services
 	/// <summary>
 	/// The caching service used by DoomMapGuessr.
 	/// </summary>
-	public class CachingService : ICachingService,
-										ICachingServiceAsync
+	public class CachingService : ICachingService, ICachingServiceAsync
 	{
 
 		/// <summary>
@@ -27,7 +26,7 @@ namespace DoomMapGuessr.Services
 		{
 
 			CacheDirectory = cacheDirectory;
-			TempCacheDirectory = Directory.CreateDirectory(Path.Join(cacheDirectory, "Temp"));
+			TemporaryCacheDirectory = Directory.CreateDirectory(Path.Join(cacheDirectory, "Temp"));
 			PersistentCacheDirectory = Directory.CreateDirectory(Path.Join(cacheDirectory, "__"));
 
 		}
@@ -51,7 +50,7 @@ namespace DoomMapGuessr.Services
 		/// <summary>
 		/// The directory used for temporary cache.
 		/// </summary>
-		public DirectoryInfo TempCacheDirectory { get; }
+		public DirectoryInfo TemporaryCacheDirectory { get; }
 
 		/// <summary>
 		/// The directory used for persistent cache.
@@ -64,7 +63,7 @@ namespace DoomMapGuessr.Services
 		private void ClearTemporaryCache()
 		{
 
-			foreach (var entry in TempCacheDirectory.EnumerateFileSystemInfos())
+			foreach (var entry in TemporaryCacheDirectory.EnumerateFileSystemInfos())
 				entry.Delete();
 
 		}
@@ -75,7 +74,7 @@ namespace DoomMapGuessr.Services
 		private void ClearPersistentCache()
 		{
 
-			foreach (var entry in TempCacheDirectory.EnumerateFileSystemInfos())
+			foreach (var entry in PersistentCacheDirectory.EnumerateFileSystemInfos())
 				entry.Delete();
 
 		}
@@ -135,6 +134,10 @@ namespace DoomMapGuessr.Services
 		/// <param name="key">The key</param>
 		/// <typeparam name="T">The type of data to store</typeparam>
 		/// <returns>The value</returns>
+		/// <remarks>
+		/// For the default caching service, please refrain from using
+		/// something other than bytes or strings (unless caching to/from Memory).
+		/// </remarks>
 		public T? Get<T>(string key) => memory.Get<T>(key);
 
 		/// <inheritdoc />
@@ -144,18 +147,14 @@ namespace DoomMapGuessr.Services
 			if (memory.TryGetValue(key, out string? value))
 				return value;
 
-			string pathToTempFile = Path.Join(TempCacheDirectory.FullName, key);
+			string pathToTempFile = Path.Join(TemporaryCacheDirectory.FullName, key);
 
 			if (File.Exists(pathToTempFile))
 				return File.ReadAllText(pathToTempFile);
 
 			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
 
-			// ReSharper disable once ConvertIfStatementToReturnStatement
-			if (File.Exists(pathToPersistentFile))
-				return File.ReadAllText(pathToPersistentFile);
-
-			return null;
+			return File.Exists(pathToPersistentFile) ? File.ReadAllText(pathToPersistentFile) : null;
 
 		}
 
@@ -166,18 +165,14 @@ namespace DoomMapGuessr.Services
 			if (memory.TryGetValue(key, out byte[]? value))
 				return value;
 
-			string pathToTempFile = Path.Join(TempCacheDirectory.FullName, key);
+			string pathToTempFile = Path.Join(TemporaryCacheDirectory.FullName, key);
 
 			if (File.Exists(pathToTempFile))
 				return File.ReadAllBytes(pathToTempFile);
 
 			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
 
-			// ReSharper disable once ConvertIfStatementToReturnStatement
-			if (File.Exists(pathToPersistentFile))
-				return File.ReadAllBytes(pathToPersistentFile);
-
-			return null;
+			return File.Exists(pathToPersistentFile) ? File.ReadAllBytes(pathToPersistentFile) : null;
 
 		}
 
@@ -185,6 +180,10 @@ namespace DoomMapGuessr.Services
 		public void Delete(string key) => Remove(key);
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// If there is a duplicate key, this method will
+		/// remove the both the original and the duplicate.
+		/// </remarks>
 		public void Remove(string key)
 		{
 
@@ -193,7 +192,7 @@ namespace DoomMapGuessr.Services
 			// like lets say there's for some reason
 			// the same key in 2 cache storages
 			// it'll remove both :)
-			string pathToTempFile = Path.Join(TempCacheDirectory.FullName, key);
+			string pathToTempFile = Path.Join(TemporaryCacheDirectory.FullName, key);
 			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
 
 			if (memory.TryGetValue<object?>(key, out _))
@@ -208,6 +207,10 @@ namespace DoomMapGuessr.Services
 		}
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// For the default caching service, please refrain from using
+		/// something other than bytes or strings (unless caching to/from Memory).
+		/// </remarks>
 		public void Set<T>(string key, T value, CacheTarget target)
 		{
 
@@ -224,12 +227,17 @@ namespace DoomMapGuessr.Services
 					{
 
 						case string str:
-							File.WriteAllText(Path.Join(TempCacheDirectory.FullName, key), str);
+							File.WriteAllText(Path.Join(TemporaryCacheDirectory.FullName, key), str);
 
 							return;
 
 						case byte[] bytes:
-							File.WriteAllBytes(Path.Join(TempCacheDirectory.FullName, key), bytes);
+							File.WriteAllBytes(Path.Join(TemporaryCacheDirectory.FullName, key), bytes);
+
+							return;
+
+						case StringReader reader:
+							File.WriteAllText(Path.Join(TemporaryCacheDirectory.FullName, key), reader.ReadToEnd());
 
 							return;
 
@@ -252,6 +260,11 @@ namespace DoomMapGuessr.Services
 
 							return;
 
+						case StringReader reader:
+							File.WriteAllText(Path.Join(PersistentCacheDirectory.FullName, key), reader.ReadToEnd());
+
+							return;
+
 						default:
 							throw new InvalidOperationException("Cannot use temporary cache with a type other than string or byte[]");
 
@@ -271,18 +284,14 @@ namespace DoomMapGuessr.Services
 			if (memory.TryGetValue(key, out byte[]? value))
 				return value;
 
-			string pathToTempFile = Path.Join(TempCacheDirectory.FullName, key);
+			string pathToTempFile = Path.Join(TemporaryCacheDirectory.FullName, key);
 
 			if (File.Exists(pathToTempFile))
 				return await File.ReadAllBytesAsync(pathToTempFile);
 
 			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
 
-			// ReSharper disable once ConvertIfStatementToReturnStatement
-			if (File.Exists(pathToPersistentFile))
-				return await File.ReadAllBytesAsync(pathToPersistentFile);
-
-			return null;
+			return File.Exists(pathToPersistentFile) ? await File.ReadAllBytesAsync(pathToPersistentFile) : null;
 
 		}
 
@@ -293,18 +302,14 @@ namespace DoomMapGuessr.Services
 			if (memory.TryGetValue(key, out string? value))
 				return value;
 
-			string pathToTempFile = Path.Join(TempCacheDirectory.FullName, key);
+			string pathToTempFile = Path.Join(TemporaryCacheDirectory.FullName, key);
 
 			if (File.Exists(pathToTempFile))
 				return await File.ReadAllTextAsync(pathToTempFile);
 
 			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
 
-			// ReSharper disable once ConvertIfStatementToReturnStatement
-			if (File.Exists(pathToPersistentFile))
-				return await File.ReadAllTextAsync(pathToPersistentFile);
-
-			return null;
+			return File.Exists(pathToPersistentFile) ? await File.ReadAllTextAsync(pathToPersistentFile) : null;
 
 		}
 
@@ -320,12 +325,17 @@ namespace DoomMapGuessr.Services
 					{
 
 						case string str:
-							await File.WriteAllTextAsync(Path.Join(TempCacheDirectory.FullName, key), str);
+							await File.WriteAllTextAsync(Path.Join(TemporaryCacheDirectory.FullName, key), str);
 
 							return;
 
 						case byte[] bytes:
-							await File.WriteAllBytesAsync(Path.Join(TempCacheDirectory.FullName, key), bytes);
+							await File.WriteAllBytesAsync(Path.Join(TemporaryCacheDirectory.FullName, key), bytes);
+
+							return;
+
+						case StringReader reader:
+							await File.WriteAllTextAsync(Path.Join(TemporaryCacheDirectory.FullName, key), await reader.ReadToEndAsync());
 
 							return;
 
@@ -348,13 +358,18 @@ namespace DoomMapGuessr.Services
 
 							return;
 
+						case StringReader reader:
+							await File.WriteAllTextAsync(Path.Join(PersistentCacheDirectory.FullName, key), await reader.ReadToEndAsync());
+
+							return;
+
 						default:
 							throw new InvalidOperationException("Cannot use temporary cache with a type other than string or byte[]");
 
 					}
 
 				case CacheTarget.Memory:
-					Set(key, value, CacheTarget.Memory);
+					Set(key, value, CacheTarget.Memory); // no async features available for Memory
 
 					return;
 

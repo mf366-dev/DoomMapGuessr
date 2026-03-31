@@ -110,6 +110,7 @@ namespace DoomMapGuessr.Services
 		}
 
 		// ReSharper disable once EmptyDestructor
+		/// <summary><c>~IniSettingsService</c></summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		~IniSettingsService() { }
 
@@ -135,15 +136,12 @@ namespace DoomMapGuessr.Services
 			EnsureIniParsed();
 			string[] split = key.Split('.', 2);
 
-			if (split.Length < 2)
-			{
-				throw new InvalidOperationException(
+			return split.Length < 2
+				? throw new InvalidOperationException(
 					"Key must in format <section>.<key>. If instead you wish to check if a section exists, use <section>.?"
-				);
-			}
-
-			return split[1] == "?"
-					   ? // -> ? means any btw in this context
+				)
+				: split[1] == "?"
+					   ? // -> ? means "any key" btw in this context
 					   actualIni.Sections.ContainsSection(split[0])
 					   : actualIni.TryGetKey(key, out _);
 
@@ -172,23 +170,23 @@ namespace DoomMapGuessr.Services
 			if (Double.TryParse(str, out double d) && Math.Abs(Math.Abs(d) - 1.0) < 0.01)
 				return true;
 
-			return Int32.TryParse(str, out int i) && Math.Abs(i) == 1;
+			return Int32.TryParse(str, out int i) && Math.Abs(i) != 0;
 
 		}
 
 		/// <inheritdoc />
-		public double GetDouble(string key) => Double.TryParse(GetString(key), out double result) ? result : 0;
+		public double GetDouble(string key) => Double.TryParse(GetString(key), out double result) ? result : Double.NaN;
 
 		/// <inheritdoc />
-		public int GetInt32(string key) => Int32.TryParse(GetString(key), out int result) ? result : 0;
+		public int GetInt32(string key) => Int32.TryParse(GetString(key), out int result) ? result : -1;
 
 		/// <inheritdoc />
-		public string? GetString(string key)
+		public string GetString(string key)
 		{
 
 			EnsureIniParsed();
 
-			return actualIni.TryGetKey(key, out string? value) ? value : null;
+			return actualIni.TryGetKey(key, out string? value) ? value : String.Empty;
 
 		}
 
