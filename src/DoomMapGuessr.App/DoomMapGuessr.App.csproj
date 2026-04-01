@@ -60,6 +60,12 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</AvaloniaResource>
 
+		<!-- Icons are internal to the project -->
+		<AvaloniaResource Include="Icons\**\*">
+			<Link>Icons\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</AvaloniaResource>
+
 		<!-- Assets are external to the project -->
 		<AvaloniaResource Include="..\..\assets\**\*">
 			<Link>Assets\%(RecursiveDir)%(Filename)%(Extension)</Link>

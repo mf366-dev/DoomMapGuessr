@@ -10,7 +10,7 @@
 		x:Class="DoomMapGuessr.Views.NoInternetDialog">
 	<Border Padding="20">
 		<StackPanel Orientation="Vertical" Spacing="8" VerticalAlignment="Center">
-			<PathIcon Data="{DynamicResource Geometry.NoWifi_600}"
+			<PathIcon Data="{DynamicResource Geometry.Upcoming600}"
 					  Width="64"
 					  Height="64"
 					  Foreground="{DynamicResource Color.Text}" />

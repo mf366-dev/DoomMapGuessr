@@ -1,16 +1,15 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:helpers="clr-namespace:DoomMapGuessr.Helpers"
 			 x:Class="DoomMapGuessr.App"
              RequestedThemeVariant="Default">
 	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
 	<Application.Resources>
 		<ResourceDictionary>
-			<!-- merged dicts -->
+			<!-- merged dictionaries -->
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceInclude Source="avares://DoomMapGuessr.App/Styles/ColorsFonts.axaml" />
-				<ResourceInclude Source="avares://DoomMapGuessr.App/Styles/MaterialSymbols.axaml" />
+				<ResourceInclude Source="avares://DoomMapGuessr.App/Styles/Colors.axaml" />
+				<ResourceInclude Source="avares://DoomMapGuessr.App/Icons/MaterialSymbols.axaml" />
 			</ResourceDictionary.MergedDictionaries>
 
 			<!-- fonts -->

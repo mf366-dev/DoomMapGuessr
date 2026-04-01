@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:System="using:System">
+					xmlns:system="using:System">
 	<!-- Designer Preview -->
 	<Design.PreviewWith>
 		<Border Padding="10">
@@ -64,8 +64,8 @@
 			<SolidColorBrush x:Key="Brush.PrimaryHoverIntense" Color="{StaticResource SystemAccentColorLight3}" />
 
 			<!-- Fonts -->
-			<System:Int32 x:Key="Font.IdealWeight">400</System:Int32>
-			<System:Int32 x:Key="Font.IdealWeightPlus">500</System:Int32>
+			<system:Int32 x:Key="Font.IdealWeight">400</system:Int32>
+			<system:Int32 x:Key="Font.IdealWeightPlus">500</system:Int32>
 		</ResourceDictionary>
 
 		<!-- Dark Theme -->
@@ -92,8 +92,8 @@
 			<SolidColorBrush x:Key="Brush.PrimaryHoverIntense" Color="{StaticResource SystemAccentColorDark3}" />
 
 			<!-- Fonts -->
-			<System:Int32 x:Key="Font.IdealWeight">450</System:Int32>
-			<System:Int32 x:Key="Font.IdealWeightPlus">550</System:Int32>
+			<system:Int32 x:Key="Font.IdealWeight">450</system:Int32>
+			<system:Int32 x:Key="Font.IdealWeightPlus">550</system:Int32>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 

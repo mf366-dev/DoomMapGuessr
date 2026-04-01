@@ -1,6 +1,5 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:c="using:DoomMapGuessr.Controls">
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Design.PreviewWith>
 		<Border Padding="20">
 			<Grid RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="Auto, Auto, Auto, Auto">
@@ -26,19 +25,19 @@
 					</Button>
 					<Button>
 						<StackPanel>
-							<PathIcon Data="{DynamicResource Geometry.LocationOn_400}" Width="16" Height="16" />
+							<PathIcon Data="{DynamicResource Geometry.Upcoming600}" Width="16" Height="16" />
 							<TextBlock Text="Icon by Geometry (PathIcon)" />
 						</StackPanel>
 					</Button>
 					<StackPanel Orientation="Horizontal" Spacing="8" Margin="4">
 						<Button Classes="circle" Width="36" Height="36">
-							<PathIcon Data="{DynamicResource Geometry.Home_400}" Width="16" Height="16" />
+							<PathIcon Data="{DynamicResource Geometry.Upcoming600}" Width="16" Height="16" />
 						</Button>
 						<Button Classes="circle" Width="64" Height="64">
-							<PathIcon Data="{DynamicResource Geometry.Settings_400}" Width="32" Height="32" />
+							<PathIcon Data="{DynamicResource Geometry.Upcoming600}" Width="32" Height="32" />
 						</Button>
 						<Button Classes="circle" Width="128" Height="128">
-							<PathIcon Data="{DynamicResource Geometry.Add2_400}" Width="64" Height="64" />
+							<PathIcon Data="{DynamicResource Geometry.Upcoming600}" Width="64" Height="64" />
 						</Button>
 					</StackPanel>
 					<Button HorizontalAlignment="Right" Classes="primary">

@@ -3,7 +3,6 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="clr-namespace:DoomMapGuessr.ViewModels"
-			 xmlns:strings="clr-namespace:DoomMapGuessr.Strings"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Class="DoomMapGuessr.Views.ClassicModePage"
 			 x:DataType="vm:ClassicModeViewModel">
@@ -13,7 +12,8 @@
 
 	<Grid ColumnDefinitions="*, Auto">
 		<Border Grid.Column="0">
-			<Image x:Name="DoomScreenshot" Source="avares://DoomMapGuessr.App/Assets/backgrounds/DOOM-64_DANGEROUS-ENCOUNTER.jpg" Stretch="UniformToFill" />
+			<!-- ReSharper disable once Xaml.PathError (no error here this shit hallucinating) -->
+			<Image x:Name="DoomScreenshot" Source="avares://DoomMapGuessr.App/Assets/backgrounds/DOOM_TITLEPIC.png" Stretch="UniformToFill" />
 		</Border>
 
 		<Grid Grid.Column="1" RowDefinitions="Auto, Auto, Auto, Auto, *" Margin="4">
