@@ -121,7 +121,7 @@
     <value>DoomMapGuessr</value>
   </data>
   <data name="App.AuthorName" xml:space="preserve">
-    <value>MF366</value>
+    <value>Matthew</value>
   </data>
   <data name="Greetings.HelloWorld" xml:space="preserve">
     <value>Olá, mundo!</value>
@@ -145,7 +145,7 @@
     <value>Igual ao do sistema</value>
   </data>
   <data name="Settings.UI" xml:space="preserve">
-    <value>Interface de Utilizador</value>
+    <value>GUI</value>
   </data>
   <data name="Settings.UI.DarkTheme" xml:space="preserve">
     <value>Tema Escuro</value>
@@ -154,7 +154,7 @@
     <value>Usar tema personalizado</value>
   </data>
   <data name="Settings.DoomScreenshots" xml:space="preserve">
-    <value>Capturas de Jogo</value>
+    <value>Capturas de Jogo DOOM</value>
   </data>
   <data name="Settings.AspectRatio" xml:space="preserve">
     <value>Proporções</value>
@@ -166,19 +166,19 @@
     <value>Cor</value>
   </data>
   <data name="Settings.Color.MaintainColor" xml:space="preserve">
-    <value>Cor Original</value>
+    <value>Cor original</value>
   </data>
   <data name="Settings.Color.Achromatopsia" xml:space="preserve">
-    <value>Achromatopsia (monocromacia)</value>
+    <value>Acromatopsia (monocromacia)</value>
   </data>
   <data name="Settings.Color.Tritanopia" xml:space="preserve">
-    <value>Tritanopia</value>
+    <value>Tritanopia (daltonismo do azul)</value>
   </data>
   <data name="Settings.Color.Protanopia" xml:space="preserve">
-    <value>Protanopia</value>
+    <value>Protanopia (daltonismo do vermelho)</value>
   </data>
   <data name="Settings.Color.Deuteranopia" xml:space="preserve">
-    <value>Deuteranopia</value>
+    <value>Deuteranopia (daltonismo do verde)</value>
   </data>
   <data name="Settings.DoomScreenshots.SourceBlacklist" xml:space="preserve">
     <value>Fontes de Capturas Bloqueadas</value>
@@ -212,7 +212,7 @@
   </data>
   <data name="News.Unlockables.Description" xml:space="preserve">
     <value>Quanto mais jogares, mais desbloqueias!
-Desde imagens de fundo a novos modos de jogo, é rip and tear until it is done!</value>
+Desde imagens de fundo a novos modos de jogo, é dar tudo por tudo até conseguir!</value>
   </data>
   <data name="Generics.NoInternet" xml:space="preserve">
     <value>Sem ligação de rede</value>
@@ -238,9 +238,9 @@ Começa a jogar já!</value>
     <value>Estas imagens não se adivinham a si mesmas...</value>
   </data>
   <data name="Greetings.CreepyHour01" xml:space="preserve">
-    <value>Corajoso; todavia, tolo.</value>
+    <value>Corajoso; porém, tolo.</value>
   </data>
   <data name="Greetings.Sunset01" xml:space="preserve">
-    <value>Pôr do sol = jogar DoomMapGuessr!</value>
+    <value>Pôr do sol acolhedor, DoomMapGuessr acolhedor!</value>
   </data>
 </root>

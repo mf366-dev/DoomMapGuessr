@@ -121,7 +121,7 @@
     <value>DoomMapGuessr</value>
   </data>
   <data name="App.AuthorName" xml:space="preserve">
-    <value>MF366 (Matthew)</value>
+    <value>Matthew</value>
   </data>
   <data name="Greetings.HelloWorld" xml:space="preserve">
     <value>Hello, world!</value>
@@ -145,7 +145,7 @@
     <value>Follow system</value>
   </data>
   <data name="Settings.UI" xml:space="preserve">
-    <value>App Interface</value>
+    <value>UI</value>
   </data>
   <data name="Settings.UI.DarkTheme" xml:space="preserve">
     <value>Dark Theme</value>
@@ -166,7 +166,7 @@
     <value>Color</value>
   </data>
   <data name="Settings.Color.MaintainColor" xml:space="preserve">
-    <value>Original Color</value>
+    <value>Original color</value>
   </data>
   <data name="Settings.Color.Achromatopsia" xml:space="preserve">
     <value>Achromatopsia (monochromacy)</value>
@@ -242,6 +242,6 @@ Start guessing now!</value>
     <value>Brave yet foolish.</value>
   </data>
   <data name="Greetings.Sunset01" xml:space="preserve">
-    <value>Sunset = DoomMapGuessr time!</value>
+    <value>Cozy sunset, cozy guessing!</value>
   </data>
 </root>
