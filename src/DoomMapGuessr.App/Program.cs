@@ -128,7 +128,7 @@ namespace DoomMapGuessr
 
 			await PrepareApplicationSettingsAsync(ApplicationServices.Get<ISettingsService>());
 
-			// todo: fix what's below this comment
+			// todo: fix what's below this comment (see #22)
 
 			ApplicationState.Shared.Cache?.CreateDirectory();
 

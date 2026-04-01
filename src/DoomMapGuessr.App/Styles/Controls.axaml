@@ -385,9 +385,9 @@
 		</Style>
 		<!-- Indeterminate -->
 		<Style Selector="^:indeterminate /template/ ContentPresenter">
-			<Setter Property="Background" Value="{DynamicResource SystemAccentColorDark2}" />
+			<Setter Property="Background" Value="{DynamicResource Brush.PrimaryHoverIntense}" />
 			<Setter Property="BorderThickness" Value="1" />
-			<Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+			<Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
 		</Style>
 		<!-- Checked -->
 		<Style Selector="^:checked /template/ ContentPresenter">
