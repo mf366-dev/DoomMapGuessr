@@ -9,6 +9,7 @@
 					<Button Classes="primary">Primary Button</Button>
 					<Button Classes="destructive">Destructive Button</Button>
 					<Button Classes="nav">Nav Button (Only text)</Button>
+					<!--
 					<Button Classes="nav"><TextBlock Classes="icon" Text="&#xe834;" /></Button>
 					<Button Classes="nav"><TextBlock Classes="icon" Text="terminal map cached downloading" /></Button>
 					<Button Classes="nav">
@@ -23,6 +24,7 @@
 							<TextBlock Text="Icon by Name (terminal)" />
 						</StackPanel>
 					</Button>
+					-->
 					<Button>
 						<StackPanel>
 							<PathIcon Data="{DynamicResource Geometry.Upcoming600}" Width="16" Height="16" />
@@ -40,12 +42,14 @@
 							<PathIcon Data="{DynamicResource Geometry.Upcoming600}" Width="64" Height="64" />
 						</Button>
 					</StackPanel>
+					<!--
 					<Button HorizontalAlignment="Right" Classes="primary">
 						<StackPanel>
 							<TextBlock Classes="icon" Text="save" />
 							<TextBlock Text="Save As" />
 						</StackPanel>
 					</Button>
+					-->
 				</StackPanel>
 
 				<StackPanel Grid.Column="0" Grid.Row="1" Margin="8" Orientation="Vertical" Spacing="4">
@@ -54,6 +58,7 @@
 					<ToggleButton IsThreeState="True">Indeterminate</ToggleButton>
 					<ToggleButton IsChecked="True">Checked</ToggleButton>
 					<ToggleButton Classes="testhovereffect">Hover Style</ToggleButton>
+					<!--
 					<ToggleButton>
 						<StackPanel>
 							<TextBlock Classes="icon">&#xe644;</TextBlock>
@@ -66,6 +71,7 @@
 							<TextBlock Text="Filter by Smoke-Free" />
 						</StackPanel>
 					</ToggleButton>
+					-->
 				</StackPanel>
 
 
@@ -75,7 +81,9 @@
 					<TextBlock Classes="h2">Heading 2</TextBlock>
 					<TextBlock Classes="h3">Heading 3</TextBlock>
 					<TextBlock>Regular Text</TextBlock>
+					<!--
 					<TextBlock Classes="display icon">&#xe71a;</TextBlock>
+					-->
 					<TextBlock Classes="caption">Caption Text</TextBlock>
 					<TextBlock Classes="small">Small Text</TextBlock>
 					<TextBlock Classes="disabled">This one has class "disabled", which means it's disabled</TextBlock>
@@ -203,11 +211,13 @@
 		<Setter Property="HorizontalAlignment" Value="Center" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 	</Style>
+	<!--
 	<Style Selector=":is(Button) > StackPanel > TextBlock.icon">
 		<Setter Property="HorizontalAlignment" Value="Center" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="RenderTransform" Value="scale(1.5)" />
 	</Style>
+	-->
 	<Style Selector=":is(Button) > StackPanel > PathIcon">
 		<Setter Property="HorizontalAlignment" Value="Center" />
 		<Setter Property="VerticalAlignment" Value="Center" />
@@ -255,7 +265,7 @@
 		</Style>
 		<!-- Disabled Text -->
 		<Style Selector="^.disabled, ^:disabled, ^[IsEnabled=false]">
-			<Setter Property="Foreground" Value="{DynamicResource Gray700}" />
+			<Setter Property="Foreground" Value="{DynamicResource Brush.Gray700}" />
 			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Bold Text -->
@@ -273,7 +283,7 @@
 			<Setter Property="FontStyle" Value="Italic" />
 			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
-		<!-- Monospace Text -->
+		<!-- Monospace Text
 		<Style Selector="^.mono, ^.code, ^.CodeBlock">
 			<Setter Property="FontFamily" Value="{StaticResource CascadiaCode}" />
 			<Setter Property="FontWeight" Value="SemiBold" />
@@ -281,6 +291,7 @@
 			<Setter Property="LineSpacing" Value="1.4" />
 			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
+		-->
 		<!-- Icon -->
 		<Style Selector="^.icon">
 			<Setter Property="FontFamily" Value="{StaticResource MaterialSharp}" />
@@ -338,7 +349,7 @@
 		<Style Selector="^.italic">
 			<Setter Property="FontStyle" Value="Italic" />
 		</Style>
-		<!-- Monospace Text -->
+		<!-- Monospace Text
 		<Style Selector="^.mono, ^.code">
 			<Setter Property="FontFamily" Value="{StaticResource CascadiaCode}" />
 			<Setter Property="FontWeight" Value="SemiBold" />
@@ -348,6 +359,7 @@
 			<Setter Property="AcceptsTab" Value="True" />
 			<Setter Property="AcceptsReturn" Value="True" />
 		</Style>
+		-->
 		<!-- Password -->
 		<Style Selector="^.secret, ^.password">
 			<Setter Property="PasswordChar" Value="•" />

@@ -6,7 +6,7 @@
 		<Border Padding="10">
 			<Grid ColumnDefinitions="Auto, Auto, Auto, Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto">
 				<Button Grid.Column="0" Grid.Row="0" Width="20" Height="20"></Button>
-				<Button Grid.Column="0" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource CoralishRed}"></Button>
+				<Button Grid.Column="0" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource CoralRed}"></Button>
 				<Button Grid.Column="0" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Red}"></Button>
 				<Button Grid.Column="0" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource DarkRed}"></Button>
 				<Button Grid.Column="0" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource DarkerRed}"></Button>
@@ -42,23 +42,25 @@
 	<ResourceDictionary.ThemeDictionaries>
 		<!-- Light Theme -->
 		<ResourceDictionary x:Key="Light">
-			<SolidColorBrush x:Key="Brush.Destructive" Color="{DynamicResource CoralishRed}" />
-			<SolidColorBrush x:Key="Brush.DestructiveHover" Color="{DynamicResource PastelRed}" />
+			<SolidColorBrush x:Key="Brush.Translucid" Opacity="0.8" Color="#FFF" />
+
+			<SolidColorBrush x:Key="Brush.Destructive" Color="#FC5050" />
+			<SolidColorBrush x:Key="Brush.DestructiveHover" Color="#FF7777" />
 
 			<Color x:Key="Color.Text">#000000</Color>
 			<Color x:Key="Color.TextAlt">#FFFFFF</Color>
 
-			<SolidColorBrush x:Key="Brush.Gray100" Color="{StaticResource Gray100}" />
-			<SolidColorBrush x:Key="Brush.Gray200" Color="{StaticResource Gray200}" />
-			<SolidColorBrush x:Key="Brush.Gray300" Color="{StaticResource Gray300}" />
-			<SolidColorBrush x:Key="Brush.Gray400" Color="{StaticResource Gray400}" />
-			<SolidColorBrush x:Key="Brush.Gray500" Color="{StaticResource Gray500}" />
-			<SolidColorBrush x:Key="Brush.Gray600" Color="{StaticResource Gray600}" />
-			<SolidColorBrush x:Key="Brush.Gray700" Color="{StaticResource Gray700}" />
-			<SolidColorBrush x:Key="Brush.Gray800" Color="{StaticResource Gray800}" />
-			<SolidColorBrush x:Key="Brush.Gray900" Color="{StaticResource Gray900}" />
+			<SolidColorBrush x:Key="Brush.Gray100" Color="#F5F5F5" />
+			<SolidColorBrush x:Key="Brush.Gray200" Color="#EEEEEE" />
+			<SolidColorBrush x:Key="Brush.Gray300" Color="#E0E0E0" />
+			<SolidColorBrush x:Key="Brush.Gray400" Color="#BDBDBD" />
+			<SolidColorBrush x:Key="Brush.Gray500" Color="#9E9E9E" />
+			<SolidColorBrush x:Key="Brush.Gray600" Color="#757575" />
+			<SolidColorBrush x:Key="Brush.Gray700" Color="#616161" />
+			<SolidColorBrush x:Key="Brush.Gray800" Color="#424242" />
+			<SolidColorBrush x:Key="Brush.Gray900" Color="#212121" />
 
-			<SolidColorBrush x:Key="Brush.GrayHover" Color="{StaticResource Gray500}" />
+			<SolidColorBrush x:Key="Brush.GrayHover" Color="#9E9E9E" />
 
 			<SolidColorBrush x:Key="Brush.PrimaryHover" Color="{StaticResource SystemAccentColorLight1}" />
 			<SolidColorBrush x:Key="Brush.PrimaryHoverIntense" Color="{StaticResource SystemAccentColorLight3}" />
@@ -70,23 +72,25 @@
 
 		<!-- Dark Theme -->
 		<ResourceDictionary x:Key="Dark">
-			<SolidColorBrush x:Key="Brush.Destructive" Color="{DynamicResource Red}" />
-			<SolidColorBrush x:Key="Brush.DestructiveHover" Color="{DynamicResource DarkRed}" />
+			<SolidColorBrush x:Key="Brush.Translucid" Opacity="0.8" Color="#000"></SolidColorBrush>
+
+			<SolidColorBrush x:Key="Brush.Destructive" Color="#E81212" />
+			<SolidColorBrush x:Key="Brush.DestructiveHover" Color="#C41B1B" />
 
 			<Color x:Key="Color.Text">#FFFFFF</Color>
 			<Color x:Key="Color.TextAlt">#000000</Color>
 
-			<SolidColorBrush x:Key="Brush.Gray100" Color="{StaticResource Gray900}" />
-			<SolidColorBrush x:Key="Brush.Gray200" Color="{StaticResource Gray800}" />
-			<SolidColorBrush x:Key="Brush.Gray300" Color="{StaticResource Gray700}" />
-			<SolidColorBrush x:Key="Brush.Gray400" Color="{StaticResource Gray600}" />
-			<SolidColorBrush x:Key="Brush.Gray500" Color="{StaticResource Gray500}" />
-			<SolidColorBrush x:Key="Brush.Gray600" Color="{StaticResource Gray400}" />
-			<SolidColorBrush x:Key="Brush.Gray700" Color="{StaticResource Gray300}" />
-			<SolidColorBrush x:Key="Brush.Gray800" Color="{StaticResource Gray200}" />
-			<SolidColorBrush x:Key="Brush.Gray900" Color="{StaticResource Gray100}" />
+			<SolidColorBrush x:Key="Brush.Gray100" Color="#212121" />
+			<SolidColorBrush x:Key="Brush.Gray200" Color="#424242" />
+			<SolidColorBrush x:Key="Brush.Gray300" Color="#616161" />
+			<SolidColorBrush x:Key="Brush.Gray400" Color="#757575" />
+			<SolidColorBrush x:Key="Brush.Gray500" Color="#9E9E9E" />
+			<SolidColorBrush x:Key="Brush.Gray600" Color="#BDBDBD" />
+			<SolidColorBrush x:Key="Brush.Gray700" Color="#E0E0E0" />
+			<SolidColorBrush x:Key="Brush.Gray800" Color="#EEEEEE" />
+			<SolidColorBrush x:Key="Brush.Gray900" Color="#F5F5F5" />
 
-			<SolidColorBrush x:Key="Brush.GrayHover" Color="{StaticResource Gray800}" />
+			<SolidColorBrush x:Key="Brush.GrayHover" Color="#EEEEEE" />
 
 			<SolidColorBrush x:Key="Brush.PrimaryHover" Color="{StaticResource SystemAccentColorDark1}" />
 			<SolidColorBrush x:Key="Brush.PrimaryHoverIntense" Color="{StaticResource SystemAccentColorDark3}" />
@@ -96,6 +100,23 @@
 			<system:Int32 x:Key="Font.IdealWeightPlus">550</system:Int32>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
+
+
+	<!-- Theme-unaware colors -->
+	<Color x:Key="PureRed">#FF0000</Color>
+	<Color x:Key="Green">#00FF00</Color>
+	<Color x:Key="Blue">#0000FF</Color>
+	<Color x:Key="Yellow">#FFFF00</Color>
+	<Color x:Key="Cyan">#00FFFF</Color>
+	<Color x:Key="Magenta">#FF00FF</Color>
+	<Color x:Key="White">#FFF</Color>
+	<Color x:Key="Black">#000</Color>
+
+	<Color x:Key="PastelRed">#FF7777</Color>
+	<Color x:Key="CoralRed">#FC5050</Color>
+	<Color x:Key="Red">#E81212</Color>
+	<Color x:Key="DarkRed">#C41B1B</Color>
+	<Color x:Key="DarkerRed">#7C0E0E</Color>
 
 	<!-- Theme-unaware brushes -->
 	<SolidColorBrush x:Key="Brush.PureRed" Color="{StaticResource Red}" />
@@ -107,30 +128,4 @@
 
 	<SolidColorBrush x:Key="Brush.White" Color="{StaticResource White}" />
 	<SolidColorBrush x:Key="Brush.Black" Color="{StaticResource Black}" />
-
-	<!-- Theme-unaware colors -->
-	<Color x:Key="PureRed">#FF0000</Color>
-	<Color x:Key="Green">#00FF00</Color>
-	<Color x:Key="Blue">#0000FF</Color>
-	<Color x:Key="Yellow">#FFFF00</Color>
-	<Color x:Key="Cyan">#00FFFF</Color>
-	<Color x:Key="Magenta">#FF00FF</Color>
-
-	<Color x:Key="PastelRed">#FF7777</Color>
-	<Color x:Key="CoralishRed">#FC5050</Color>
-	<Color x:Key="Red">#E81212</Color>
-	<Color x:Key="DarkRed">#C41B1B</Color>
-	<Color x:Key="DarkerRed">#7C0E0E</Color>
-
-	<Color x:Key="White">#FFFFFF</Color>
-	<Color x:Key="Gray100">#F5F5F5</Color>
-	<Color x:Key="Gray200">#EEEEEE</Color>
-	<Color x:Key="Gray300">#E0E0E0</Color>
-	<Color x:Key="Gray400">#BDBDBD</Color>
-	<Color x:Key="Gray500">#9E9E9E</Color>
-	<Color x:Key="Gray600">#757575</Color>
-	<Color x:Key="Gray700">#616161</Color>
-	<Color x:Key="Gray800">#424242</Color>
-	<Color x:Key="Gray900">#212121</Color>
-	<Color x:Key="Black">#000000</Color>
 </ResourceDictionary>
