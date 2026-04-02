@@ -243,4 +243,7 @@ Começa a jogar já!</value>
   <data name="Greetings.Sunset01" xml:space="preserve">
     <value>Pôr do sol acolhedor, DoomMapGuessr acolhedor!</value>
   </data>
+  <data name="News.SeeOnGitHub" xml:space="preserve">
+    <value>Ver no GitHub</value>
+  </data>
 </root>

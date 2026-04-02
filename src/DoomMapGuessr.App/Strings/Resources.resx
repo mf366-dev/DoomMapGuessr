@@ -244,4 +244,7 @@ Start guessing now!</value>
   <data name="Greetings.Sunset01" xml:space="preserve">
     <value>Cozy sunset, cozy guessing!</value>
   </data>
+  <data name="News.SeeOnGitHub" xml:space="preserve">
+    <value>See on GitHub</value>
+  </data>
 </root>

@@ -6,7 +6,7 @@
 				<Border Classes="card">
 					<StackPanel Orientation="Vertical" Spacing="4">
 						<StackPanel Orientation="Horizontal" Spacing="4">
-							<TextBlock Classes="h2" FontFamily="{StaticResource MaterialRounded}">globe</TextBlock>
+							<PathIcon Data="{DynamicResource Geometry.Globe600}" Width="16" Height="16" />
 							<TextBlock Classes="h2">Language</TextBlock>
 						</StackPanel>
 						<TextBlock>This is demo text.</TextBlock>
@@ -21,8 +21,7 @@
 
 	<Style Selector="Border.card">
 		<Setter Property="CornerRadius" Value="10" />
-		<Setter Property="Background" Value="{DynamicResource Brush.Gray100}" />
+		<Setter Property="Background" Value="{DynamicResource Brush.CardBackground}" />
 		<Setter Property="BorderThickness" Value="8" />
-		<Setter Property="Padding" Value="8" />
 	</Style>
 </Styles>

@@ -235,25 +235,25 @@
 		<!-- Display size -->
 		<Style Selector="^.display">
 			<Setter Property="FontWeight" Value="Bold" />
-			<Setter Property="FontSize" Value="32" />
+			<Setter Property="FontSize" Value="34" />
 			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Heading 1 -->
 		<Style Selector="^.h1, ^.title">
-			<Setter Property="FontWeight" Value="ExtraBold" />
-			<Setter Property="FontSize" Value="28" />
+			<Setter Property="FontWeight" Value="SemiBold" />
+			<Setter Property="FontSize" Value="30" />
 			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Heading 2 -->
 		<Style Selector="^.h2">
-			<Setter Property="FontWeight" Value="Bold" />
-			<Setter Property="FontSize" Value="24" />
+			<Setter Property="FontWeight" Value="SemiBold" />
+			<Setter Property="FontSize" Value="26" />
 			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Heading 3 -->
 		<Style Selector="^.h3">
-			<Setter Property="FontWeight" Value="Bold" />
-			<Setter Property="FontSize" Value="20" />
+			<Setter Property="FontWeight" Value="SemiBold" />
+			<Setter Property="FontSize" Value="22" />
 			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
 		<!-- Caption Text -->
@@ -391,6 +391,7 @@
 		</Style>
 		<!-- Checked -->
 		<Style Selector="^:checked /template/ ContentPresenter">
+			<Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
 			<Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
 			<Setter Property="BorderThickness" Value="1" />
 			<Setter Property="BorderBrush" Value="Transparent" />

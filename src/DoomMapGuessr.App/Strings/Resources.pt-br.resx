@@ -243,4 +243,7 @@ Comece adivinhando já!</value>
   <data name="Greetings.Sunset01" xml:space="preserve">
     <value>Pôr do sol aconchegante, DoomMapGuessr aconchegante!</value>
   </data>
+  <data name="News.SeeOnGitHub" xml:space="preserve">
+    <value>Ver em GitHub</value>
+  </data>
 </root>

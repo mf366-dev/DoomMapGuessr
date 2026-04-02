@@ -287,6 +287,15 @@ namespace DoomMapGuessr.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to See on GitHub.
+        /// </summary>
+        public static string News_SeeOnGitHub {
+            get {
+                return ResourceManager.GetString("News.SeeOnGitHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your Items.
         /// </summary>
         public static string News_Unlockables {
