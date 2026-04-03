@@ -392,7 +392,6 @@
 		<!-- Checked -->
 		<Style Selector="^:checked /template/ ContentPresenter">
 			<Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
-			<Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
 			<Setter Property="BorderThickness" Value="1" />
 			<Setter Property="BorderBrush" Value="Transparent" />
 		</Style>
