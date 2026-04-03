@@ -1,269 +1,540 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:DoomMapGuessr.ViewModels"
-             xmlns:strings="clr-namespace:DoomMapGuessr.Strings"
-             xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
-             xmlns:ctxt="clr-namespace:ColorTextBlock.Avalonia;assembly=ColorTextBlock.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="710"
-             x:Class="DoomMapGuessr.Views.HomePage"
-             x:DataType="vm:HomePageViewModel">
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:DoomMapGuessr.ViewModels"
+			 xmlns:strings="clr-namespace:DoomMapGuessr.Strings"
+			 xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
+			 xmlns:ctxt="clr-namespace:ColorTextBlock.Avalonia;assembly=ColorTextBlock.Avalonia"
+			 mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="710"
+			 SizeChanged="UserControl_SizeChanged"
+			 x:Class="DoomMapGuessr.Views.HomePage"
+			 x:DataType="vm:HomePageViewModel">
 	<Design.DataContext>
 		<vm:HomePageViewModel />
 	</Design.DataContext>
 
 	<Grid RowDefinitions="Auto, *"
-	      VerticalAlignment="Stretch"
-	      HorizontalAlignment="Stretch">
+		  VerticalAlignment="Stretch"
+		  HorizontalAlignment="Stretch"
+		  Width="{Binding Width, RelativeSource={RelativeSource AncestorType=UserControl}}">
 		<TextBlock Grid.Row="0"
-		           Padding="0,12,0,12"
-		           Classes="display"
-		           Text="{Binding RandomGreeting}" />
-		<ScrollViewer Grid.Row="1"
-		              HorizontalScrollBarVisibility="Disabled"
-		              VerticalScrollBarVisibility="Visible">
-			<StackPanel Orientation="Vertical"
-			            VerticalAlignment="Stretch"
-			            HorizontalAlignment="Stretch"
-			            Spacing="8"
-			            Width="{Binding Width, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-			            Height="{Binding Height, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
-				<Grid ColumnDefinitions="Auto, *, 200">
-					<Border Grid.Column="0"
-					        Classes="card"
-					        Margin="0,0,4,0">
+				   Padding="0,12,0,12"
+				   Classes="display"
+				   Text="{Binding RandomGreeting}" />
+
+		<!-- TILED / REGULAR -->
+		<ContentControl Grid.Row="1"
+						Name="DashboardControl"
+						IsEnabled="False"
+						IsVisible="False"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						Width="{Binding Width, RelativeSource={RelativeSource AncestorType=Grid}}"
+						Height="{Binding Height, RelativeSource={RelativeSource AncestorType=Grid}}">
+			<ScrollViewer HorizontalScrollBarVisibility="Disabled"
+						  VerticalScrollBarVisibility="Visible">
+				<StackPanel Orientation="Vertical"
+							VerticalAlignment="Stretch"
+							HorizontalAlignment="Stretch"
+							Spacing="8"
+							Width="{Binding Width, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+							Height="{Binding Height, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
+					<Grid ColumnDefinitions="Auto, *, 200">
+						<Border Grid.Column="0"
+								Classes="card"
+								Margin="0,0,4,0">
+							<Grid RowDefinitions="*, Auto"
+								  Width="300"
+								  Margin="16">
+								<md:MarkdownScrollViewer Grid.Row="0"
+														 Markdown="{Binding LatestReleaseBody}">
+									<md:MarkdownScrollViewer.Styles>
+										<Style Selector="ctxt|CTextBlock.Heading1">
+											<Setter Property="FontWeight"
+													Value="SemiBold" />
+											<Setter Property="FontSize"
+													Value="30" />
+										</Style>
+
+										<Style Selector=".Blockquote ctxt|CTextBlock.Heading1">
+											<Setter Property="FontWeight"
+													Value="SemiLight" />
+											<Setter Property="FontStyle"
+													Value="Italic" />
+										</Style>
+
+										<Style Selector="ctxt|CTextBlock.Heading2">
+											<Setter Property="FontWeight"
+													Value="SemiBold" />
+											<Setter Property="FontSize"
+													Value="26" />
+										</Style>
+
+										<Style Selector=".Blockquote ctxt|CTextBlock.Heading2">
+											<Setter Property="FontWeight"
+													Value="SemiLight" />
+											<Setter Property="FontStyle"
+													Value="Italic" />
+										</Style>
+
+										<Style Selector="ctxt|CTextBlock.Heading3">
+											<Setter Property="FontWeight"
+													Value="SemiBold" />
+											<Setter Property="FontSize"
+													Value="22" />
+										</Style>
+
+										<Style Selector=".Blockquote ctxt|CTextBlock.Heading3">
+											<Setter Property="FontWeight"
+													Value="SemiLight" />
+											<Setter Property="FontStyle"
+													Value="Italic" />
+										</Style>
+
+										<Style Selector="ctxt|CTextBlock.Paragraph">
+											<Setter Property="FontWeight"
+													Value="{DynamicResource Font.IdealWeight}" />
+											<Setter Property="FontSize"
+													Value="14" />
+										</Style>
+									</md:MarkdownScrollViewer.Styles>
+								</md:MarkdownScrollViewer>
+								<Button Grid.Row="1"
+										CornerRadius="100"
+										Command="{Binding OpenGitHubRepoCommand}"
+										HorizontalAlignment="Stretch">
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center"
+												   FontSize="16"
+												   Text="{x:Static strings:Resources.News_SeeOnGitHub}" />
+										<PathIcon Data="{DynamicResource Geometry.OpenInNew600}"
+												  Width="16" Height="16" />
+									</StackPanel>
+								</Button>
+							</Grid>
+						</Border> <!-- MARKDOWN: WHAT'S NEW? -->
+						<Grid Grid.Column="1"
+							  RowDefinitions="Auto, Auto"
+							  Margin="4,0,4,0">
+							<Border Grid.Row="0"
+									Classes="card"
+									Margin="0,0,0,4"
+									Padding="16">
+								<Border.Background>
+									<ImageBrush Source="avares://DoomMapGuessr.App/Assets/backgrounds/DOOM-64_DANGEROUS-ENCOUNTER.jpg"
+												Opacity="0.3"
+												Stretch="UniformToFill" />
+								</Border.Background>
+								<Grid ColumnDefinitions="Auto, *, Auto">
+									<PathIcon Grid.Column="0"
+											  Data="{DynamicResource Geometry.ReleaseAlert400}"
+											  Width="64"
+											  Height="64"
+											  Margin="8" />
+									<StackPanel Grid.Column="1" Margin="8">
+										<TextBlock Classes="h1"
+												   Text="For the hardcore Doomers only..." />
+										<TextBlock Classes="h3"
+												   Text="Introducing the brand new Challenge Mode!" />
+										<TextBlock Text="Screenshots get progressively harder and you have to guess them correctly: secrets included! If it sounds too ITYTD to you, I really hope the time limit per screenshot and the fact that if you get a single screenshot partially incorrect you lose the entire challenge make it a bit more nightmare-ish. This is the game mode for the real Doomers."
+												   TextWrapping="Wrap" />
+									</StackPanel>
+									<Button Grid.Column="2"
+											Classes="circle"
+											HorizontalContentAlignment="Center"
+											Width="36"
+											Height="36"
+											Margin="8"
+											Command="{Binding NavigateToClassicModeCommand}">
+										<PathIcon Data="{DynamicResource Geometry.ArrowForward600}" Width="16" Height="16" />
+									</Button>
+								</Grid>
+							</Border>
+							<Border Grid.Row="1"
+									Classes="card"
+									Margin="0,4,0,0"
+									Padding="16">
+								<Border.Background>
+									<ImageBrush Source="avares://DoomMapGuessr.App/Assets/backgrounds/LEGACY-OF-RUST_TITLEPIC.png"
+												Opacity="0.3"
+												Stretch="UniformToFill" />
+								</Border.Background>
+								<Grid ColumnDefinitions="Auto, *, Auto">
+									<PathIcon Grid.Column="0"
+											  Data="{DynamicResource Geometry.ReleaseAlert400}"
+											  Width="64" Height="64"
+											  Margin="8" />
+									<StackPanel Grid.Column="1" Margin="8">
+										<TextBlock Classes="h1"
+												   Text="{x:Static strings:Resources.News_LegacyOfRustNew}" />
+										<TextBlock Text="{x:Static strings:Resources.News_LegacyOfRustNew_Description}"
+												   TextWrapping="Wrap" />
+									</StackPanel>
+									<Button Grid.Column="2"
+											Classes="circle"
+											HorizontalContentAlignment="Center"
+											Width="36"
+											Height="36"
+											Margin="8"
+											Command="{Binding NavigateToClassicModeCommand}">
+										<PathIcon Data="{DynamicResource Geometry.ArrowForward600}"
+												  Width="16" Height="16" />
+									</Button>
+								</Grid>
+							</Border>
+						</Grid>
+						<Border Grid.Column="2"
+								Classes="card"
+								Margin="4,0,0,0"
+								Padding="12">
+							<Grid RowDefinitions="Auto, *"
+								  VerticalAlignment="Center">
+								<PathIcon Grid.Row="0"
+										  Data="{DynamicResource Geometry.Upcoming400}"
+										  Width="64"
+										  Height="64"
+										  Margin="8" />
+								<TextBlock Grid.Row="1"
+										   Classes="h1"
+										   VerticalAlignment="Center"
+										   TextAlignment="Center"
+										   Margin="8"
+										   Text="{x:Static strings:Resources.Generics_ComingSoon}" />
+							</Grid>
+						</Border>
+					</Grid>
+					<Grid ColumnDefinitions="*, 300, 300">
+						<Border Grid.Column="0"
+								Classes="card"
+								Margin="0,0,4,0"
+								Padding="16">
+							<Border.Background>
+								<ImageBrush Source="avares://DoomMapGuessr.App/Assets/backgrounds/DOOM_TITLEPIC.png"
+											Opacity="0.3"
+											Stretch="UniformToFill" />
+							</Border.Background>
+							<Grid ColumnDefinitions="Auto, *, Auto">
+								<PathIcon Grid.Column="0"
+										  Data="{DynamicResource Geometry.Trophy400}"
+										  Width="64" Height="64"
+										  Margin="8" />
+								<StackPanel Grid.Column="1" Margin="8">
+									<TextBlock Classes="h1"
+											   Text="{x:Static strings:Resources.News_Unlockables}" />
+									<TextBlock Text="{x:Static strings:Resources.News_Unlockables_Description}"
+											   TextWrapping="Wrap" />
+								</StackPanel>
+								<Button Grid.Column="2"
+										Classes="circle"
+										HorizontalContentAlignment="Center"
+										Width="36" Height="36"
+										Margin="8"
+										Command="{Binding NavigateToUnlockablesCommand}">
+									<PathIcon Data="{DynamicResource Geometry.ArrowForward600}"
+											  Width="16" Height="16" />
+								</Button>
+							</Grid>
+						</Border>
+						<Border Grid.Column="1"
+								Classes="card"
+								Margin="4,0,4,0"
+								Padding="12">
+							<Grid ColumnDefinitions="Auto, *"
+								  HorizontalAlignment="Center">
+								<PathIcon Grid.Column="0"
+										  Data="{DynamicResource Geometry.Upcoming400}"
+										  Width="64"
+										  Height="64"
+										  Margin="8" />
+								<TextBlock Grid.Column="1"
+										   Classes="h1"
+										   VerticalAlignment="Center"
+										   TextAlignment="Center"
+										   Margin="8"
+										   Text="{x:Static strings:Resources.Generics_ComingSoon}" />
+							</Grid>
+						</Border>
+						<Border Grid.Column="2"
+								Classes="card"
+								Margin="4,0,0,0"
+								Padding="12">
+							<Grid ColumnDefinitions="Auto, *"
+								  HorizontalAlignment="Center">
+								<PathIcon Grid.Column="0"
+										  Data="{DynamicResource Geometry.Upcoming400}"
+										  Width="64"
+										  Height="64"
+										  Margin="8" />
+								<TextBlock Grid.Column="1"
+										   Classes="h1"
+										   VerticalAlignment="Center"
+										   TextAlignment="Center"
+										   Margin="8"
+										   Text="{x:Static strings:Resources.Generics_ComingSoon}" />
+							</Grid>
+						</Border>
+					</Grid>
+				</StackPanel>
+			</ScrollViewer>
+		</ContentControl>
+
+		<!-- OUT OF SPACE (LINE FORMAT) -->
+		<ContentControl Grid.Row="1"
+						Name="NoSpaceControl"
+						IsEnabled="False"
+						IsVisible="False"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						Width="{Binding Width, RelativeSource={RelativeSource AncestorType=Grid}}"
+						Height="{Binding Height, RelativeSource={RelativeSource AncestorType=Grid}}">
+			<ScrollViewer HorizontalScrollBarVisibility="Visible"
+						  VerticalScrollBarVisibility="Disabled">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Stretch"
+							HorizontalAlignment="Stretch"
+							Spacing="8"
+							Width="{Binding Width, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+							Height="{Binding Height, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
+					<Border Classes="card">
 						<Grid RowDefinitions="*, Auto"
-						      MinWidth="200"
-						      MaxWidth="600"
-						      Margin="12">
+							  Width="300"
+							  Margin="24">
 							<md:MarkdownScrollViewer Grid.Row="0"
-							                         Markdown="{Binding LatestReleaseBody}">
+													 Markdown="{Binding LatestReleaseBody}">
 								<md:MarkdownScrollViewer.Styles>
 									<Style Selector="ctxt|CTextBlock.Heading1">
 										<Setter Property="FontWeight"
-										        Value="SemiBold" />
+												Value="SemiBold" />
 										<Setter Property="FontSize"
-										        Value="30" />
+												Value="30" />
 									</Style>
 
 									<Style Selector=".Blockquote ctxt|CTextBlock.Heading1">
 										<Setter Property="FontWeight"
-										        Value="SemiLight" />
+												Value="SemiLight" />
 										<Setter Property="FontStyle"
-										        Value="Italic" />
+												Value="Italic" />
 									</Style>
 
 									<Style Selector="ctxt|CTextBlock.Heading2">
 										<Setter Property="FontWeight"
-										        Value="SemiBold" />
+												Value="SemiBold" />
 										<Setter Property="FontSize"
-										        Value="26" />
+												Value="26" />
 									</Style>
 
 									<Style Selector=".Blockquote ctxt|CTextBlock.Heading2">
 										<Setter Property="FontWeight"
-										        Value="SemiLight" />
+												Value="SemiLight" />
 										<Setter Property="FontStyle"
-										        Value="Italic" />
+												Value="Italic" />
 									</Style>
 
 									<Style Selector="ctxt|CTextBlock.Heading3">
 										<Setter Property="FontWeight"
-										        Value="SemiBold" />
+												Value="SemiBold" />
 										<Setter Property="FontSize"
-										        Value="22" />
+												Value="22" />
 									</Style>
 
 									<Style Selector=".Blockquote ctxt|CTextBlock.Heading3">
 										<Setter Property="FontWeight"
-										        Value="SemiLight" />
+												Value="SemiLight" />
 										<Setter Property="FontStyle"
-										        Value="Italic" />
+												Value="Italic" />
 									</Style>
 
 									<Style Selector="ctxt|CTextBlock.Paragraph">
 										<Setter Property="FontWeight"
-										        Value="{DynamicResource Font.IdealWeight}" />
+												Value="{DynamicResource Font.IdealWeight}" />
 										<Setter Property="FontSize"
-										        Value="14" />
-                                    </Style>
+												Value="14" />
+									</Style>
 								</md:MarkdownScrollViewer.Styles>
 							</md:MarkdownScrollViewer>
 							<Button Grid.Row="1"
-							        Command="{Binding OpenGitHubRepoCommand}"
-							        HorizontalAlignment="Stretch">
+									CornerRadius="100"
+									Command="{Binding OpenGitHubRepoCommand}"
+									HorizontalAlignment="Stretch"
+									Margin="8">
 								<StackPanel Orientation="Horizontal">
 									<TextBlock VerticalAlignment="Center"
-									           Text="{x:Static strings:Resources.News_SeeOnGitHub}" />
+											   FontSize="18"
+											   Text="{x:Static strings:Resources.News_SeeOnGitHub}" />
 									<PathIcon Data="{DynamicResource Geometry.OpenInNew600}"
-									          Width="16" Height="16" />
+											  Width="16" Height="16" />
 								</StackPanel>
 							</Button>
 						</Grid>
-					</Border> <!-- MARKDOWN: WHAT'S NEW? -->
-					<Grid Grid.Column="1"
-					      RowDefinitions="Auto, Auto"
-					      Margin="4,0,4,0">
-						<Border Grid.Row="0"
-						        Classes="card"
-						        Margin="0,0,0,4"
-						        Padding="16">
-							<Border.Background>
-								<ImageBrush Source="avares://DoomMapGuessr.App/Assets/backgrounds/DOOM-64_DANGEROUS-ENCOUNTER.jpg"
-								            Opacity="0.3"
-								            Stretch="UniformToFill" />
-							</Border.Background>
-							<Grid ColumnDefinitions="Auto, *, Auto">
-								<PathIcon Grid.Column="0"
-								          Data="{DynamicResource Geometry.ReleaseAlert400}"
-								          Width="64"
-								          Height="64"
-								          Margin="8" />
-								<StackPanel Grid.Column="1" Margin="8">
-									<TextBlock Classes="h1"
-									           Text="For the hardcore Doomers only..." />
-									<TextBlock Classes="h3"
-									           Text="Introducing the brand new Challenge Mode!" />
-									<TextBlock Text="Screenshots get progressively harder and you have to guess them correctly: secrets included! If it sounds too ITYTD to you, I really hope the time limit per screenshot and the fact that if you get a single screenshot partially incorrect you lose the entire challenge make it a bit more nightmare-ish. This is the game mode for the real Doomers."
-									           TextWrapping="Wrap" />
-								</StackPanel>
-								<Button Grid.Column="2"
-								        Classes="circle"
-								        HorizontalContentAlignment="Center"
-								        Width="36"
-								        Height="36"
-								        Margin="8"
-								        Command="{Binding NavigateToClassicModeCommand}">
-									<PathIcon Data="{DynamicResource Geometry.ArrowForward600}" Width="16" Height="16" />
-								</Button>
-							</Grid>
-						</Border>
-						<Border Grid.Row="1"
-						        Classes="card"
-						        Margin="0,4,0,0"
-						        Padding="16">
-							<Border.Background>
-								<ImageBrush Source="avares://DoomMapGuessr.App/Assets/backgrounds/LEGACY-OF-RUST_TITLEPIC.png"
-								            Opacity="0.3"
-								            Stretch="UniformToFill" />
-							</Border.Background>
-							<Grid ColumnDefinitions="Auto, *, Auto">
-								<PathIcon Grid.Column="0"
-								          Data="{DynamicResource Geometry.ReleaseAlert400}"
-								          Width="64" Height="64"
-								          Margin="8" />
-								<StackPanel Grid.Column="1" Margin="8">
-									<TextBlock Classes="h1"
-									           Text="{x:Static strings:Resources.News_LegacyOfRustNew}" />
-									<TextBlock Text="{x:Static strings:Resources.News_LegacyOfRustNew_Description}"
-									           TextWrapping="Wrap" />
-								</StackPanel>
-								<Button Grid.Column="2"
-								        Classes="circle"
-								        HorizontalContentAlignment="Center"
-								        Width="36"
-								        Height="36"
-								        Margin="8"
-								        Command="{Binding NavigateToClassicModeCommand}">
-									<PathIcon Data="{DynamicResource Geometry.ArrowForward600}"
-									          Width="16" Height="16" />
-								</Button>
-							</Grid>
-						</Border>
-					</Grid>
-					<Border Grid.Column="2"
-					        Classes="card"
-					        Margin="4,0,0,0"
-					        Padding="12">
-						<Grid RowDefinitions="Auto, *"
-						      VerticalAlignment="Center">
+					</Border>
+					<Border Classes="card"
+							Width="400"
+							Padding="24">
+						<Border.Background>
+							<ImageBrush Source="avares://DoomMapGuessr.App/Assets/backgrounds/DOOM-64_DANGEROUS-ENCOUNTER.jpg"
+										Opacity="0.3"
+										Stretch="UniformToFill" />
+						</Border.Background>
+						<Grid RowDefinitions="Auto, *, Auto">
 							<PathIcon Grid.Row="0"
-							          Data="{DynamicResource Geometry.Upcoming400}"
-							          Width="64"
-							          Height="64"
-							          Margin="8" />
-							<TextBlock Grid.Row="1"
-							           Classes="h1"
-							           VerticalAlignment="Center"
-							           TextAlignment="Center"
-							           Margin="8"
-							           Text="{x:Static strings:Resources.Generics_ComingSoon}" />
+									  Data="{DynamicResource Geometry.ReleaseAlert400}"
+									  Width="64"
+									  Height="64"
+									  Margin="8" />
+							<StackPanel Grid.Row="1" Margin="8">
+								<TextBlock Classes="h1"
+										   TextAlignment="Center"
+										   Text="For the hardcore Doomers only!" />
+								<TextBlock Classes="h3"
+										   TextAlignment="Center"
+										   Text="Introducing the brand new Challenge Mode!" />
+								<TextBlock TextAlignment="Center"
+										   Text="Screenshots get progressively harder and you have to guess them correctly: secrets included! If it sounds too ITYTD to you, I really hope the time limit per screenshot and the fact that if you get a single screenshot partially incorrect you lose the entire challenge make it a bit more nightmare-ish. This is the game mode for the real Doomers."
+										   TextWrapping="Wrap" />
+							</StackPanel>
+							<Button Grid.Row="2"
+									Classes="circle"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									VerticalContentAlignment="Center"
+									Height="36"
+									Margin="8"
+									Command="{Binding NavigateToClassicModeCommand}">
+								<StackPanel Orientation="Horizontal" Spacing="8">
+									<TextBlock FontSize="18">Check it out</TextBlock>
+									<PathIcon Data="{DynamicResource Geometry.ArrowForward600}" Width="16" Height="16" />
+								</StackPanel>
+							</Button>
 						</Grid>
 					</Border>
-				</Grid>
-				<Grid ColumnDefinitions="*, 300, 300">
-					<Border Grid.Column="0"
-					        Classes="card"
-					        Margin="0,0,4,0"
-					        Padding="16">
+					<Border Classes="card"
+							Width="400"
+							Padding="24">
+						<Border.Background>
+							<ImageBrush Source="avares://DoomMapGuessr.App/Assets/backgrounds/LEGACY-OF-RUST_TITLEPIC.png"
+										Opacity="0.3"
+										Stretch="UniformToFill" />
+						</Border.Background>
+						<Grid RowDefinitions="Auto, *, Auto">
+							<PathIcon Grid.Row="0"
+									  Data="{DynamicResource Geometry.ReleaseAlert400}"
+									  Width="64"
+									  Height="64"
+									  Margin="8" />
+							<StackPanel Grid.Row="1" Margin="8">
+								<TextBlock Classes="h1"
+										   TextAlignment="Center"
+										   Text="{x:Static strings:Resources.News_LegacyOfRustNew}" />
+								<TextBlock TextAlignment="Center"
+										   TextWrapping="WrapWithOverflow"
+										   Text="{x:Static strings:Resources.News_LegacyOfRustNew_Description}" />
+							</StackPanel>
+							<Button Grid.Row="2"
+									Classes="circle"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									VerticalContentAlignment="Center"
+									Height="36"
+									Margin="8"
+									Command="{Binding NavigateToClassicModeCommand}">
+								<StackPanel Orientation="Horizontal" Spacing="8">
+									<TextBlock FontSize="18">Check it out</TextBlock>
+									<PathIcon Data="{DynamicResource Geometry.ArrowForward600}" Width="16" Height="16" />
+								</StackPanel>
+							</Button>
+						</Grid>
+					</Border>
+					<Border Classes="card"
+							Width="400"
+							Padding="24">
 						<Border.Background>
 							<ImageBrush Source="avares://DoomMapGuessr.App/Assets/backgrounds/DOOM_TITLEPIC.png"
-							            Opacity="0.3"
-							            Stretch="UniformToFill" />
+										Opacity="0.3"
+										Stretch="UniformToFill" />
 						</Border.Background>
-						<Grid ColumnDefinitions="Auto, *, Auto">
-							<PathIcon Grid.Column="0"
-							          Data="{DynamicResource Geometry.Trophy400}"
-							          Width="64" Height="64"
-							          Margin="8" />
-							<StackPanel Grid.Column="1" Margin="8">
+						<Grid RowDefinitions="Auto, *, Auto">
+							<PathIcon Grid.Row="0"
+									  Data="{DynamicResource Geometry.Trophy400}"
+									  Width="64"
+									  Height="64"
+									  Margin="8" />
+							<StackPanel Grid.Row="1" Margin="8">
 								<TextBlock Classes="h1"
-								           Text="{x:Static strings:Resources.News_Unlockables}" />
-								<TextBlock Text="{x:Static strings:Resources.News_Unlockables_Description}"
-								           TextWrapping="Wrap" />
+										   TextAlignment="Center"
+										   Text="{x:Static strings:Resources.News_Unlockables}" />
+								<TextBlock TextAlignment="Center"
+										   TextWrapping="WrapWithOverflow"
+										   Text="{x:Static strings:Resources.News_Unlockables_Description}" />
 							</StackPanel>
-							<Button Grid.Column="2"
-							        Classes="circle"
-							        HorizontalContentAlignment="Center"
-							        Width="36" Height="36"
-							        Margin="8"
-							        Command="{Binding NavigateToUnlockablesCommand}">
-								<PathIcon Data="{DynamicResource Geometry.ArrowForward600}"
-								          Width="16" Height="16" />
+							<Button Grid.Row="2"
+									Classes="circle"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									VerticalContentAlignment="Center"
+									Height="36"
+									Margin="8"
+									Command="{Binding NavigateToUnlockablesCommand}">
+								<StackPanel Orientation="Horizontal" Spacing="8">
+									<TextBlock FontSize="18">Check it out</TextBlock>
+									<PathIcon Data="{DynamicResource Geometry.ArrowForward600}" Width="16" Height="16" />
+								</StackPanel>
 							</Button>
 						</Grid>
 					</Border>
-					<Border Grid.Column="1"
-					        Classes="card"
-					        Margin="4,0,4,0"
-					        Padding="12">
-						<Grid ColumnDefinitions="Auto, *"
-						      HorizontalAlignment="Center">
-							<PathIcon Grid.Column="0"
-							          Data="{DynamicResource Geometry.Upcoming400}"
-							          Width="64"
-							          Height="64"
-							          Margin="8" />
-							<TextBlock Grid.Column="1"
-							           Classes="h1"
-							           VerticalAlignment="Center"
-							           TextAlignment="Center"
-							           Margin="8"
-							           Text="{x:Static strings:Resources.Generics_ComingSoon}" />
+					<Border Classes="card"
+							Padding="24">
+						<Grid RowDefinitions="Auto, *"
+							  VerticalAlignment="Center">
+							<PathIcon Grid.Row="0"
+									  Data="{DynamicResource Geometry.Upcoming400}"
+									  Width="64"
+									  Height="64"
+									  Margin="8" />
+							<TextBlock Grid.Row="1"
+									   Classes="h1"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   Margin="8"
+									   Text="{x:Static strings:Resources.Generics_ComingSoon}" />
 						</Grid>
 					</Border>
-					<Border Grid.Column="2"
-					        Classes="card"
-					        Margin="4,0,0,0"
-					        Padding="12">
-						<Grid ColumnDefinitions="Auto, *"
-						      HorizontalAlignment="Center">
-							<PathIcon Grid.Column="0"
-							          Data="{DynamicResource Geometry.Upcoming400}"
-							          Width="64"
-							          Height="64"
-							          Margin="8" />
-							<TextBlock Grid.Column="1"
-							           Classes="h1"
-							           VerticalAlignment="Center"
-							           TextAlignment="Center"
-							           Margin="8"
-							           Text="{x:Static strings:Resources.Generics_ComingSoon}" />
+					<Border Classes="card"
+							Padding="24">
+						<Grid RowDefinitions="Auto, *"
+							  VerticalAlignment="Center">
+							<PathIcon Grid.Row="0"
+									  Data="{DynamicResource Geometry.Upcoming400}"
+									  Width="64"
+									  Height="64"
+									  Margin="8" />
+							<TextBlock Grid.Row="1"
+									   Classes="h1"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   Margin="8"
+									   Text="{x:Static strings:Resources.Generics_ComingSoon}" />
 						</Grid>
 					</Border>
-				</Grid>
-			</StackPanel>
-		</ScrollViewer>
+					<Border Classes="card"
+							Padding="24">
+						<Grid RowDefinitions="Auto, *"
+							  VerticalAlignment="Center">
+							<PathIcon Grid.Row="0"
+									  Data="{DynamicResource Geometry.Upcoming400}"
+									  Width="64"
+									  Height="64"
+									  Margin="8" />
+							<TextBlock Grid.Row="1"
+									   Classes="h1"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   Margin="8"
+									   Text="{x:Static strings:Resources.Generics_ComingSoon}" />
+						</Grid>
+					</Border>
+				</StackPanel>
+			</ScrollViewer>
+		</ContentControl>
 	</Grid>
 </UserControl>

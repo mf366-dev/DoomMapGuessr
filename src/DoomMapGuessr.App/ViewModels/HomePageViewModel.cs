@@ -24,7 +24,7 @@ namespace DoomMapGuessr.ViewModels
                 : (ApplicationState.Shared.SavedRelease.TagName[1..] == ApplicationState.Shared.VersionInfo.ApplicationVersion
                     ? $"# What's new in this version?\n**DoomMapGuessr {ApplicationState.Shared.SavedRelease.TagName}**\n\n{ApplicationState.Shared.SavedRelease.Body}"
                     : (ApplicationState.Shared.VersionInfo.IsDevVersion // now we actually have a property named "IsDevVersion" how fucking cool right?
-                        ? $"# You're using a dev build of DoomMapGuessr\nUpdate to a stable build to see release info."
+                        ? $"# No release data found.\nIt seems this is a build contained in a developer channel of DoomMapGuessr. If you are not a tester nor a developer, it is recommended you update to the latest stable version."
                         : $"# New version available! What's new?\n**DoomMapGuessr {ApplicationState.Shared.SavedRelease.TagName}**\n\n{ApplicationState.Shared.SavedRelease.Body}"));
 
 		private Random random = new();
@@ -55,6 +55,8 @@ namespace DoomMapGuessr.ViewModels
             _ = WebBrowserService.OpenUrl(ApplicationState.Shared.SavedRelease.HtmlUrl);
 
         }
+
+		
 
     }
 
