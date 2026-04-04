@@ -18,13 +18,14 @@ using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using Avalonia;
+
 using DoomMapGuessr.Services;
 using DoomMapGuessr.Services.Abstractions;
-using DoomMapGuessr.Settings;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Octokit;
 
 
 namespace DoomMapGuessr
@@ -98,6 +99,9 @@ namespace DoomMapGuessr
 		public static async Task DownloadSqliteDatabaseAsync()
 		{
 
+			// TODO: BIG TASK
+
+			/*
 			// for now this simply downloads even if its already cached
 			// todo: actually do the cache thing and the y'know what im talking bout
 			byte[] bytes = await client.GetByteArrayAsync(DB_URL);
@@ -108,6 +112,7 @@ namespace DoomMapGuessr
 			);
 
 			ApplicationState.Shared.SqliteConnection.Open();
+			*/
 
 		}
 
@@ -126,10 +131,13 @@ namespace DoomMapGuessr
 
 			// todo: fix what's below this comment (see #22)
 
-			ApplicationState.Shared.Cache?.CreateDirectory();
+			// todo: initialize cache directory here
 
+			// todo: move these 2 lines to App.axaml.cs (see the TODOs in that file)
+			/*
 			ApplicationState.Shared.SavedRelease =
 				await new GitHubClient(new ProductHeaderValue("DoomMapGuessr")).Repository.Release.GetLatest("MF366-Coding", "DoomMapGuessr");
+			*/
 
 			await DownloadSqliteDatabaseAsync();
 
@@ -143,7 +151,8 @@ namespace DoomMapGuessr
 
 		}
 
-		~Program() { ApplicationState.Shared.SqliteConnection?.Close(); }
+		// TODO: BIG TASK
+		~Program() { /*ApplicationState.Shared.SqliteConnection?.Close();*/ }
 
 	}
 

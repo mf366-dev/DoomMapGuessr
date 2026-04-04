@@ -6,6 +6,7 @@ using DoomMapGuessr.Settings;
 using DoomMapGuessr.Strings;
 
 
+// TODO: CLEANUP ALL USAGES OF APPLICATION STATE HERE!!
 namespace DoomMapGuessr.ViewModels
 {
 

@@ -44,7 +44,7 @@
 							<ToggleSwitch Name="DarkModeToggleSwitch" Margin="48,0,0,0"
 							              OnContent="{x:Static strings:Resources.Settings_UI_DarkTheme}"
 							              OffContent="{x:Static strings:Resources.Settings_UI_DarkTheme}"
-							              IsChecked="{Binding DarkMode}"
+							              IsChecked="{Binding DarkTheme}"
 							              IsEnabled="{Binding CustomTheme}" />
 						</StackPanel>
 					</StackPanel>

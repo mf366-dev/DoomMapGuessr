@@ -7,6 +7,8 @@ using DoomMapGuessr.ViewModels;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using Octokit;
+
 
 namespace DoomMapGuessr.Extensions
 {
@@ -30,6 +32,12 @@ namespace DoomMapGuessr.Extensions
 				services.AddSingleton<SettingsPageViewModel>();
 
 				services.AddSingleton<MainWindowViewModel>();
+				services.AddSingleton<AchievementsUnlockablesViewModel>();
+				services.AddSingleton<ClassicModeViewModel>();
+				services.AddSingleton<GeoModeViewModel>();
+				services.AddSingleton<HomePageViewModel>();
+
+				services.AddSingleton<Release>();
 
 			}
 

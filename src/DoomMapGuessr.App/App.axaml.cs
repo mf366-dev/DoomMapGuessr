@@ -8,6 +8,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 
 using DoomMapGuessr.Extensions;
+using DoomMapGuessr.Services.Abstractions;
 using DoomMapGuessr.Settings;
 using DoomMapGuessr.ViewModels;
 using DoomMapGuessr.Views;
@@ -54,18 +55,20 @@ namespace DoomMapGuessr
 		public override void OnFrameworkInitializationCompleted()
 		{
 
-			RequestedThemeVariant = ApplicationState.Shared.Settings.Data["GUI"]["FollowSystem"] == "1"
-										? ThemeVariant.Default
-										: (ApplicationState.Shared.Settings.Data["GUI"]["DarkMode"] == "1"
-											   ? ThemeVariant.Dark
-											   : ThemeVariant.Light);
-			Strings.Resources.Culture = new(ApplicationState.Shared.Settings.Data["Language"]["Culture"]);
-
 			// Dependency Injection setup lesgo
 			ServiceCollection collection = new();
 			collection.AddCommonServices();
+			// todo: add octokit fetch here
 			ServiceProvider = collection.BuildServiceProvider();
 			var vm = ServiceProvider.GetRequiredService<MainWindowViewModel>();
+
+			RequestedThemeVariant =
+				ServiceProvider.GetRequiredService<ISettingsService>().GetBoolean("GUI.FollowSystem")
+										? ThemeVariant.Default
+										: (ServiceProvider.GetRequiredService<ISettingsService>().GetBoolean("GUI.DarkTheme")
+											   ? ThemeVariant.Dark
+											   : ThemeVariant.Light);
+			Strings.Resources.Culture = new(ServiceProvider.GetRequiredService<ISettingsService>().GetString("Language.Culture") ?? "en-US");
 
 			if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
 			{

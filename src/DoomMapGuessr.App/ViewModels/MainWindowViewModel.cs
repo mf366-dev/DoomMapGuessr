@@ -1,9 +1,12 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using DoomMapGuessr.Services;
 using DoomMapGuessr.Views;
+
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace DoomMapGuessr.ViewModels
@@ -45,81 +48,41 @@ namespace DoomMapGuessr.ViewModels
 			{
 
 				case "Home":
-					if (!ViewModelArchive.TryGet<HomePageViewModel>(out var homePageViewModel))
-					{
-
-						homePageViewModel = new(this);
-						ViewModelArchive.Archive(homePageViewModel);
-
-					}
-
 					CurrentPage = new HomePage
 					{
-						DataContext = homePageViewModel
+						DataContext = ((App)Application.Current!).ServiceProvider.GetRequiredService<HomePageViewModel>()
 					};
 
 					break;
 
 				case "ClassicMode":
-					if (!ViewModelArchive.TryGet<ClassicModeViewModel>(out var classicModeViewModel))
-					{
-
-						classicModeViewModel = new();
-						ViewModelArchive.Archive(classicModeViewModel);
-
-					}
-
 					CurrentPage = new ClassicModePage
 					{
-						DataContext = classicModeViewModel
+						DataContext = ((App)Application.Current!).ServiceProvider.GetRequiredService<ClassicModeViewModel>()
 					};
 
 					break;
 
 				case "GeoMode":
-					if (!ViewModelArchive.TryGet<GeoModeViewModel>(out var geoModeViewModel))
-					{
-
-						geoModeViewModel = new();
-						ViewModelArchive.Archive(geoModeViewModel);
-
-					}
-
 					CurrentPage = new GeoModePage
 					{
-						DataContext = geoModeViewModel
+						DataContext = ((App)Application.Current!).ServiceProvider.GetRequiredService<GeoModeViewModel>()
 					};
 
 					break;
 
 				case "AchievementsUnlockables":
-					if (!ViewModelArchive.TryGet<AchievementsUnlockablesViewModel>(out var achievementsUnlockablesViewModel))
-					{
-
-						achievementsUnlockablesViewModel = new();
-						ViewModelArchive.Archive(achievementsUnlockablesViewModel);
-
-					}
-
 					CurrentPage = new AchievementsUnlockablesPage
 					{
-						DataContext = achievementsUnlockablesViewModel
+						DataContext = ((App)Application.Current!).ServiceProvider.GetRequiredService<AchievementsUnlockablesViewModel>()
 					};
 
 					break;
 
 				case "Settings":
-					if (!ViewModelArchive.TryGet<SettingsPageViewModel>(out var settingsPageViewModel))
-					{
-
-						settingsPageViewModel = new();
-						ViewModelArchive.Archive(settingsPageViewModel);
-
-					}
-
 					CurrentPage = new SettingsPage
 					{
-						DataContext = settingsPageViewModel
+						DataContext = ((App)Application.Current!).ServiceProvider.GetRequiredService<SettingsPageViewModel>()
 					};
 
 					break;
