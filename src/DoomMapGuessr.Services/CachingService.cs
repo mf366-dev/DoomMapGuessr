@@ -15,21 +15,12 @@ namespace DoomMapGuessr.Services
 	/// <summary>
 	/// The caching service used by DoomMapGuessr.
 	/// </summary>
-	public class CachingService : ICachingService, ICachingServiceAsync
+	/// <remarks>
+	/// Initializes a new caching service.
+	/// </remarks>
+	/// <param name="cacheDirectory">The directory in which the cache is stored</param>
+	public class CachingService(string cacheDirectory) : ICachingService, ICachingServiceAsync
 	{
-
-		/// <summary>
-		/// Initializes a new caching service.
-		/// </summary>
-		/// <param name="cacheDirectory"></param>
-		public CachingService(string cacheDirectory)
-		{
-
-			CacheDirectory = cacheDirectory;
-			TemporaryCacheDirectory = Directory.CreateDirectory(Path.Join(cacheDirectory, "Temp"));
-			PersistentCacheDirectory = Directory.CreateDirectory(Path.Join(cacheDirectory, "__"));
-
-		}
 
 		private readonly MemoryCache memory = new(
 			new MemoryCacheOptions
@@ -45,17 +36,17 @@ namespace DoomMapGuessr.Services
 		/// <summary>
 		/// The directory used for persistent cache.
 		/// </summary>
-		public string CacheDirectory { get; }
+		public string CacheDirectory { get; } = cacheDirectory;
 
 		/// <summary>
 		/// The directory used for temporary cache.
 		/// </summary>
-		public DirectoryInfo TemporaryCacheDirectory { get; }
+		public DirectoryInfo TemporaryCacheDirectory { get; } = Directory.CreateDirectory(Path.Join(cacheDirectory, "Temp"));
 
 		/// <summary>
 		/// The directory used for persistent cache.
 		/// </summary>
-		public DirectoryInfo PersistentCacheDirectory { get; }
+		public DirectoryInfo PersistentCacheDirectory { get; } = Directory.CreateDirectory(Path.Join(cacheDirectory, "__"));
 
 		/// <summary>
 		/// Clears temporary cache.

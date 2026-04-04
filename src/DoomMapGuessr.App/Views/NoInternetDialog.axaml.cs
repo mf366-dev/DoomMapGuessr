@@ -7,13 +7,8 @@ namespace DoomMapGuessr.Views
     public partial class NoInternetDialog : Window
     {
 
-        public NoInternetDialog()
-        {
+		public NoInternetDialog() => InitializeComponent();
 
-            InitializeComponent();
-
-        }
-
-    }
+	}
 
 }

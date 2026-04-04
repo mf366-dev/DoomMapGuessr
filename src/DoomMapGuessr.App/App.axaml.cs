@@ -6,16 +6,29 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
+
+using DoomMapGuessr.Extensions;
 using DoomMapGuessr.Settings;
 using DoomMapGuessr.ViewModels;
 using DoomMapGuessr.Views;
+
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace DoomMapGuessr
 {
 
+	/// <summary>
+	/// Avalonia app.
+	/// Contains Avalonia-specific functionality.
+	/// </summary>
     public class App : Application
     {
+
+		/// <summary>
+		/// Globally used service provider.
+		/// </summary>
+		public ServiceProvider ServiceProvider { get; private set; } = null!;
 
         public static readonly string[] allowedCultures = ["en-US", "pt-br", "pt-PT", "sk-sk"];
         public static readonly string systemCulture = CultureInfo.CurrentCulture.Name;
@@ -32,8 +45,12 @@ namespace DoomMapGuessr
 
         }
 
+        /// <inheritdoc/>
         public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
+        /// <summary>
+		/// Runs after Avalonia is initialized.
+		/// </summary>
         public override void OnFrameworkInitializationCompleted()
         {
 
@@ -43,6 +60,12 @@ namespace DoomMapGuessr
                                                ? ThemeVariant.Dark
                                                : ThemeVariant.Light);
             Strings.Resources.Culture = new(ApplicationState.Shared.Settings.Data["Language"]["Culture"]);
+
+			// Dependency Injection setup lesgo
+			ServiceCollection collection = new();
+			collection.AddCommonServices();
+			ServiceProvider = collection.BuildServiceProvider();
+			var vm = ServiceProvider.GetRequiredService<MainWindowViewModel>();
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
@@ -55,7 +78,7 @@ namespace DoomMapGuessr
 
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel()
+                    DataContext = vm
                 };
 
             }

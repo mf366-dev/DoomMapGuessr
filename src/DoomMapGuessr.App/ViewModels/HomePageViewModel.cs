@@ -27,8 +27,8 @@ namespace DoomMapGuessr.ViewModels
                         ? $"# No release data found.\nIt seems this is a build contained in a developer channel of DoomMapGuessr. If you are not a tester nor a developer, it is recommended you update to the latest stable version."
                         : $"# New version available! What's new?\n**DoomMapGuessr {ApplicationState.Shared.SavedRelease.TagName}**\n\n{ApplicationState.Shared.SavedRelease.Body}"));
 
-		private Random random = new();
-		private string[] greetings = [Resources.Greetings_Regular01, Resources.Greetings_Regular02];
+		private readonly Random random = new();
+		private readonly string[] greetings = [Resources.Greetings_Regular01, Resources.Greetings_Regular02];
 
 		public string RandomGreeting => DateTime.Now.Hour switch
 		{

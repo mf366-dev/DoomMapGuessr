@@ -7,7 +7,7 @@ namespace DoomMapGuessr.Views
 	public partial class ClassicModePage : UserControl
 	{
 
-		public ClassicModePage() { InitializeComponent(); }
+		public ClassicModePage() => InitializeComponent();
 
 	}
 

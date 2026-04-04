@@ -13,7 +13,7 @@
 
 	<Grid RowDefinitions="Auto, *, Auto">
 		<StackPanel Grid.Row="0" Margin="4"  Orientation="Horizontal" Spacing="4">
-			<TextBlock Classes="h1" TextAlignment="Center" FontFamily="{StaticResource MaterialRounded}">settings</TextBlock>
+			<TextBlock Classes="h1" TextAlignment="Center">settings</TextBlock>
 			<TextBlock Classes="h1" Text="{x:Static strings:Resources.Menu_Settings}" />
 		</StackPanel>
 		<ScrollViewer Grid.Row="1">
@@ -21,7 +21,7 @@
 				<Border Grid.Row="0" Classes="card">
 					<StackPanel Orientation="Vertical" Spacing="2">
 						<StackPanel Orientation="Horizontal" Spacing="4">
-							<TextBlock Classes="h2" FontFamily="{StaticResource MaterialRounded}">globe</TextBlock>
+							<TextBlock Classes="h2">globe</TextBlock>
 							<TextBlock Classes="h2" Text="{x:Static strings:Resources.Generics_Language}" />
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Spacing="8">
@@ -34,7 +34,7 @@
 				<Border Grid.Row="1" Classes="card">
 					<StackPanel Orientation="Vertical" Spacing="2">
 						<StackPanel Orientation="Horizontal" Spacing="4">
-							<TextBlock Classes="h2" FontFamily="{StaticResource MaterialRounded}">brush</TextBlock>
+							<TextBlock Classes="h2">brush</TextBlock>
 							<TextBlock Classes="h2" Text="{x:Static strings:Resources.Settings_UI}" />
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Spacing="8">
@@ -52,7 +52,7 @@
 				<Border Grid.Row="2" Classes="card">
 					<StackPanel Orientation="Vertical" Spacing="2">
 						<StackPanel Orientation="Horizontal" Spacing="4">
-							<TextBlock Classes="h2" FontFamily="{StaticResource MaterialRounded}">image</TextBlock>
+							<TextBlock Classes="h2">image</TextBlock>
 							<TextBlock Classes="h2" Text="{x:Static strings:Resources.Settings_DoomScreenshots}" />
 						</StackPanel>
 						<TextBlock Classes="h3" Margin="24,8,0,8" Text="{x:Static strings:Resources.Settings_AspectRatio}" />
@@ -88,26 +88,26 @@
 							<Grid ColumnDefinitions="Auto, Auto, *, Auto, Auto">
 								<Button Grid.Column="0" Margin="4">
 									<StackPanel>
-										<TextBlock Classes="icon">&#xf3dd;</TextBlock>
-										<TextBlock Classes="icon-text" Text="{x:Static strings:Resources.Generics_Add}" />
+										<TextBlock>&#xf3dd;</TextBlock>
+										<TextBlock Text="{x:Static strings:Resources.Generics_Add}" />
 									</StackPanel>
 								</Button>
 								<Button Grid.Column="1" Margin="4">
 									<StackPanel>
-										<TextBlock Classes="icon">edit</TextBlock>
-										<TextBlock Classes="icon-text" Text="{x:Static strings:Resources.Generics_Edit}" />
+										<TextBlock>edit</TextBlock>
+										<TextBlock Text="{x:Static strings:Resources.Generics_Edit}" />
 									</StackPanel>
 								</Button>
 								<Button Grid.Column="3" Margin="4">
 									<StackPanel>
-										<TextBlock Classes="icon">delete</TextBlock>
-										<TextBlock Classes="icon-text" Text="{x:Static strings:Resources.Generics_Remove}" />
+										<TextBlock>delete</TextBlock>
+										<TextBlock Text="{x:Static strings:Resources.Generics_Remove}" />
 									</StackPanel>
 								</Button>
 								<Button Grid.Column="4" Classes="destructive" Margin="4">
 									<StackPanel>
-										<TextBlock Classes="icon">mop</TextBlock>
-										<TextBlock Classes="icon-text" Text="{x:Static strings:Resources.Generics_RemoveAll}" />
+										<TextBlock>mop</TextBlock>
+										<TextBlock Text="{x:Static strings:Resources.Generics_RemoveAll}" />
 									</StackPanel>
 								</Button>
 							</Grid>
@@ -118,7 +118,7 @@
 		</ScrollViewer>
 		<Button Grid.Row="2" Classes="primary" Margin="8" HorizontalAlignment="Right" Command="{Binding SaveSettingsCommand}">
 			<StackPanel>
-				<TextBlock Classes="icon">save</TextBlock>
+				<TextBlock>save</TextBlock>
 				<TextBlock Text="{x:Static strings:Resources.Generics_Save}" />
 			</StackPanel>
 		</Button>

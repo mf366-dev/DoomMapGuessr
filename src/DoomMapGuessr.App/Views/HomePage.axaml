@@ -40,7 +40,7 @@
 							Spacing="8"
 							Width="{Binding Width, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
 							Height="{Binding Height, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
-					<Grid ColumnDefinitions="Auto, *, 200">
+					<Grid ColumnDefinitions="Auto, *, 220">
 						<Border Grid.Column="0"
 								Classes="card"
 								Margin="0,0,4,0">
@@ -196,10 +196,11 @@
 										  Height="64"
 										  Margin="8" />
 								<TextBlock Grid.Row="1"
-										   Classes="h1"
+										   Classes="h2"
 										   VerticalAlignment="Center"
 										   TextAlignment="Center"
 										   Margin="8"
+										   TextWrapping="Wrap"
 										   Text="{x:Static strings:Resources.Generics_ComingSoon}" />
 							</Grid>
 						</Border>
@@ -248,7 +249,7 @@
 										  Height="64"
 										  Margin="8" />
 								<TextBlock Grid.Column="1"
-										   Classes="h1"
+										   Classes="h2"
 										   VerticalAlignment="Center"
 										   TextAlignment="Center"
 										   Margin="8"
@@ -267,7 +268,7 @@
 										  Height="64"
 										  Margin="8" />
 								<TextBlock Grid.Column="1"
-										   Classes="h1"
+										   Classes="h2"
 										   VerticalAlignment="Center"
 										   TextAlignment="Center"
 										   Margin="8"

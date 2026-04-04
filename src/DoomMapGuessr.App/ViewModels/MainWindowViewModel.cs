@@ -15,16 +15,16 @@ namespace DoomMapGuessr.ViewModels
     public partial class MainWindowViewModel : ViewModelBase, INavigationService
     {
 
-        [ObservableProperty]
-        private UserControl currentPage;
+		[ObservableProperty]
+		public partial UserControl CurrentPage { get; set; }
 
-        [ObservableProperty]
-        private bool isSidebarOpen = true;
+		[ObservableProperty]
+		public partial bool IsSidebarOpen { get; set; } = true;
 
-        /// <summary>
-        /// Initializes the ViewModel for the <see cref="MainWindow"/>.
-        /// </summary>
-        public MainWindowViewModel()
+		/// <summary>
+		/// Initializes the ViewModel for the <see cref="MainWindow"/>.
+		/// </summary>
+		public MainWindowViewModel()
         {
 
             HomePageViewModel dataCtx = new(this);
