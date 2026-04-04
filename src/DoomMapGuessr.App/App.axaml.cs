@@ -22,44 +22,44 @@ namespace DoomMapGuessr
 	/// Avalonia app.
 	/// Contains Avalonia-specific functionality.
 	/// </summary>
-    public class App : Application
-    {
+	public class App : Application
+	{
 
 		/// <summary>
 		/// Globally used service provider.
 		/// </summary>
 		public ServiceProvider ServiceProvider { get; private set; } = null!;
 
-        public static readonly string[] allowedCultures = ["en-US", "pt-br", "pt-PT", "sk-sk"];
-        public static readonly string systemCulture = CultureInfo.CurrentCulture.Name;
+		public static readonly string[] allowedCultures = ["en-US", "pt-br", "pt-PT", "sk-sk"];
+		public static readonly string systemCulture = CultureInfo.CurrentCulture.Name;
 
-        private static void DisableAvaloniaDataAnnotationValidation()
-        {
+		private static void DisableAvaloniaDataAnnotationValidation()
+		{
 
-            // Get an array of plugins to remove
-            var dataValidationPluginsToRemove = BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
+			// Get an array of plugins to remove
+			var dataValidationPluginsToRemove = BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
 
-            // remove each entry found
-            foreach (var plugin in dataValidationPluginsToRemove)
-                _ = BindingPlugins.DataValidators.Remove(plugin);
+			// remove each entry found
+			foreach (var plugin in dataValidationPluginsToRemove)
+				_ = BindingPlugins.DataValidators.Remove(plugin);
 
-        }
+		}
 
-        /// <inheritdoc/>
-        public override void Initialize() => AvaloniaXamlLoader.Load(this);
+		/// <inheritdoc/>
+		public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
-        /// <summary>
+		/// <summary>
 		/// Runs after Avalonia is initialized.
 		/// </summary>
-        public override void OnFrameworkInitializationCompleted()
-        {
+		public override void OnFrameworkInitializationCompleted()
+		{
 
-            RequestedThemeVariant = ApplicationState.Shared.Settings.Data["GUI"]["FollowSystem"] == "1"
-                                        ? ThemeVariant.Default
-                                        : (ApplicationState.Shared.Settings.Data["GUI"]["DarkMode"] == "1"
-                                               ? ThemeVariant.Dark
-                                               : ThemeVariant.Light);
-            Strings.Resources.Culture = new(ApplicationState.Shared.Settings.Data["Language"]["Culture"]);
+			RequestedThemeVariant = ApplicationState.Shared.Settings.Data["GUI"]["FollowSystem"] == "1"
+										? ThemeVariant.Default
+										: (ApplicationState.Shared.Settings.Data["GUI"]["DarkMode"] == "1"
+											   ? ThemeVariant.Dark
+											   : ThemeVariant.Light);
+			Strings.Resources.Culture = new(ApplicationState.Shared.Settings.Data["Language"]["Culture"]);
 
 			// Dependency Injection setup lesgo
 			ServiceCollection collection = new();
@@ -67,26 +67,26 @@ namespace DoomMapGuessr
 			ServiceProvider = collection.BuildServiceProvider();
 			var vm = ServiceProvider.GetRequiredService<MainWindowViewModel>();
 
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
+			if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+			{
 
-                // ReSharper disable CommentTypo
-                // Avoid duplicate validations from both Avalonia and the CommunityToolkit.
-                // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
-                // ReSharper restore CommentTypo
-                DisableAvaloniaDataAnnotationValidation();
+				// ReSharper disable CommentTypo
+				// Avoid duplicate validations from both Avalonia and the CommunityToolkit.
+				// More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
+				// ReSharper restore CommentTypo
+				DisableAvaloniaDataAnnotationValidation();
 
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = vm
-                };
+				desktop.MainWindow = new MainWindow
+				{
+					DataContext = vm
+				};
 
-            }
+			}
 
-            base.OnFrameworkInitializationCompleted();
+			base.OnFrameworkInitializationCompleted();
 
-        }
+		}
 
-    }
+	}
 
 }

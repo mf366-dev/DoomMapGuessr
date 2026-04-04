@@ -9,11 +9,11 @@ using DoomMapGuessr.Views;
 namespace DoomMapGuessr.ViewModels
 {
 
-    /// <summary>
-    /// View model for the <see cref="MainWindow"/>.
-    /// </summary>
-    public partial class MainWindowViewModel : ViewModelBase, INavigationService
-    {
+	/// <summary>
+	/// View model for the <see cref="MainWindow"/>.
+	/// </summary>
+	public partial class MainWindowViewModel : ViewModelBase, INavigationService
+	{
 
 		[ObservableProperty]
 		public partial UserControl CurrentPage { get; set; }
@@ -25,127 +25,127 @@ namespace DoomMapGuessr.ViewModels
 		/// Initializes the ViewModel for the <see cref="MainWindow"/>.
 		/// </summary>
 		public MainWindowViewModel()
-        {
+		{
 
-            HomePageViewModel dataCtx = new(this);
-            ViewModelArchive.Archive(dataCtx);
+			HomePageViewModel dataCtx = new(this);
+			ViewModelArchive.Archive(dataCtx);
 
-            CurrentPage = new HomePage
-            {
-                DataContext = dataCtx
-            };
+			CurrentPage = new HomePage
+			{
+				DataContext = dataCtx
+			};
 
-        }
+		}
 
-        /// <inheritdoc />
-        public void NavigateTo(string pageName)
-        {
+		/// <inheritdoc />
+		public void NavigateTo(string pageName)
+		{
 
-            switch (pageName)
-            {
+			switch (pageName)
+			{
 
-                case "Home":
-                    if (!ViewModelArchive.TryGet<HomePageViewModel>(out var homePageViewModel))
-                    {
+				case "Home":
+					if (!ViewModelArchive.TryGet<HomePageViewModel>(out var homePageViewModel))
+					{
 
-                        homePageViewModel = new(this);
-                        ViewModelArchive.Archive(homePageViewModel);
+						homePageViewModel = new(this);
+						ViewModelArchive.Archive(homePageViewModel);
 
-                    }
+					}
 
-                    CurrentPage = new HomePage
-                    {
-                        DataContext = homePageViewModel
-                    };
+					CurrentPage = new HomePage
+					{
+						DataContext = homePageViewModel
+					};
 
-                    break;
+					break;
 
-                case "ClassicMode":
-                    if (!ViewModelArchive.TryGet<ClassicModeViewModel>(out var classicModeViewModel))
-                    {
+				case "ClassicMode":
+					if (!ViewModelArchive.TryGet<ClassicModeViewModel>(out var classicModeViewModel))
+					{
 
-                        classicModeViewModel = new();
-                        ViewModelArchive.Archive(classicModeViewModel);
+						classicModeViewModel = new();
+						ViewModelArchive.Archive(classicModeViewModel);
 
-                    }
+					}
 
-                    CurrentPage = new ClassicModePage
-                    {
-                        DataContext = classicModeViewModel
-                    };
+					CurrentPage = new ClassicModePage
+					{
+						DataContext = classicModeViewModel
+					};
 
-                    break;
+					break;
 
-                case "GeoMode":
-                    if (!ViewModelArchive.TryGet<GeoModeViewModel>(out var geoModeViewModel))
-                    {
+				case "GeoMode":
+					if (!ViewModelArchive.TryGet<GeoModeViewModel>(out var geoModeViewModel))
+					{
 
-                        geoModeViewModel = new();
-                        ViewModelArchive.Archive(geoModeViewModel);
+						geoModeViewModel = new();
+						ViewModelArchive.Archive(geoModeViewModel);
 
-                    }
+					}
 
-                    CurrentPage = new GeoModePage
-                    {
-                        DataContext = geoModeViewModel
-                    };
+					CurrentPage = new GeoModePage
+					{
+						DataContext = geoModeViewModel
+					};
 
-                    break;
+					break;
 
-                case "AchievementsUnlockables":
-                    if (!ViewModelArchive.TryGet<AchievementsUnlockablesViewModel>(out var achievementsUnlockablesViewModel))
-                    {
+				case "AchievementsUnlockables":
+					if (!ViewModelArchive.TryGet<AchievementsUnlockablesViewModel>(out var achievementsUnlockablesViewModel))
+					{
 
-                        achievementsUnlockablesViewModel = new();
-                        ViewModelArchive.Archive(achievementsUnlockablesViewModel);
+						achievementsUnlockablesViewModel = new();
+						ViewModelArchive.Archive(achievementsUnlockablesViewModel);
 
-                    }
+					}
 
-                    CurrentPage = new AchievementsUnlockablesPage
-                    {
-                        DataContext = achievementsUnlockablesViewModel
-                    };
+					CurrentPage = new AchievementsUnlockablesPage
+					{
+						DataContext = achievementsUnlockablesViewModel
+					};
 
-                    break;
+					break;
 
-                case "Settings":
-                    if (!ViewModelArchive.TryGet<SettingsPageViewModel>(out var settingsPageViewModel))
-                    {
+				case "Settings":
+					if (!ViewModelArchive.TryGet<SettingsPageViewModel>(out var settingsPageViewModel))
+					{
 
-                        settingsPageViewModel = new();
-                        ViewModelArchive.Archive(settingsPageViewModel);
+						settingsPageViewModel = new();
+						ViewModelArchive.Archive(settingsPageViewModel);
 
-                    }
+					}
 
-                    CurrentPage = new SettingsPage
-                    {
-                        DataContext = settingsPageViewModel
-                    };
+					CurrentPage = new SettingsPage
+					{
+						DataContext = settingsPageViewModel
+					};
 
-                    break;
+					break;
 
-                case "CloseSidebarPane":
-                    IsSidebarOpen = false;
+				case "CloseSidebarPane":
+					IsSidebarOpen = false;
 
-                    break;
+					break;
 
-                case "OpenSidebarPane":
-                    IsSidebarOpen = true;
+				case "OpenSidebarPane":
+					IsSidebarOpen = true;
 
-                    break;
+					break;
 
-                case "ToggleSidebarPane":
-                    IsSidebarOpen = !IsSidebarOpen;
+				case "ToggleSidebarPane":
+					IsSidebarOpen = !IsSidebarOpen;
 
-                    break;
+					break;
 
-            }
+			}
 
-        }
+		}
 
-        /// <inheritdoc />
-        public void NavigateTo(string pageName, object? parameter) => NavigateTo(pageName);
+		/// <inheritdoc />
+		public void NavigateTo(string pageName, object? parameter) => NavigateTo(pageName);
 
-    }
+	}
 
 }

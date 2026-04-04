@@ -25,8 +25,8 @@ namespace DoomMapGuessr.Extensions
 			/// </summary>
 			public void AddCommonServices()
 			{
-				
-				services.AddSingleton<ISettingsService>(new IniSettingsService(Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.DoomMapGuessr", "config.ini")));
+
+				services.AddSingleton<ISettingsService>(new IniSettingsService(Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.DoomMapGuessr", "config.ini")).Load().Parse());
 				services.AddSingleton<SettingsPageViewModel>();
 
 				services.AddSingleton<MainWindowViewModel>();

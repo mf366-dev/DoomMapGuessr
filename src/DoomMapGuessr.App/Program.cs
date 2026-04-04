@@ -18,16 +18,12 @@ using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 using Avalonia;
-
 using DoomMapGuessr.Services;
 using DoomMapGuessr.Services.Abstractions;
 using DoomMapGuessr.Settings;
-
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Octokit;
 
 
@@ -43,7 +39,7 @@ namespace DoomMapGuessr
 			Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.doommapguessr");
 
 		private static readonly HttpClient client = new();
-		private static readonly string[] allowedCultures = [ "en-US", "pt-br", "pt-PT", "sk-sk" ];
+		private static readonly string[] allowedCultures = ["en-US", "pt-br", "pt-PT", "sk-sk"];
 		private static readonly string systemCulture = CultureInfo.CurrentCulture.Name;
 
 		// Avalonia configuration, don't remove; also used by visual designer.
@@ -138,9 +134,9 @@ namespace DoomMapGuessr
 			await DownloadSqliteDatabaseAsync();
 
 			BuildAvaloniaApp()
-				#if DEBUG
+#if DEBUG
 				.WithDeveloperTools()
-				#endif
+#endif
 				.StartWithClassicDesktopLifetime(args);
 
 			return 0;

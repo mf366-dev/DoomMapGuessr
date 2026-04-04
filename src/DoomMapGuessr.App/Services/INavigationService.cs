@@ -1,25 +1,25 @@
 ﻿namespace DoomMapGuessr.Services
 {
 
-    /// <summary>
-    /// A navigation service.
-    /// </summary>
-    public interface INavigationService
-    {
+	/// <summary>
+	/// A navigation service.
+	/// </summary>
+	public interface INavigationService
+	{
 
-        /// <summary>
-        /// Navigates to a page.
-        /// </summary>
-        /// <param name="pageName">The name of the page.</param>
-        void NavigateTo(string pageName);
+		/// <summary>
+		/// Navigates to a page.
+		/// </summary>
+		/// <param name="pageName">The name of the page.</param>
+		void NavigateTo(string pageName);
 
-        /// <summary>
-        /// Navigates to a page with some parameters.
-        /// </summary>
-        /// <param name="pageName">The name of the page</param>
-        /// <param name="parameter">A parameter to be passed</param>
-        void NavigateTo(string pageName, object? parameter);
+		/// <summary>
+		/// Navigates to a page with some parameters.
+		/// </summary>
+		/// <param name="pageName">The name of the page</param>
+		/// <param name="parameter">A parameter to be passed</param>
+		void NavigateTo(string pageName, object? parameter);
 
-    }
+	}
 
 }
