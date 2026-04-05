@@ -1,6 +1,6 @@
 using System.Globalization;
 using System.Linq;
-
+using System.Reflection;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
@@ -30,6 +30,8 @@ namespace DoomMapGuessr
 		/// Globally used service provider.
 		/// </summary>
 		public ServiceProvider ServiceProvider { get; private set; } = null!;
+
+		public ApplicationVersioningInformation VersioningInformation { get; } = new(Assembly.GetExecutingAssembly());
 
 		public static readonly string[] allowedCultures = ["en-US", "pt-br", "pt-PT", "sk-sk"];
 		public static readonly string systemCulture = CultureInfo.CurrentCulture.Name;
