@@ -87,8 +87,8 @@ namespace DoomMapGuessr
 			if (!settings.Contains("GUI.FollowSystem"))
 				settings.Set("GUI.FollowSystem", 1);
 
-			if (!settings.Contains("GUI.DarkMode"))
-				settings.Set("GUI.DarkMode", 1);
+			if (!settings.Contains("GUI.DarkTheme"))
+				settings.Set("GUI.DarkTheme", 1);
 
 			await settings.SaveAsync();
 

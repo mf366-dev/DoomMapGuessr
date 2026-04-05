@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 
 using Avalonia;
@@ -23,8 +24,7 @@ namespace DoomMapGuessr.ViewModels
 		public partial int CurrentIndex { get; set; } = Array.IndexOf(App.allowedCultures, ((App)Application.Current!)
 			.ServiceProvider
 			.GetRequiredService<ISettingsService>()
-			.GetString("Language.Culture")
-		+ 1);
+			.GetString("Language.Culture"));
 
 		[ObservableProperty]
 		public partial int Proportions { get; set; } = Math.Min(Math.Clamp(((App)Application.Current!)
@@ -66,16 +66,15 @@ namespace DoomMapGuessr.ViewModels
 		private void RunLanguageChangeProtocol()
 		{
 
-			((App)Application.Current!)
-			.ServiceProvider
-			.GetRequiredService<ISettingsService>()
-			.Set("Language.Culture", CurrentIndex == 0 // same as system
-				? App.allowedCultures.Contains(App.systemCulture, StringComparer.OrdinalIgnoreCase) // same as system is allowed
-					? App.systemCulture      // same as system
-					: App.allowedCultures[0] // en-US
-				: App.allowedCultures[CurrentIndex - 1]);
+			string culture = CurrentIndex == 0 // same as system
+				? App.allowedCultures.Contains(CultureInfo.CurrentCulture.Name, StringComparer.OrdinalIgnoreCase) // same as system is allowed
+					? CultureInfo.CurrentCulture.Name // same as system
+					: App.allowedCultures[1] // en-US
+				: App.allowedCultures[CurrentIndex];
 
-			Resources.Culture = new(App.allowedCultures[CurrentIndex - 1]); // auto updates UI
+			Resources.Culture = new(culture); // auto updates UI
+
+			((App)Application.Current!).ServiceProvider.GetRequiredService<ISettingsService>().Set("Language.Culture", culture);
 
 		}
 

@@ -41,7 +41,7 @@
 							<ToggleSwitch Margin="24,8,0,0" OnContent="{x:Static strings:Resources.Settings_UI_UseCustomTheme}"
 							              OffContent="{x:Static strings:Resources.Settings_UI_UseCustomTheme}"
 							              IsChecked="{Binding CustomTheme}" />
-							<ToggleSwitch Name="DarkModeToggleSwitch" Margin="48,0,0,0"
+							<ToggleSwitch Name="DarkThemeToggleSwitch" Margin="48,0,0,0"
 							              OnContent="{x:Static strings:Resources.Settings_UI_DarkTheme}"
 							              OffContent="{x:Static strings:Resources.Settings_UI_DarkTheme}"
 							              IsChecked="{Binding DarkTheme}"

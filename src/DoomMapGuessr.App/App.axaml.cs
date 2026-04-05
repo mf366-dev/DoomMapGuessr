@@ -33,8 +33,7 @@ namespace DoomMapGuessr
 
 		public ApplicationVersioningInformation VersioningInformation { get; } = new(Assembly.GetExecutingAssembly());
 
-		public static readonly string[] allowedCultures = ["en-US", "pt-br", "pt-PT", "sk-sk"];
-		public static readonly string systemCulture = CultureInfo.CurrentCulture.Name;
+		public static readonly string[] allowedCultures = ["", "en-US", "pt-br", "pt-PT"];
 
 		private static void DisableAvaloniaDataAnnotationValidation()
 		{
