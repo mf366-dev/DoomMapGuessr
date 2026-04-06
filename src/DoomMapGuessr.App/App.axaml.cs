@@ -1,19 +1,16 @@
+using System;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
+
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 
-using DoomMapGuessr.Extensions;
-using DoomMapGuessr.Services.Abstractions;
-using DoomMapGuessr.Settings;
+using DoomMapGuessr.Services.Settings;
 using DoomMapGuessr.ViewModels;
 using DoomMapGuessr.Views;
-
-using Microsoft.Extensions.DependencyInjection;
 
 
 namespace DoomMapGuessr
@@ -27,18 +24,22 @@ namespace DoomMapGuessr
 	{
 
 		/// <summary>
-		/// Globally used service provider.
+		/// Allowed cultures. First item is a filler - do not use.
 		/// </summary>
-		public ServiceProvider ServiceProvider { get; private set; } = null!;
+		public static string[] AllowedCultures { get; } = ["", "en-US", "pt-br", "pt-PT"];
 
-		public ApplicationVersioningInformation VersioningInformation { get; } = new(Assembly.GetExecutingAssembly());
+		/// <summary>
+		/// System culture.
+		/// </summary>
+		public static CultureInfo SystemCulture => CultureInfo.InstalledUICulture;
 
-		public static readonly string[] allowedCultures = ["", "en-US", "pt-br", "pt-PT"];
-
+		/// <remarks>
+		/// Avalonia function. Do not mess with.
+		/// </remarks>
 		private static void DisableAvaloniaDataAnnotationValidation()
 		{
 
-			// Get an array of plugins to remove
+			// plugins to remove
 			var dataValidationPluginsToRemove = BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
 
 			// remove each entry found
@@ -56,21 +57,19 @@ namespace DoomMapGuessr
 		public override void OnFrameworkInitializationCompleted()
 		{
 
-			// Dependency Injection setup lesgo
-			ServiceCollection collection = new();
-			collection.AddCommonServices();
-			// todo: add octokit fetch here
-			ServiceProvider = collection.BuildServiceProvider();
-			var vm = ServiceProvider.GetRequiredService<MainWindowViewModel>();
-
+			// Theme
 			RequestedThemeVariant =
-				ServiceProvider.GetRequiredService<ISettingsService>().GetBoolean("GUI.FollowSystem")
+				ApplicationServices.Get<ISettingsService>().GetBoolean("GUI.FollowSystem")
 										? ThemeVariant.Default
-										: (ServiceProvider.GetRequiredService<ISettingsService>().GetBoolean("GUI.DarkTheme")
+										: (ApplicationServices.Get<ISettingsService>().GetBoolean("GUI.DarkTheme")
 											   ? ThemeVariant.Dark
 											   : ThemeVariant.Light);
-			Strings.Resources.Culture = new(ServiceProvider.GetRequiredService<ISettingsService>().GetString("Language.Culture") ?? "en-US");
 
+			// Language
+			Strings.Resources.Culture = new(ApplicationServices.Get<ISettingsService>().GetString("Language.Culture") ?? "en-US");
+			CultureInfo.CurrentCulture = Strings.Resources.Culture;
+
+			// Desktop setup
 			if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
 			{
 
@@ -82,9 +81,13 @@ namespace DoomMapGuessr
 
 				desktop.MainWindow = new MainWindow
 				{
-					DataContext = vm
+					DataContext = ApplicationServices.Get<MainWindowViewModel>()
 				};
 
+			}
+			else
+			{
+				throw new PlatformNotSupportedException("DoomMapGuessr is currently only supported on desktop");
 			}
 
 			base.OnFrameworkInitializationCompleted();

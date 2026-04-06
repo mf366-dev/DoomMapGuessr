@@ -2,13 +2,13 @@
 using System.Threading.Tasks;
 
 
-namespace DoomMapGuessr.Services
+namespace DoomMapGuessr.Helpers
 {
 
 	/// <summary>
-	/// Service for default webbrowser usage.
+	/// Helper class for default webbrowser usage.
 	/// </summary>
-	public static class WebBrowserService
+	public static class WebBrowser
 	{
 
 		/// <summary>

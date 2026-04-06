@@ -1,12 +1,9 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using DoomMapGuessr.Services;
 using DoomMapGuessr.Views;
-
-using Microsoft.Extensions.DependencyInjection;
 
 
 namespace DoomMapGuessr.ViewModels
@@ -50,7 +47,7 @@ namespace DoomMapGuessr.ViewModels
 				case "Home":
 					CurrentPage = new HomePage
 					{
-						DataContext = ((App)Application.Current!).ServiceProvider.GetRequiredService<HomePageViewModel>()
+						DataContext = ApplicationServices.Get<HomePageViewModel>()
 					};
 
 					break;
@@ -58,7 +55,7 @@ namespace DoomMapGuessr.ViewModels
 				case "ClassicMode":
 					CurrentPage = new ClassicModePage
 					{
-						DataContext = ((App)Application.Current!).ServiceProvider.GetRequiredService<ClassicModeViewModel>()
+						DataContext = ApplicationServices.Get<ClassicModeViewModel>()
 					};
 
 					break;
@@ -66,7 +63,7 @@ namespace DoomMapGuessr.ViewModels
 				case "GeoMode":
 					CurrentPage = new GeoModePage
 					{
-						DataContext = ((App)Application.Current!).ServiceProvider.GetRequiredService<GeoModeViewModel>()
+						DataContext = ApplicationServices.Get<GeoModeViewModel>()
 					};
 
 					break;
@@ -74,7 +71,7 @@ namespace DoomMapGuessr.ViewModels
 				case "AchievementsUnlockables":
 					CurrentPage = new AchievementsUnlockablesPage
 					{
-						DataContext = ((App)Application.Current!).ServiceProvider.GetRequiredService<AchievementsUnlockablesViewModel>()
+						DataContext = ApplicationServices.Get<AchievementsUnlockablesViewModel>()
 					};
 
 					break;
@@ -82,7 +79,7 @@ namespace DoomMapGuessr.ViewModels
 				case "Settings":
 					CurrentPage = new SettingsPage
 					{
-						DataContext = ((App)Application.Current!).ServiceProvider.GetRequiredService<SettingsPageViewModel>()
+						DataContext = ApplicationServices.Get<SettingsPageViewModel>()
 					};
 
 					break;

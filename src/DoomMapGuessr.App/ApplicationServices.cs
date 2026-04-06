@@ -1,6 +1,7 @@
 ﻿using System;
-
+using DoomMapGuessr.Models;
 using Microsoft.Extensions.DependencyInjection;
+using Octokit;
 
 
 namespace DoomMapGuessr
@@ -16,6 +17,16 @@ namespace DoomMapGuessr
 		/// The Service Provider.
 		/// </summary>
 		public static IServiceProvider Root { get; internal set; } = null!;
+
+		/// <summary>
+		/// The version information for this application.
+		/// </summary>
+		public static ApplicationVersioningInformation VersionInfo { get; internal set; } = null!;
+
+		/// <summary>
+		/// The latest GitHub release.
+		/// </summary>
+		public static Release? SavedRelease { get; internal set; } = null;
 
 		/// <summary>
 		/// Gets a required service.

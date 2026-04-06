@@ -14,16 +14,15 @@
  */
 
 using System;
-using System.Globalization;
 using System.IO;
-using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 
 using Avalonia;
-
-using DoomMapGuessr.Services;
-using DoomMapGuessr.Services.Abstractions;
-
+using DoomMapGuessr.Services.Cache;
+using DoomMapGuessr.Services.Cache.Abstractions;
+using DoomMapGuessr.Services.Settings;
+using DoomMapGuessr.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -39,9 +38,7 @@ namespace DoomMapGuessr
 		public static string AppDataDirectory =>
 			Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.doommapguessr");
 
-		private static readonly HttpClient client = new();
-		private static readonly string[] allowedCultures = ["en-US", "pt-br", "pt-PT", "sk-sk"];
-		private static readonly string systemCulture = CultureInfo.CurrentCulture.Name;
+		private const string DB_URL = "https://raw.githubusercontent.com/MF366-Coding/DoomMapGuessr/refs/heads/main/data/MAPDAT3.db";
 
 		// Avalonia configuration, don't remove; also used by visual designer.
 		public static AppBuilder BuildAvaloniaApp() =>
@@ -58,6 +55,14 @@ namespace DoomMapGuessr
 							 services.AddSingleton<ISettingsService>(_ => new IniSettingsService(Path.Join(AppDataDirectory, "config.ini")));
 							 services.AddSingleton<ICachingService>(_ => new CachingService(Path.Join(AppDataDirectory, "AppCache")));
 
+							 services.AddSingleton<MainWindowViewModel>();
+							 services.AddSingleton<MainWindowViewModel>();
+							 services.AddSingleton<HomePageViewModel>();
+							 services.AddSingleton<ClassicModeViewModel>();
+							 services.AddSingleton<GeoModeViewModel>();
+							 services.AddSingleton<AchievementsUnlockablesViewModel>();
+							 services.AddSingleton<SettingsPageViewModel>();
+
 						 }
 					 );
 
@@ -67,22 +72,28 @@ namespace DoomMapGuessr
 			if (settings is IniSettingsService { IsIniParsed: false } ini)
 				ini.Load().Parse();
 
+			#region Language Settings
+
 			if (!settings.Contains("Language.?"))
 				settings.Set<string?>("Language.*", null);
-
-			if (!settings.Contains("GUI.?"))
-				settings.Set<string?>("GUI.*", null);
 
 			if (!settings.Contains("Language.Culture"))
 			{
 
 				settings.Set(
-					"Language.Culture", allowedCultures.Contains(systemCulture, StringComparer.OrdinalIgnoreCase)
-											? systemCulture
-											: allowedCultures[0]
+					"Language.Culture", App.AllowedCultures.Contains(App.SystemCulture.Name, StringComparer.OrdinalIgnoreCase)
+											? App.SystemCulture.Name
+											: App.AllowedCultures[0]
 				);
 
 			}
+
+			#endregion
+
+			#region GUI Settings
+
+			if (!settings.Contains("GUI.?"))
+				settings.Set<string?>("GUI.*", null);
 
 			if (!settings.Contains("GUI.FollowSystem"))
 				settings.Set("GUI.FollowSystem", 1);
@@ -90,20 +101,53 @@ namespace DoomMapGuessr
 			if (!settings.Contains("GUI.DarkTheme"))
 				settings.Set("GUI.DarkTheme", 1);
 
+			#endregion
+
+			#region Database Settings
+
+			if (!settings.Contains("Database.?"))
+				settings.Set<string?>("Database.*", null);
+
+			if (!settings.Contains("Database.CheckPeriodicityMode"))
+				settings.Set("Database.CheckPeriodicityMode", 4); // check weekly
+
+			if (!settings.Contains("Database.DateOfLastCheck"))
+				settings.Set("Database.DateOfLastCheck", new DateTime(0).Ticks.ToString());
+
+			#endregion
+
+			#region Update Settings
+
+			if (!settings.Contains("Update.?"))
+				settings.Set<string?>("Update.*", null);
+
+			if (!settings.Contains("Update.CheckPeriodicityMode"))
+				settings.Set("Update.CheckPeriodicityMode", 4); // check weekly
+																// (these are the same as the
+																// database check modes except for
+																// modes 1 and 9 and the fact
+																// there's no caching here)
+
+			if (!settings.Contains("Update.DateOfLastCheck"))
+				settings.Set("Update.DateOfLastCheck", new DateTime(0).Ticks.ToString());
+
+			#endregion
+
 			await settings.SaveAsync();
 
 		}
 
-		private const string DB_URL = "https://raw.githubusercontent.com/MF366-Coding/DoomMapGuessr/refs/heads/main/data/MAPDAT3.db";
-
 		public static async Task DownloadSqliteDatabaseAsync()
 		{
 
-			// TODO: BIG TASK
+			// todo: fetch the database (unless it's the first time using DoomMapGuessr)
+			// if it's the first time, then the UI boots as usual, with no database
+			// and the user is asked whether they want to begin the download
+
+			// xxx: make sure to respect caching settings
 
 			/*
 			// for now this simply downloads even if its already cached
-			// todo: actually do the cache thing and the y'know what im talking bout
 			byte[] bytes = await client.GetByteArrayAsync(DB_URL);
 			await ApplicationState.Shared.Cache!.SetAsync("__cached_db", bytes);
 
@@ -116,28 +160,29 @@ namespace DoomMapGuessr
 
 		}
 
-		// Initialization code. Don't use any Avalonia, third-party APIs or any
-		// SynchronizationContext-reliant code before AppMain is called: things aren't initialized
-		// yet and stuff might break.
+		/// <summary>
+		/// DoomMapGuessr entry point.
+		/// </summary>
+		/// <param name="args">Commandline arguments</param>
+		/// <remarks>
+		/// Initialization code. Don't use any Avalonia, third-party APIs or any
+		/// SynchronizationContext-reliant code before AppMain is called: things aren't initialized
+		/// yet and stuff might break.
+		/// </remarks>
 		[STAThread]
 		public static async Task<int> Main(string[] args)
 		{
 
+			// Host and DI
 			Host = CreateHostBuilder(args).Build();
 			await Host.StartAsync();
 			ApplicationServices.Root = Host.Services;
+			ApplicationServices.VersionInfo = new(Assembly.GetExecutingAssembly());
 
 			await PrepareApplicationSettingsAsync(ApplicationServices.Get<ISettingsService>());
 
-			// todo: fix what's below this comment (see #22)
-
-			// todo: initialize cache directory here
-
-			// todo: move these 2 lines to App.axaml.cs (see the TODOs in that file)
-			/*
-			ApplicationState.Shared.SavedRelease =
-				await new GitHubClient(new ProductHeaderValue("DoomMapGuessr")).Repository.Release.GetLatest("MF366-Coding", "DoomMapGuessr");
-			*/
+			// todo: fetch the release right here
+			// requires a switch to get all cases checked
 
 			await DownloadSqliteDatabaseAsync();
 
@@ -151,7 +196,7 @@ namespace DoomMapGuessr
 
 		}
 
-		// TODO: BIG TASK
+		// todo: close SqLite connection
 		~Program() { /*ApplicationState.Shared.SqliteConnection?.Close();*/ }
 
 	}

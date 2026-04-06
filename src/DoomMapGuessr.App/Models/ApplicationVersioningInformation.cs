@@ -2,7 +2,7 @@
 using System.Reflection;
 
 
-namespace DoomMapGuessr.Settings
+namespace DoomMapGuessr.Models
 {
 
 	/// <summary>

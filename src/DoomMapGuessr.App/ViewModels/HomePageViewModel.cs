@@ -1,15 +1,14 @@
 ﻿using System;
-using Avalonia;
+
 using CommunityToolkit.Mvvm.Input;
 
+using DoomMapGuessr.Helpers;
 using DoomMapGuessr.Services;
-using DoomMapGuessr.Settings;
 using DoomMapGuessr.Strings;
-using Microsoft.Extensions.DependencyInjection;
+
 using Octokit;
 
 
-// TODO: CLEANUP ALL USAGES OF APPLICATION STATE HERE!!
 namespace DoomMapGuessr.ViewModels
 {
 
@@ -23,13 +22,13 @@ namespace DoomMapGuessr.ViewModels
 		private INavigationService? NavigationService { get; }
 
 		public string LatestReleaseBody =>
-			((App)Avalonia.Application.Current!).ServiceProvider.GetRequiredService<Release>().Body is null
+			ApplicationServices.Get<Release>().Body is null
 				? "# No release data found.\nSomething went wrong."
-				: (((App)Avalonia.Application.Current!).ServiceProvider.GetRequiredService<Release>().TagName[1..] == ((App)Avalonia.Application.Current!).VersioningInformation.ApplicationVersion
-					? $"# What's new in this version?\n**DoomMapGuessr {((App)Avalonia.Application.Current!).ServiceProvider.GetRequiredService<Release>().TagName}**\n\n{((App)Avalonia.Application.Current!).ServiceProvider.GetRequiredService<Release>().Body}"
-					: (((App)Avalonia.Application.Current!).VersioningInformation.IsDevVersion // now we actually have a property named "IsDevVersion" how fucking cool right?
+				: (ApplicationServices.Get<Release>().TagName[1..] == ApplicationServices.VersionInfo.ApplicationVersion
+					? $"# What's new in this version?\n**DoomMapGuessr {ApplicationServices.Get<Release>().TagName}**\n\n{ApplicationServices.Get<Release>().Body}"
+					: (ApplicationServices.VersionInfo.IsDevVersion // now we actually have a property named "IsDevVersion" how fucking cool right?
 						? $"# No release data found.\nIt seems this is a build contained in a developer channel of DoomMapGuessr. If you are not a tester nor a developer, it is recommended you update to the latest stable version."
-						: $"# New version available! What's new?\n**DoomMapGuessr {((App)Avalonia.Application.Current!).ServiceProvider.GetRequiredService<Release>().TagName}**\n\n{((App)Avalonia.Application.Current!).ServiceProvider.GetRequiredService<Release>().Body}"));
+						: $"# New version available! What's new?\n**DoomMapGuessr {ApplicationServices.Get<Release>().TagName}**\n\n{ApplicationServices.Get<Release>().Body}"));
 
 		private readonly Random random = new();
 		private readonly string[] greetings = [Resources.Greetings_Regular01, Resources.Greetings_Regular02];
@@ -53,10 +52,10 @@ namespace DoomMapGuessr.ViewModels
 		private void OpenGitHubRepo()
 		{
 
-			if (((App)Avalonia.Application.Current!).ServiceProvider.GetRequiredService<Release>().HtmlUrl is null)
+			if (ApplicationServices.Get<Release>().HtmlUrl is null)
 				return;
 
-			_ = WebBrowserService.OpenUrl(((App)Avalonia.Application.Current!).ServiceProvider.GetRequiredService<Release>().HtmlUrl);
+			_ = WebBrowser.OpenUrl(ApplicationServices.Get<Release>().HtmlUrl);
 
 		}
 

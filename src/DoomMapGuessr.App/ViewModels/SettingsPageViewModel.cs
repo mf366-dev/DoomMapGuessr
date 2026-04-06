@@ -8,10 +8,8 @@ using Avalonia.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-using DoomMapGuessr.Services.Abstractions;
+using DoomMapGuessr.Services.Settings;
 using DoomMapGuessr.Strings;
-
-using Microsoft.Extensions.DependencyInjection;
 
 
 namespace DoomMapGuessr.ViewModels
@@ -21,28 +19,22 @@ namespace DoomMapGuessr.ViewModels
 	{
 
 		[ObservableProperty]
-		public partial int CurrentIndex { get; set; } = Array.IndexOf(App.allowedCultures, ((App)Application.Current!)
-			.ServiceProvider
-			.GetRequiredService<ISettingsService>()
+		public partial int CurrentIndex { get; set; } = Array.IndexOf(App.AllowedCultures, ApplicationServices.Get<ISettingsService>()
 			.GetString("Language.Culture"));
 
 		[ObservableProperty]
-		public partial int Proportions { get; set; } = Math.Min(Math.Clamp(((App)Application.Current!)
-			.ServiceProvider
-			.GetRequiredService<ISettingsService>()
-			.GetInt32("Screenshots.Proportions"), 0, 3)
-		, 0);
+		public partial int Proportions { get; set; } = Math.Min(
+			Math.Clamp(
+				ApplicationServices.Get<ISettingsService>().GetInt32("Screenshots.Proportions"),
+				0, 3),
+			0);
 
 		[ObservableProperty]
-		public partial bool CustomTheme { get; set; } = !((App)Application.Current!)
-			.ServiceProvider
-			.GetRequiredService<ISettingsService>()
+		public partial bool CustomTheme { get; set; } = !ApplicationServices.Get<ISettingsService>()
 			.GetBoolean("GUI.FollowSystem");
 
 		[ObservableProperty]
-		public partial bool DarkTheme { get; set; } = ((App)Application.Current!)
-			.ServiceProvider
-			.GetRequiredService<ISettingsService>()
+		public partial bool DarkTheme { get; set; } = ApplicationServices.Get<ISettingsService>()
 			.GetBoolean("GUI.DarkTheme");
 
 		[ObservableProperty]
@@ -67,22 +59,23 @@ namespace DoomMapGuessr.ViewModels
 		{
 
 			string culture = CurrentIndex == 0 // same as system
-				? App.allowedCultures.Contains(CultureInfo.CurrentCulture.Name, StringComparer.OrdinalIgnoreCase) // same as system is allowed
+				? App.AllowedCultures.Contains(CultureInfo.CurrentCulture.Name, StringComparer.OrdinalIgnoreCase) // same as system is allowed
 					? CultureInfo.CurrentCulture.Name // same as system
-					: App.allowedCultures[1] // en-US
-				: App.allowedCultures[CurrentIndex];
+					: App.AllowedCultures[1] // en-US
+				: App.AllowedCultures[CurrentIndex];
 
 			Resources.Culture = new(culture); // auto updates UI
+			CultureInfo.CurrentCulture = Resources.Culture;
 
-			((App)Application.Current!).ServiceProvider.GetRequiredService<ISettingsService>().Set("Language.Culture", culture);
+			ApplicationServices.Get<ISettingsService>().Set("Language.Culture", culture);
 
 		}
 
 		private void RunThemeChangeProtocol()
 		{
 
-			((App)Application.Current!).ServiceProvider.GetRequiredService<ISettingsService>().Set("GUI.FollowSystem", CustomTheme ? "0" : "1");
-			((App)Application.Current!).ServiceProvider.GetRequiredService<ISettingsService>().Set("GUI.DarkTheme", CustomTheme ? "1" : "0");
+			ApplicationServices.Get<ISettingsService>().Set("GUI.FollowSystem", CustomTheme ? "0" : "1");
+			ApplicationServices.Get<ISettingsService>().Set("GUI.DarkTheme", CustomTheme ? "1" : "0");
 
 			_ = (Application.Current?.RequestedThemeVariant = !CustomTheme
 																? ThemeVariant.Default
@@ -98,7 +91,7 @@ namespace DoomMapGuessr.ViewModels
 
 			RunLanguageChangeProtocol();
 			RunThemeChangeProtocol();
-			((App)Application.Current!).ServiceProvider.GetRequiredService<ISettingsService>().Save();
+			ApplicationServices.Get<ISettingsService>().Save();
 
 		}
 

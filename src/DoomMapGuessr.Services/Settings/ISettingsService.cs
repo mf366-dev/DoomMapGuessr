@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 
-namespace DoomMapGuessr.Services.Abstractions
+namespace DoomMapGuessr.Services.Settings
 {
 
 	/// <summary>

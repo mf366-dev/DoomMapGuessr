@@ -137,7 +137,6 @@
 	<!-- Others -->
 	<ItemGroup>
 		<UpToDateCheckInput Remove="Resources\Fonts.axaml" />
-		<Folder Include="Models\" />
 	</ItemGroup>
 	
 </Project>

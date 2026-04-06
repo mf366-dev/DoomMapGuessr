@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace DoomMapGuessr.Services.Abstractions
+namespace DoomMapGuessr.Services.Logging
 {
 
 	/// <summary>

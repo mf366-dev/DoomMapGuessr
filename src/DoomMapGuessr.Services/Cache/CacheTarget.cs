@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace DoomMapGuessr.Services.Enums
+namespace DoomMapGuessr.Services.Cache
 {
 
 	/// <summary>

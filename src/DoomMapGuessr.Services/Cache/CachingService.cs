@@ -2,14 +2,13 @@
 using System.IO;
 using System.Threading.Tasks;
 
-using DoomMapGuessr.Services.Abstractions;
-using DoomMapGuessr.Services.Enums;
+using DoomMapGuessr.Services.Cache.Abstractions;
 
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Internal;
 
 
-namespace DoomMapGuessr.Services
+namespace DoomMapGuessr.Services.Cache
 {
 
 	/// <summary>
@@ -19,7 +18,7 @@ namespace DoomMapGuessr.Services
 	/// Initializes a new caching service.
 	/// </remarks>
 	/// <param name="cacheDirectory">The directory in which the cache is stored</param>
-	public class CachingService(string cacheDirectory) : ICachingService, ICachingServiceAsync
+	public class CachingService(string cacheDirectory) : IFullCachingService
 	{
 
 		private readonly MemoryCache memory = new(
@@ -46,7 +45,7 @@ namespace DoomMapGuessr.Services
 		/// <summary>
 		/// The directory used for persistent cache.
 		/// </summary>
-		public DirectoryInfo PersistentCacheDirectory { get; } = Directory.CreateDirectory(Path.Join(cacheDirectory, "__"));
+		public DirectoryInfo PersistentCacheDirectory { get; } = Directory.CreateDirectory(Path.Join(cacheDirectory, "_Persistent"));
 
 		/// <summary>
 		/// Clears temporary cache.

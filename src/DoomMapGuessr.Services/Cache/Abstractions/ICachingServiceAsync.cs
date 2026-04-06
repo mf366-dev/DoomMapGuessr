@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
 
-using DoomMapGuessr.Services.Enums;
 
-
-namespace DoomMapGuessr.Services.Abstractions
+namespace DoomMapGuessr.Services.Cache.Abstractions
 {
 
 	/// <summary>

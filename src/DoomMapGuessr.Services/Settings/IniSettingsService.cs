@@ -4,15 +4,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 
-using DoomMapGuessr.Services.Abstractions;
-
 using IniParser.Model;
 using IniParser.Model.Configuration;
 using IniParser.Model.Formatting;
 using IniParser.Parser;
 
 
-namespace DoomMapGuessr.Services
+namespace DoomMapGuessr.Services.Settings
 {
 
 	/// <summary>
