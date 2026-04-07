@@ -27,12 +27,9 @@ namespace DoomMapGuessr.ViewModels
 		public MainWindowViewModel()
 		{
 
-			HomePageViewModel dataCtx = new(this);
-			ViewModelArchive.Archive(dataCtx);
-
 			CurrentPage = new HomePage
 			{
-				DataContext = dataCtx
+				DataContext = ApplicationServices.Get<HomePageViewModel>()
 			};
 
 		}

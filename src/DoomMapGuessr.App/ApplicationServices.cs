@@ -1,5 +1,7 @@
 ﻿using System;
 using DoomMapGuessr.Models;
+using DoomMapGuessr.Services;
+using DoomMapGuessr.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Octokit;
 
@@ -12,6 +14,11 @@ namespace DoomMapGuessr
 	/// </summary>
 	public static class ApplicationServices
 	{
+
+		/// <summary>
+		/// The navigation service used throughout the app.
+		/// </summary>
+		public static INavigationService NavigationService => Get<MainWindowViewModel>();
 
 		/// <summary>
 		/// The Service Provider.

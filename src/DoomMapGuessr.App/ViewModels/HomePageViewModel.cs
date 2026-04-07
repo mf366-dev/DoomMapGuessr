@@ -3,7 +3,6 @@
 using CommunityToolkit.Mvvm.Input;
 
 using DoomMapGuessr.Helpers;
-using DoomMapGuessr.Services;
 using DoomMapGuessr.Strings;
 
 using Octokit;
@@ -15,24 +14,30 @@ namespace DoomMapGuessr.ViewModels
 	public partial class HomePageViewModel : ViewModelBase
 	{
 
+		/// <summary>
+		/// Initializes the home page view model.
+		/// </summary>
 		public HomePageViewModel() { }
 
-		public HomePageViewModel(INavigationService navigationService) => NavigationService = navigationService;
-
-		private INavigationService? NavigationService { get; }
-
+		/// <summary>
+		/// Release body to display under the "What's new?" widget.
+		/// </summary>
 		public string LatestReleaseBody =>
-			ApplicationServices.Get<Release>().Body is null
+			ApplicationServices.SavedRelease?.Body is null
 				? "# No release data found.\nSomething went wrong."
-				: (ApplicationServices.Get<Release>().TagName[1..] == ApplicationServices.VersionInfo.ApplicationVersion
-					? $"# What's new in this version?\n**DoomMapGuessr {ApplicationServices.Get<Release>().TagName}**\n\n{ApplicationServices.Get<Release>().Body}"
+				: (ApplicationServices.SavedRelease.TagName[1..] == ApplicationServices.VersionInfo.ApplicationVersion
+					? $"# What's new in this version?\n**DoomMapGuessr {ApplicationServices.SavedRelease.TagName}**\n\n{ApplicationServices.SavedRelease.Body}"
 					: (ApplicationServices.VersionInfo.IsDevVersion // now we actually have a property named "IsDevVersion" how fucking cool right?
 						? $"# No release data found.\nIt seems this is a build contained in a developer channel of DoomMapGuessr. If you are not a tester nor a developer, it is recommended you update to the latest stable version."
-						: $"# New version available! What's new?\n**DoomMapGuessr {ApplicationServices.Get<Release>().TagName}**\n\n{ApplicationServices.Get<Release>().Body}"));
+						: $"# New version available! What's new?\n**DoomMapGuessr {ApplicationServices.SavedRelease.TagName}**\n\n{ApplicationServices.SavedRelease.Body}"));
 
 		private readonly Random random = new();
 		private readonly string[] greetings = [Resources.Greetings_Regular01, Resources.Greetings_Regular02];
 
+		/// <summary>
+		/// The random (or not so random) greeting chosen
+		/// to be displayed in the home page.
+		/// </summary>
 		public string RandomGreeting => DateTime.Now.Hour switch
 		{
 
@@ -43,10 +48,10 @@ namespace DoomMapGuessr.ViewModels
 		};
 
 		[RelayCommand]
-		private void NavigateToUnlockables() => NavigationService?.NavigateTo("AchievementsUnlockables");
+		private void NavigateToUnlockables() => ApplicationServices.NavigationService.NavigateTo("AchievementsUnlockables");
 
 		[RelayCommand]
-		private void NavigateToClassicMode() => NavigationService?.NavigateTo("ClassicMode");
+		private void NavigateToClassicMode() => ApplicationServices.NavigationService.NavigateTo("ClassicMode");
 
 		[RelayCommand]
 		private void OpenGitHubRepo()

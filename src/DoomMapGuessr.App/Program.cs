@@ -19,6 +19,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 using Avalonia;
+using DoomMapGuessr.Helpers;
+using DoomMapGuessr.Services;
 using DoomMapGuessr.Services.Cache;
 using DoomMapGuessr.Services.Cache.Abstractions;
 using DoomMapGuessr.Services.Settings;
@@ -121,15 +123,8 @@ namespace DoomMapGuessr
 			if (!settings.Contains("Update.?"))
 				settings.Set<string?>("Update.*", null);
 
-			if (!settings.Contains("Update.CheckPeriodicityMode"))
-				settings.Set("Update.CheckPeriodicityMode", 4); // check weekly
-																// (these are the same as the
-																// database check modes except for
-																// modes 1 and 9 and the fact
-																// there's no caching here)
-
-			if (!settings.Contains("Update.DateOfLastCheck"))
-				settings.Set("Update.DateOfLastCheck", new DateTime(0).Ticks.ToString());
+			if (!settings.Contains("Update.Check"))
+				settings.Set("Update.Check", 1); // 1 for always check, 0 for never check
 
 			#endregion
 
@@ -140,9 +135,7 @@ namespace DoomMapGuessr
 		public static async Task DownloadSqliteDatabaseAsync()
 		{
 
-			// todo: fetch the database (unless it's the first time using DoomMapGuessr)
-			// if it's the first time, then the UI boots as usual, with no database
-			// and the user is asked whether they want to begin the download
+			// todo: fetch the database (even if it's the first time playing DoomMapGuessr)
 
 			// xxx: make sure to respect caching settings
 
@@ -181,8 +174,9 @@ namespace DoomMapGuessr
 
 			await PrepareApplicationSettingsAsync(ApplicationServices.Get<ISettingsService>());
 
-			// todo: fetch the release right here
-			// requires a switch to get all cases checked
+			// Fetch latest release
+			if (ApplicationServices.Get<ISettingsService>().GetBoolean("Update.Check"))
+				ApplicationServices.SavedRelease = await ReleaseFetcher.FetchLatestAsync("mf366-dev", "DoomMapGuessr");
 
 			await DownloadSqliteDatabaseAsync();
 

@@ -390,3 +390,6 @@ _ReSharper*/
 
 # JetBrains
 .idea/
+
+# Ideas and whatnot
+ideadump/

@@ -4,9 +4,15 @@
 namespace DoomMapGuessr.Views
 {
 
+	/// <summary>
+	/// DoomMapGuessr's home page.
+	/// </summary>
 	public partial class HomePage : UserControl
 	{
 
+		/// <summary>
+		/// Initializes the home page.
+		/// </summary>
 		public HomePage() => InitializeComponent();
 
 		private void UserControl_SizeChanged(object? sender, SizeChangedEventArgs e)
