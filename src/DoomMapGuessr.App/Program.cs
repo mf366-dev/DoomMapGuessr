@@ -19,12 +19,13 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 using Avalonia;
+
 using DoomMapGuessr.Helpers;
-using DoomMapGuessr.Services;
 using DoomMapGuessr.Services.Cache;
 using DoomMapGuessr.Services.Cache.Abstractions;
 using DoomMapGuessr.Services.Settings;
 using DoomMapGuessr.ViewModels;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

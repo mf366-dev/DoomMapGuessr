@@ -24,15 +24,10 @@ namespace DoomMapGuessr.ViewModels
 		/// <summary>
 		/// Initializes the ViewModel for the <see cref="MainWindow"/>.
 		/// </summary>
-		public MainWindowViewModel()
+		public MainWindowViewModel() => CurrentPage = new HomePage
 		{
-
-			CurrentPage = new HomePage
-			{
-				DataContext = ApplicationServices.Get<HomePageViewModel>()
-			};
-
-		}
+			DataContext = ApplicationServices.Get<HomePageViewModel>()
+		};
 
 		/// <inheritdoc />
 		public void NavigateTo(string pageName)

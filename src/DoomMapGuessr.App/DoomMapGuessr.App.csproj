@@ -18,6 +18,12 @@
 		<Title>DoomMapGuessr</Title>
 		<PackageTitle>dev.mf366.doommapguessr</PackageTitle>
 		<Authors>Matthew</Authors>
+		<ApplicationIcon>..\..\assets\Icon.ico</ApplicationIcon>
+		<PackageIcon>..\..\assets\Icon_800x800.png</PackageIcon>
+		<PackageReadmeFile>..\..\README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/mf366-dev/DoomMapGuessr/</RepositoryUrl>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<PackageLicenseFile>..\..\LICENSE.txt</PackageLicenseFile>
 
 		<!-- Used for the actual versioning and Parcel as well -->
 		<Version>3.0.0-dev</Version>
@@ -28,7 +34,7 @@
 		- 0 if stable
 		- 1 if beta/dev/alpha
 		-->
-		<AssemblyVersion>3.0.0.1</AssemblyVersion>
+		<AssemblyVersion>3.0.0.1</AssemblyVersion>		
 		
 	</PropertyGroup>
 

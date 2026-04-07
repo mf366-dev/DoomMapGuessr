@@ -22,7 +22,7 @@ namespace DoomMapGuessr.ViewModels
 		/// <summary>
 		/// Release body to display under the "What's new?" widget.
 		/// </summary>
-		public string LatestReleaseBody =>
+		public static string LatestReleaseBody { get; } =
 			ApplicationServices.SavedRelease?.Body is null
 				? "# No release data found.\nSomething went wrong."
 				: (ApplicationServices.SavedRelease.TagName[1..] == ApplicationServices.VersionInfo.ApplicationVersion
