@@ -16,7 +16,7 @@
 **DoomMapGuessr** is a [GeoGuessr](https://www.geoguessr.com/)-style game where, instead of guessing in which part of the world you are, you try to guess where the screenshot being shown to you was taken, in the Classic DOOM franchise and some extra WADs.
 DoomMapGuessr allows for fun gameplay with customization settings available, such as being able to pick your own screenshots and WADs!
 
-### Version 3 *(coming out soon!)*
+### Version 3 *(WIP - coming out soon!)*
 Currently in development, version 3 will include several new exciting features, such as:
 * **GeoGuessr Gamemode.** Now, instead of having to simply guess what's the game, the episode and the map, you can guess exactly where it was taken, and coordinates count!</li>
 * **Inclusion of [Legacy of Rust](https://doomwiki.org/wiki/Legacy_of_Rust).** Legacy of Rust will be included as a game in this major update.
@@ -25,6 +25,9 @@ Currently in development, version 3 will include several new exciting features, 
 * **Database Modifications.** Essentially, we moved from JSON to SQLite.
 * **Cross-Platform Compatibility.** With the new C# + Avalonia codebase, 99% of platform-specific issues will be decimated.
 * **And much more!**
+
+**Read more about what's coming to DoomMapGuessr v3.0.0 [right here](https://www.moddb.com/games/doommapguessr/news/whats-next24)** - we made it to the ModDB homepage! _(You can also read the same article [here](https://mf366.itch.io/doommapguessr/devlog/1483155/whats-next).)_
+
 
 ## Official Database Contents
 The official database contains:
@@ -47,7 +50,7 @@ The official database contains:
 * [**DoomWorld**](https://www.doomworld.com/forum/topic/146388-doommapguesser-the-geoguesser-of-doom/?tab=comments#comment-2821321)
 * and of course, in here, where you can download it!
 
-<a href="https://www.moddb.com/games/doommapguessr" title="View DoomMapGuessr on ModDB"><img src="https://button.moddb.com/popularity/medium/games/84847.png" alt="DoomMapGuessr"></a>
+<a href="https://www.moddb.com/games/doommapguessr" title="View DoomMapGuessr on ModDB"><img src="https://button.moddb.com/popularity/medium/games/84847.png" alt="DoomMapGuessr"></a> _(we made it to the homepage!!)_
 
 ***
 
