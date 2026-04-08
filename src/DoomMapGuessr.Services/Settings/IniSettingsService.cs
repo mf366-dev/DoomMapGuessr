@@ -48,16 +48,20 @@ namespace DoomMapGuessr.Services.Settings
 		};
 
 		private readonly string pathToSettings = filepath;
+
 		private IniData? actualIni;
 
 		private bool disposedValue;
+
 		private string stringifiedData = "";
 
 		/// <summary>
 		/// Initializes this service with a representation of the settings file.
 		/// </summary>
 		/// <param name="file">The file</param>
-		public IniSettingsService(FileInfo file) : this(file.FullName) { }
+		public IniSettingsService(
+			FileInfo file
+		) : this(file.FullName) { }
 
 		/// <summary>
 		/// Whether the data has been loaded and parsed.
@@ -108,7 +112,10 @@ namespace DoomMapGuessr.Services.Settings
 		}
 
 		/// <inheritdoc />
-		public void Add<T>(string key, T value)
+		public void Add<T>(
+			string key,
+			T value
+		)
 		{
 
 			EnsureIniParsed();
@@ -123,7 +130,9 @@ namespace DoomMapGuessr.Services.Settings
 		}
 
 		/// <inheritdoc />
-		public bool Contains(string key)
+		public bool Contains(
+			string key
+		)
 		{
 
 			EnsureIniParsed();
@@ -145,11 +154,16 @@ namespace DoomMapGuessr.Services.Settings
 		/// </summary>
 		/// <exception cref="InvalidOperationException"></exception>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public T Get<T>(string key, T defaultValue = default!) =>
+		public T Get<T>(
+			string key,
+			T defaultValue = default!
+		) =>
 			throw new InvalidOperationException("Cannot Get<T>() for INI. Try GetString() instead.");
 
 		/// <inheritdoc />
-		public bool GetBoolean(string key)
+		public bool GetBoolean(
+			string key
+		)
 		{
 
 			string? str = GetString(key);
@@ -168,18 +182,32 @@ namespace DoomMapGuessr.Services.Settings
 		}
 
 		/// <inheritdoc />
-		public double GetDouble(string key) => Double.TryParse(GetString(key), out double result) ? result : Double.NaN;
+		public double GetDouble(
+			string key
+		) =>
+			Double.TryParse(GetString(key), out double result)
+				? result
+				: Double.NaN;
 
 		/// <inheritdoc />
-		public int GetInt32(string key) => Int32.TryParse(GetString(key), out int result) ? result : -1;
+		public int GetInt32(
+			string key
+		) =>
+			Int32.TryParse(GetString(key), out int result)
+				? result
+				: -1;
 
 		/// <inheritdoc />
-		public string GetString(string key)
+		public string GetString(
+			string key
+		)
 		{
 
 			EnsureIniParsed();
 
-			return actualIni.TryGetKey(key, out string? value) ? value : String.Empty;
+			return actualIni.TryGetKey(key, out string? value)
+					   ? value
+					   : String.Empty;
 
 		}
 
@@ -208,7 +236,10 @@ namespace DoomMapGuessr.Services.Settings
 		}
 
 		/// <inheritdoc />
-		public void Set<T>(string key, T value)
+		public void Set<T>(
+			string key,
+			T value
+		)
 		{
 
 			EnsureIniParsed();
@@ -231,7 +262,10 @@ namespace DoomMapGuessr.Services.Settings
 
 		/// <inheritdoc />
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public bool TryGet<T>(string key, out T value) =>
+		public bool TryGet<T>(
+			string key,
+			out T value
+		) =>
 			throw new InvalidOperationException("TryGet<T> is not supported for INI. Use GetString instead.");
 
 		// ReSharper disable once EmptyDestructor
@@ -265,7 +299,9 @@ namespace DoomMapGuessr.Services.Settings
 		/// </summary>
 		/// <param name="defaultData">The data to use if the file is missing</param>
 		/// <returns>Self</returns>
-		public IniSettingsService Load(string defaultData)
+		public IniSettingsService Load(
+			string defaultData
+		)
 		{
 
 			string? directoryPath = Path.GetDirectoryName(pathToSettings);
@@ -296,7 +332,9 @@ namespace DoomMapGuessr.Services.Settings
 		/// </summary>
 		/// <param name="configuration">The parser configuration</param>
 		/// <returns>Self</returns>
-		public IniSettingsService Parse(IniParserConfiguration configuration)
+		public IniSettingsService Parse(
+			IniParserConfiguration configuration
+		)
 		{
 
 			configuration.ThrowExceptionsOnError = true; // force this to be true

@@ -19,13 +19,11 @@ namespace DoomMapGuessr.ViewModels
 		/// <summary>
 		/// Initializes the ViewModel for the <see cref="MainWindow" />.
 		/// </summary>
-		public MainWindowViewModel()
-		{
+		public MainWindowViewModel() =>
 			CurrentPage = new HomePage
 			{
 				DataContext = ApplicationServices.Get<HomePageViewModel>()
 			};
-		}
 
 		[ObservableProperty]
 		public partial UserControl CurrentPage { get; set; }
@@ -34,7 +32,9 @@ namespace DoomMapGuessr.ViewModels
 		public partial bool IsSidebarOpen { get; set; } = true;
 
 		/// <inheritdoc />
-		public void NavigateTo(string pageName)
+		public void NavigateTo(
+			string pageName
+		)
 		{
 
 			switch (pageName)
@@ -100,7 +100,11 @@ namespace DoomMapGuessr.ViewModels
 		}
 
 		/// <inheritdoc />
-		public void NavigateTo(string pageName, object? parameter) => NavigateTo(pageName);
+		public void NavigateTo(
+			string pageName,
+			object? parameter
+		) =>
+			NavigateTo(pageName);
 
 	}
 

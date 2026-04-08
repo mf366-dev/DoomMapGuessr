@@ -50,26 +50,37 @@ namespace DoomMapGuessr
 					  .WithInterFont()
 					  .LogToTrace();
 
-		public static IHostBuilder CreateHostBuilder(string[] args) =>
+		public static IHostBuilder CreateHostBuilder(
+			string[] args
+		) =>
 			Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
-					 .ConfigureServices((ctx, services) =>
-						 {
+					 .ConfigureServices((
+											ctx,
+											services
+										) =>
+										{
 
-							 services.AddSingleton<ISettingsService>(_ => new IniSettingsService(Path.Join(AppDataDirectory, "config.ini")));
-							 services.AddSingleton<ICachingService>(_ => new CachingService(Path.Join(AppDataDirectory, "AppCache")));
+											services.AddSingleton<ISettingsService>(_ => new IniSettingsService(
+																						Path.Join(AppDataDirectory, "config.ini")
+																					)
+											);
 
-							 services.AddSingleton<MainWindowViewModel>();
-							 services.AddSingleton<MainWindowViewModel>();
-							 services.AddSingleton<HomePageViewModel>();
-							 services.AddSingleton<ClassicModeViewModel>();
-							 services.AddSingleton<GeoModeViewModel>();
-							 services.AddSingleton<AchievementsUnlockablesViewModel>();
-							 services.AddSingleton<SettingsPageViewModel>();
+											services.AddSingleton<ICachingService>(_ => new CachingService(Path.Join(AppDataDirectory, "AppCache")));
 
-						 }
+											services.AddSingleton<MainWindowViewModel>();
+											services.AddSingleton<MainWindowViewModel>();
+											services.AddSingleton<HomePageViewModel>();
+											services.AddSingleton<ClassicModeViewModel>();
+											services.AddSingleton<GeoModeViewModel>();
+											services.AddSingleton<AchievementsUnlockablesViewModel>();
+											services.AddSingleton<SettingsPageViewModel>();
+
+										}
 					 );
 
-		public static async Task PrepareApplicationSettingsAsync(ISettingsService settings)
+		public static async Task PrepareApplicationSettingsAsync(
+			ISettingsService settings
+		)
 		{
 
 			if (settings is IniSettingsService { IsIniParsed: false } ini)
@@ -164,7 +175,9 @@ namespace DoomMapGuessr
 		/// yet and stuff might break.
 		/// </remarks>
 		[STAThread]
-		public static async Task<int> Main(string[] args)
+		public static async Task<int> Main(
+			string[] args
+		)
 		{
 
 			// Host and DI

@@ -79,8 +79,19 @@ namespace DoomMapGuessr.ViewModels
 		private void RunThemeChangeProtocol()
 		{
 
-			ApplicationServices.Get<ISettingsService>().Set("GUI.FollowSystem", CustomTheme ? "0" : "1");
-			ApplicationServices.Get<ISettingsService>().Set("GUI.DarkTheme", CustomTheme ? "1" : "0");
+			ApplicationServices.Get<ISettingsService>()
+							   .Set(
+								   "GUI.FollowSystem", CustomTheme
+														   ? "0"
+														   : "1"
+							   );
+
+			ApplicationServices.Get<ISettingsService>()
+							   .Set(
+								   "GUI.DarkTheme", CustomTheme
+														? "1"
+														: "0"
+							   );
 
 			_ = Application.Current?.RequestedThemeVariant = !CustomTheme
 																 ? ThemeVariant.Default

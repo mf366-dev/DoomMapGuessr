@@ -50,7 +50,9 @@ namespace DoomMapGuessr.Services.Cache
 		public DirectoryInfo PersistentCacheDirectory { get; } = Directory.CreateDirectory(Path.Join(cacheDirectory, "_Persistent"));
 
 		/// <inheritdoc />
-		public void Clear(CacheTarget target)
+		public void Clear(
+			CacheTarget target
+		)
 		{
 
 			foreach (var flag in Enum.GetValues<CacheTarget>())
@@ -75,10 +77,15 @@ namespace DoomMapGuessr.Services.Cache
 		/// For the default caching service, please refrain from using
 		/// something other than bytes or strings (unless caching to/from Memory).
 		/// </remarks>
-		public T? Get<T>(string key) => memory.Get<T>(key);
+		public T? Get<T>(
+			string key
+		) =>
+			memory.Get<T>(key);
 
 		/// <inheritdoc />
-		public string? GetString(string key)
+		public string? GetString(
+			string key
+		)
 		{
 
 			if (memory.TryGetValue(key, out string? value))
@@ -91,12 +98,16 @@ namespace DoomMapGuessr.Services.Cache
 
 			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
 
-			return File.Exists(pathToPersistentFile) ? File.ReadAllText(pathToPersistentFile) : null;
+			return File.Exists(pathToPersistentFile)
+					   ? File.ReadAllText(pathToPersistentFile)
+					   : null;
 
 		}
 
 		/// <inheritdoc />
-		public byte[]? GetBytes(string key)
+		public byte[]? GetBytes(
+			string key
+		)
 		{
 
 			if (memory.TryGetValue(key, out byte[]? value))
@@ -109,7 +120,9 @@ namespace DoomMapGuessr.Services.Cache
 
 			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
 
-			return File.Exists(pathToPersistentFile) ? File.ReadAllBytes(pathToPersistentFile) : null;
+			return File.Exists(pathToPersistentFile)
+					   ? File.ReadAllBytes(pathToPersistentFile)
+					   : null;
 
 		}
 
@@ -118,7 +131,9 @@ namespace DoomMapGuessr.Services.Cache
 		/// If there is a duplicate key, this method will
 		/// remove the both the original and the duplicate.
 		/// </remarks>
-		public void Remove(string key)
+		public void Remove(
+			string key
+		)
 		{
 
 			// btw this method slightly differs
@@ -145,7 +160,11 @@ namespace DoomMapGuessr.Services.Cache
 		/// For the default caching service, please refrain from using
 		/// something other than bytes or strings (unless caching to/from Memory).
 		/// </remarks>
-		public void Set<T>(string key, T value, CacheTarget target)
+		public void Set<T>(
+			string key,
+			T value,
+			CacheTarget target
+		)
 		{
 
 			switch (target)
@@ -212,7 +231,9 @@ namespace DoomMapGuessr.Services.Cache
 		}
 
 		/// <inheritdoc />
-		public async Task<byte[]?> GetBytesAsync(string key)
+		public async Task<byte[]?> GetBytesAsync(
+			string key
+		)
 		{
 
 			if (memory.TryGetValue(key, out byte[]? value))
@@ -225,12 +246,16 @@ namespace DoomMapGuessr.Services.Cache
 
 			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
 
-			return File.Exists(pathToPersistentFile) ? await File.ReadAllBytesAsync(pathToPersistentFile) : null;
+			return File.Exists(pathToPersistentFile)
+					   ? await File.ReadAllBytesAsync(pathToPersistentFile)
+					   : null;
 
 		}
 
 		/// <inheritdoc />
-		public async Task<string?> GetStringAsync(string key)
+		public async Task<string?> GetStringAsync(
+			string key
+		)
 		{
 
 			if (memory.TryGetValue(key, out string? value))
@@ -243,12 +268,18 @@ namespace DoomMapGuessr.Services.Cache
 
 			string pathToPersistentFile = Path.Join(PersistentCacheDirectory.FullName, key);
 
-			return File.Exists(pathToPersistentFile) ? await File.ReadAllTextAsync(pathToPersistentFile) : null;
+			return File.Exists(pathToPersistentFile)
+					   ? await File.ReadAllTextAsync(pathToPersistentFile)
+					   : null;
 
 		}
 
 		/// <inheritdoc />
-		public async Task SetAsync<T>(string key, T value, CacheTarget target)
+		public async Task SetAsync<T>(
+			string key,
+			T value,
+			CacheTarget target
+		)
 		{
 
 			switch (target)
@@ -341,7 +372,9 @@ namespace DoomMapGuessr.Services.Cache
 		/// </summary>
 		/// <param name="target">The target</param>
 		/// <exception cref="ArgumentOutOfRangeException">Target not recognized</exception>
-		private void ClearNoFlagSupport(CacheTarget target)
+		private void ClearNoFlagSupport(
+			CacheTarget target
+		)
 		{
 
 			switch (target)
@@ -370,7 +403,10 @@ namespace DoomMapGuessr.Services.Cache
 		}
 
 		/// <inheritdoc cref="Remove" />
-		public void Delete(string key) => Remove(key);
+		public void Delete(
+			string key
+		) =>
+			Remove(key);
 
 	}
 

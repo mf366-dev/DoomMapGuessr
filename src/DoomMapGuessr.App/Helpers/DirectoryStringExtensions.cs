@@ -15,13 +15,19 @@ namespace DoomMapGuessr.Helpers
 		/// Enumerates subdirectories in a directory.
 		/// </summary>
 		/// <returns>An enumerable of directory paths</returns>
-		internal static IEnumerable<string> EnumerateDirectories(this string directory) => Directory.EnumerateDirectories(directory);
+		internal static IEnumerable<string> EnumerateDirectories(
+			this string directory
+		) =>
+			Directory.EnumerateDirectories(directory);
 
 		/// <summary>
 		/// Enumerates files in a directory.
 		/// </summary>
 		/// <returns>An enumerable of filepaths</returns>
-		internal static IEnumerable<string> EnumerateFiles(this string directory) => Directory.EnumerateFiles(directory);
+		internal static IEnumerable<string> EnumerateFiles(
+			this string directory
+		) =>
+			Directory.EnumerateFiles(directory);
 
 	}
 

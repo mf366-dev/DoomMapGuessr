@@ -17,14 +17,19 @@ namespace DoomMapGuessr.Services.Settings
 		/// <typeparam name="T">The type of the value</typeparam>
 		/// <param name="key">The key</param>
 		/// <param name="value">The value to store</param>
-		void Add<T>(string key, T value);
+		void Add<T>(
+			string key,
+			T value
+		);
 
 		/// <summary>
 		/// Checks if a given key exists in storage.
 		/// </summary>
 		/// <param name="key">The key</param>
 		/// <returns><c>true</c> if it exists</returns>
-		bool Contains(string key);
+		bool Contains(
+			string key
+		);
 
 		/// <summary>
 		/// Gets a stored value.
@@ -33,7 +38,10 @@ namespace DoomMapGuessr.Services.Settings
 		/// <param name="key">The key</param>
 		/// <param name="defaultValue">The value to default to</param>
 		/// <returns>The stored value or <paramref name="defaultValue" /></returns>
-		T Get<T>(string key, T defaultValue = default!);
+		T Get<T>(
+			string key,
+			T defaultValue = default!
+		);
 
 		/// <summary>
 		/// Gets a stored boolean.<br />
@@ -43,28 +51,36 @@ namespace DoomMapGuessr.Services.Settings
 		/// </summary>
 		/// <param name="key">The key</param>
 		/// <returns>The boolean</returns>
-		bool GetBoolean(string key);
+		bool GetBoolean(
+			string key
+		);
 
 		/// <summary>
 		/// Gets a stored double.
 		/// </summary>
 		/// <param name="key">The key</param>
 		/// <returns>The double</returns>
-		double GetDouble(string key);
+		double GetDouble(
+			string key
+		);
 
 		/// <summary>
 		/// Gets a stored integer.
 		/// </summary>
 		/// <param name="key">The key</param>
 		/// <returns>The integer</returns>
-		int GetInt32(string key);
+		int GetInt32(
+			string key
+		);
 
 		/// <summary>
 		/// Gets a stored string.
 		/// </summary>
 		/// <param name="key">The key</param>
 		/// <returns>The string or <c>null</c></returns>
-		string? GetString(string key);
+		string? GetString(
+			string key
+		);
 
 		/// <summary>
 		/// Saves the settings.
@@ -83,7 +99,10 @@ namespace DoomMapGuessr.Services.Settings
 		/// <typeparam name="T">The type of the value</typeparam>
 		/// <param name="key">The key</param>
 		/// <param name="value">The value to store</param>
-		void Set<T>(string key, T value);
+		void Set<T>(
+			string key,
+			T value
+		);
 
 		/// <summary>
 		/// Tries to get a stored value.
@@ -92,7 +111,10 @@ namespace DoomMapGuessr.Services.Settings
 		/// <param name="key">The key</param>
 		/// <param name="value">The returned value</param>
 		/// <returns><c>true</c> if found</returns>
-		bool TryGet<T>(string key, out T value);
+		bool TryGet<T>(
+			string key,
+			out T value
+		);
 
 	}
 

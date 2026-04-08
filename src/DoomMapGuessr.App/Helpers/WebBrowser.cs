@@ -16,7 +16,9 @@ namespace DoomMapGuessr.Helpers
 		/// </summary>
 		/// <param name="url">The URL</param>
 		/// <returns><c>true</c> if successful</returns>
-		public static bool OpenUrl(string url)
+		public static bool OpenUrl(
+			string url
+		)
 		{
 
 			try
@@ -45,7 +47,9 @@ namespace DoomMapGuessr.Helpers
 		/// </summary>
 		/// <param name="url">The URL to open</param>
 		/// <returns></returns>
-		public static async Task<Process?> OpenUrlAsync(string url)
+		public static async Task<Process?> OpenUrlAsync(
+			string url
+		)
 		{
 
 			try

@@ -17,11 +17,16 @@ namespace DoomMapGuessr.Models
 		/// class.
 		/// </summary>
 		/// <param name="assembly">The assembly where the version information is located</param>
-		public ApplicationVersioningInformation(Assembly? assembly)
+		public ApplicationVersioningInformation(
+			Assembly? assembly
+		)
 		{
 
 			AssemblyVersion = assembly?.GetName().Version;
-			ApplicationVersion = AssemblyVersion is null ? null : $"{AssemblyVersion.Major}{AssemblyVersion.Minor}{AssemblyVersion.Build}";
+
+			ApplicationVersion = AssemblyVersion is null
+									 ? null
+									 : $"{AssemblyVersion.Major}{AssemblyVersion.Minor}{AssemblyVersion.Build}";
 
 		}
 
