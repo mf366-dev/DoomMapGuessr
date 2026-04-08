@@ -34,7 +34,8 @@
 		- 0 if stable
 		- 1 if beta/dev/alpha
 		-->
-		<AssemblyVersion>3.0.0.1</AssemblyVersion>		
+		<AssemblyVersion>3.0.0.1</AssemblyVersion>
+		<Platforms>AnyCPU;ARM32;ARM64;x64;x86</Platforms>		
 		
 	</PropertyGroup>
 

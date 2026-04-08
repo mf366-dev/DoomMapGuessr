@@ -5,6 +5,8 @@
 		<Nullable>enable</Nullable>
 
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+		<Platforms>AnyCPU;ARM32;ARM64;x64</Platforms>
 	</PropertyGroup>
 
 </Project>
