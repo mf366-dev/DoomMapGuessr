@@ -18,7 +18,9 @@ namespace DoomMapGuessr.Services.Cache
 	/// Initializes a new caching service.
 	/// </remarks>
 	/// <param name="cacheDirectory">The directory in which the cache is stored</param>
-	public class CachingService(string cacheDirectory) : IFullCachingService
+	public class CachingService(
+		string cacheDirectory
+	) : IFullCachingService
 	{
 
 		private readonly MemoryCache memory = new(
@@ -47,61 +49,6 @@ namespace DoomMapGuessr.Services.Cache
 		/// </summary>
 		public DirectoryInfo PersistentCacheDirectory { get; } = Directory.CreateDirectory(Path.Join(cacheDirectory, "_Persistent"));
 
-		/// <summary>
-		/// Clears temporary cache.
-		/// </summary>
-		private void ClearTemporaryCache()
-		{
-
-			foreach (var entry in TemporaryCacheDirectory.EnumerateFileSystemInfos())
-				entry.Delete();
-
-		}
-
-		/// <summary>
-		/// Clears persistent cache.
-		/// </summary>
-		private void ClearPersistentCache()
-		{
-
-			foreach (var entry in PersistentCacheDirectory.EnumerateFileSystemInfos())
-				entry.Delete();
-
-		}
-
-		/// <summary>
-		/// Clears a target (does not support bitwise operations).
-		/// </summary>
-		/// <param name="target">The target</param>
-		/// <exception cref="ArgumentOutOfRangeException">Target not recognized</exception>
-		private void ClearNoFlagSupport(CacheTarget target)
-		{
-
-			switch (target)
-			{
-
-				case CacheTarget.Memory:
-					memory.Clear();
-
-					break;
-
-				case CacheTarget.Temporary:
-					ClearTemporaryCache();
-
-					break;
-
-				case CacheTarget.Persistent:
-					ClearPersistentCache();
-
-					break;
-
-				default:
-					throw new ArgumentOutOfRangeException(nameof(target), target, "No such cache target");
-
-			}
-
-		}
-
 		/// <inheritdoc />
 		public void Clear(CacheTarget target)
 		{
@@ -119,7 +66,7 @@ namespace DoomMapGuessr.Services.Cache
 		/// <summary>
 		/// Gets a cached item from memory.
 		/// If you wish to get a cached item from
-		/// another target, see <see cref="GetString"/> or <see cref="GetBytes"/>.
+		/// another target, see <see cref="GetString" /> or <see cref="GetBytes" />.
 		/// </summary>
 		/// <param name="key">The key</param>
 		/// <typeparam name="T">The type of data to store</typeparam>
@@ -165,9 +112,6 @@ namespace DoomMapGuessr.Services.Cache
 			return File.Exists(pathToPersistentFile) ? File.ReadAllBytes(pathToPersistentFile) : null;
 
 		}
-
-		/// <inheritdoc cref="Remove" />
-		public void Delete(string key) => Remove(key);
 
 		/// <inheritdoc />
 		/// <remarks>
@@ -369,6 +313,64 @@ namespace DoomMapGuessr.Services.Cache
 			}
 
 		}
+
+		/// <summary>
+		/// Clears temporary cache.
+		/// </summary>
+		private void ClearTemporaryCache()
+		{
+
+			foreach (var entry in TemporaryCacheDirectory.EnumerateFileSystemInfos())
+				entry.Delete();
+
+		}
+
+		/// <summary>
+		/// Clears persistent cache.
+		/// </summary>
+		private void ClearPersistentCache()
+		{
+
+			foreach (var entry in PersistentCacheDirectory.EnumerateFileSystemInfos())
+				entry.Delete();
+
+		}
+
+		/// <summary>
+		/// Clears a target (does not support bitwise operations).
+		/// </summary>
+		/// <param name="target">The target</param>
+		/// <exception cref="ArgumentOutOfRangeException">Target not recognized</exception>
+		private void ClearNoFlagSupport(CacheTarget target)
+		{
+
+			switch (target)
+			{
+
+				case CacheTarget.Memory:
+					memory.Clear();
+
+					break;
+
+				case CacheTarget.Temporary:
+					ClearTemporaryCache();
+
+					break;
+
+				case CacheTarget.Persistent:
+					ClearPersistentCache();
+
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException(nameof(target), target, "No such cache target");
+
+			}
+
+		}
+
+		/// <inheritdoc cref="Remove" />
+		public void Delete(string key) => Remove(key);
 
 	}
 

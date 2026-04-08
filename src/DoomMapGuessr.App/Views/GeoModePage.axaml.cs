@@ -13,7 +13,7 @@ namespace DoomMapGuessr.Views
 		/// <summary>
 		/// Initializes the page.
 		/// </summary>
-		public GeoModePage() => InitializeComponent();
+		public GeoModePage() { InitializeComponent(); }
 
 	}
 

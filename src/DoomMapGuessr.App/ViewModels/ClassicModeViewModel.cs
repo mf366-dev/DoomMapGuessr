@@ -4,7 +4,7 @@
 	/// <summary>
 	/// View model for the classic mode page.
 	/// </summary>
-	public partial class ClassicModeViewModel : ViewModelBase
+	public class ClassicModeViewModel : ViewModelBase
 	{
 
 		/// <summary>

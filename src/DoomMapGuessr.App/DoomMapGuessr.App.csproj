@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	
+
 	<PropertyGroup>
-		
+
 		<!-- Basic Properties -->
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net10.0</TargetFramework>
@@ -35,11 +35,11 @@
 		- 1 if beta/dev/alpha
 		-->
 		<AssemblyVersion>3.0.0.1</AssemblyVersion>
-		<Platforms>AnyCPU;ARM32;ARM64;x64;x86</Platforms>		
-		
+		<Platforms>AnyCPU;ARM32;ARM64;x64;x86</Platforms>
+
 	</PropertyGroup>
 
-	
+
 	<!-- Publish AOT if Release -->
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
 		<PublishAot>true</PublishAot>
@@ -48,7 +48,7 @@
 		<PublishReadyToRun>false</PublishReadyToRun> <!-- is conflicting with AOT -->
 	</PropertyGroup>
 
-	
+
 	<!-- Don't publish AOT if x86 -->
 	<PropertyGroup Condition="'$(Platform)' == 'x86' and '$(Configuration)' == 'Release'">
 		<PublishAot>false</PublishAot>
@@ -57,10 +57,10 @@
 		<PublishReadyToRun>true</PublishReadyToRun>
 	</PropertyGroup>
 
-	
+
 	<!-- Resources -->
 	<ItemGroup>
-		
+
 		<!-- Styles are internal to the project -->
 		<AvaloniaResource Include="Styles\**\*">
 			<Link>Styles\%(RecursiveDir)%(Filename)%(Extension)</Link>
@@ -97,13 +97,13 @@
 		<EmbeddedResource Update="Strings\Resources.pt-br.resx">
 			<DependentUpon>Resources.resx</DependentUpon>
 		</EmbeddedResource>
-		
+
 	</ItemGroup>
 
-	
+
 	<!-- Packages -->
 	<ItemGroup>
-		
+
 		<!-- Avalonia Base Packages -->
 		<PackageReference Include="Avalonia" Version="11.3.13" />
 		<PackageReference Include="Avalonia.Desktop" Version="11.3.13" />
@@ -131,7 +131,7 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.5" />
 		<PackageReference Include="Octokit" Version="14.0.0" />
-		
+
 	</ItemGroup>
 
 
@@ -139,11 +139,11 @@
 	<ItemGroup>
 		<ProjectReference Include="..\DoomMapGuessr.Services\DoomMapGuessr.Services.csproj" />
 	</ItemGroup>
-	
+
 
 	<!-- Others -->
 	<ItemGroup>
 		<UpToDateCheckInput Remove="Resources\Fonts.axaml" />
 	</ItemGroup>
-	
+
 </Project>

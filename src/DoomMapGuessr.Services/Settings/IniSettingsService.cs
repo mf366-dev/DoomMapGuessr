@@ -107,11 +107,6 @@ namespace DoomMapGuessr.Services.Settings
 
 		}
 
-		// ReSharper disable once EmptyDestructor
-		/// <summary><c>~IniSettingsService</c></summary>
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		~IniSettingsService() { }
-
 		/// <inheritdoc />
 		public void Add<T>(string key, T value)
 		{
@@ -135,13 +130,13 @@ namespace DoomMapGuessr.Services.Settings
 			string[] split = key.Split('.', 2);
 
 			return split.Length < 2
-				? throw new InvalidOperationException(
-					"Key must in format <section>.<key>. If instead you wish to check if a section exists, use <section>.?"
-				)
-				: split[1] == "?"
-					   ? // -> ? means "any key" btw in this context
-					   actualIni.Sections.ContainsSection(split[0])
-					   : actualIni.TryGetKey(key, out _);
+					   ? throw new InvalidOperationException(
+							 "Key must in format <section>.<key>. If instead you wish to check if a section exists, use <section>.?"
+						 )
+					   : split[1] == "?"
+						   ? // -> ? means "any key" btw in this context
+						   actualIni.Sections.ContainsSection(split[0])
+						   : actualIni.TryGetKey(key, out _);
 
 		}
 
@@ -226,7 +221,7 @@ namespace DoomMapGuessr.Services.Settings
 				);
 			}
 
-			if (split[1] == "*") // in here we use * cuz it means ALL
+			if (split[1] == "*")                         // in here we use * cuz it means ALL
 				actualIni.Sections.AddSection(split[0]); // value is ignored
 
 			else
@@ -238,6 +233,13 @@ namespace DoomMapGuessr.Services.Settings
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public bool TryGet<T>(string key, out T value) =>
 			throw new InvalidOperationException("TryGet<T> is not supported for INI. Use GetString instead.");
+
+		// ReSharper disable once EmptyDestructor
+		/// <summary>
+		/// <c>~IniSettingsService</c>
+		/// </summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		~IniSettingsService() { }
 
 		/// <summary>
 		/// Gets a copy of the actual INI data.

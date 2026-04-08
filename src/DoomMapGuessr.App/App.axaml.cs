@@ -26,7 +26,7 @@ namespace DoomMapGuessr
 		/// <summary>
 		/// Allowed cultures. First item is a filler - do not use.
 		/// </summary>
-		public static string[] AllowedCultures { get; } = ["", "en-US", "pt-br", "pt-PT"];
+		public static string[] AllowedCultures { get; } = [ "", "en-US", "pt-br", "pt-PT" ];
 
 		/// <summary>
 		/// System culture.
@@ -48,7 +48,7 @@ namespace DoomMapGuessr
 
 		}
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
 		/// <summary>
@@ -58,12 +58,11 @@ namespace DoomMapGuessr
 		{
 
 			// Theme
-			RequestedThemeVariant =
-				ApplicationServices.Get<ISettingsService>().GetBoolean("GUI.FollowSystem")
+			RequestedThemeVariant = ApplicationServices.Get<ISettingsService>().GetBoolean("GUI.FollowSystem")
 										? ThemeVariant.Default
-										: (ApplicationServices.Get<ISettingsService>().GetBoolean("GUI.DarkTheme")
-											   ? ThemeVariant.Dark
-											   : ThemeVariant.Light);
+										: ApplicationServices.Get<ISettingsService>().GetBoolean("GUI.DarkTheme")
+											? ThemeVariant.Dark
+											: ThemeVariant.Light;
 
 			// Language
 			Strings.Resources.Culture = new(ApplicationServices.Get<ISettingsService>().GetString("Language.Culture") ?? "en-US");
@@ -86,9 +85,7 @@ namespace DoomMapGuessr
 
 			}
 			else
-			{
 				throw new PlatformNotSupportedException("DoomMapGuessr is currently only supported on desktop");
-			}
 
 			base.OnFrameworkInitializationCompleted();
 

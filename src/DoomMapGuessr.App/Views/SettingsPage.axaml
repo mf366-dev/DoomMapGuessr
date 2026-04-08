@@ -1,4 +1,4 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -12,7 +12,7 @@
 	</Design.DataContext>
 
 	<Grid RowDefinitions="Auto, *, Auto">
-		<StackPanel Grid.Row="0" Margin="4"  Orientation="Horizontal" Spacing="4">
+		<StackPanel Grid.Row="0" Margin="4" Orientation="Horizontal" Spacing="4">
 			<TextBlock Classes="h1" TextAlignment="Center">settings</TextBlock>
 			<TextBlock Classes="h1" Text="{x:Static strings:Resources.Menu_Settings}" />
 		</StackPanel>
@@ -68,19 +68,16 @@
 							<RadioButton Margin="48,0,0,0" VerticalAlignment="Center"
 							             Content="{x:Static strings:Resources.Settings_Color_MaintainColor}" />
 							<RadioButton Margin="48,0,0,0" VerticalAlignment="Center"
-							             Content="{x:Static strings:Resources.Settings_Color_Protanopia}">
-							</RadioButton>
+							             Content="{x:Static strings:Resources.Settings_Color_Protanopia}" />
 							<RadioButton Margin="48,0,0,0" VerticalAlignment="Center"
-							             Content="{x:Static strings:Resources.Settings_Color_Deuteranopia}">
-							</RadioButton>
+							             Content="{x:Static strings:Resources.Settings_Color_Deuteranopia}" />
 							<RadioButton Margin="48,0,0,0" VerticalAlignment="Center"
-							             Content="{x:Static strings:Resources.Settings_Color_Tritanopia}">
-							</RadioButton>
+							             Content="{x:Static strings:Resources.Settings_Color_Tritanopia}" />
 							<RadioButton Margin="48,0,0,0" VerticalAlignment="Center"
-							             Content="{x:Static strings:Resources.Settings_Color_Achromatopsia}">
-							</RadioButton>
+							             Content="{x:Static strings:Resources.Settings_Color_Achromatopsia}" />
 						</StackPanel>
-						<TextBlock Classes="h3" Margin="24,8,0,8" Text="{x:Static strings:Resources.Settings_DoomScreenshots_SourceBlacklist}"></TextBlock>
+						<TextBlock Classes="h3" Margin="24,8,0,8"
+						           Text="{x:Static strings:Resources.Settings_DoomScreenshots_SourceBlacklist}" />
 						<StackPanel Orientation="Vertical" Spacing="8" Margin="48,0,0,0">
 							<ListBox MinWidth="50" CornerRadius="10">
 								<ListBoxItem>google.com</ListBoxItem>

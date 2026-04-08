@@ -36,12 +36,12 @@ namespace DoomMapGuessr
 	internal sealed class Program
 	{
 
+		private const string DB_URL = "https://raw.githubusercontent.com/MF366-Coding/DoomMapGuessr/refs/heads/main/data/MAPDAT3.db";
+
 		public static IHost Host { get; private set; } = null!;
 
 		public static string AppDataDirectory =>
 			Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "dev.mf366.doommapguessr");
-
-		private const string DB_URL = "https://raw.githubusercontent.com/MF366-Coding/DoomMapGuessr/refs/heads/main/data/MAPDAT3.db";
 
 		// Avalonia configuration, don't remove; also used by visual designer.
 		public static AppBuilder BuildAvaloniaApp() =>
@@ -182,9 +182,9 @@ namespace DoomMapGuessr
 			await DownloadSqliteDatabaseAsync();
 
 			BuildAvaloniaApp()
-#if DEBUG
+				#if DEBUG
 				.WithDeveloperTools()
-#endif
+				#endif
 				.StartWithClassicDesktopLifetime(args);
 
 			return 0;
@@ -192,7 +192,10 @@ namespace DoomMapGuessr
 		}
 
 		// todo: close SqLite connection
-		~Program() { /*ApplicationState.Shared.SqliteConnection?.Close();*/ }
+		~Program()
+		{
+			/*ApplicationState.Shared.SqliteConnection?.Close();*/
+		}
 
 	}
 

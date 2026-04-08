@@ -13,7 +13,7 @@ namespace DoomMapGuessr.Views
 		/// <summary>
 		/// Initializes the settings page.
 		/// </summary>
-		public SettingsPage() => InitializeComponent();
+		public SettingsPage() { InitializeComponent(); }
 
 	}
 

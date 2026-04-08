@@ -13,7 +13,7 @@ namespace DoomMapGuessr.Views
 		/// <summary>
 		/// Initializes the main window.
 		/// </summary>
-		public MainWindow() => InitializeComponent();
+		public MainWindow() { InitializeComponent(); }
 
 	}
 

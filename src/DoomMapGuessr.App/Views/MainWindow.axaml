@@ -1,16 +1,16 @@
 <Window xmlns="https://github.com/avaloniaui"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:vm="using:DoomMapGuessr.ViewModels"
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:strings="clr-namespace:DoomMapGuessr.Strings"
-		mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="710"
-		MinWidth="800"
-		MinHeight="600"
-		x:Class="DoomMapGuessr.Views.MainWindow"
-		x:DataType="vm:MainWindowViewModel"
-		Icon="/Assets/Icon.ico"
-		Title="{x:Static strings:Resources.App_Title}">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DoomMapGuessr.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:strings="clr-namespace:DoomMapGuessr.Strings"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="710"
+        MinWidth="800"
+        MinHeight="600"
+        x:Class="DoomMapGuessr.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/Icon.ico"
+        Title="{x:Static strings:Resources.App_Title}">
 
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
@@ -18,17 +18,17 @@
 		<vm:MainWindowViewModel />
 	</Design.DataContext>
 
-	<SplitView Grid.Column="0"
-			   IsPaneOpen="{Binding IsSidebarOpen}"
-			   OpenPaneLength="250"
-			   CompactPaneLength="46.5"
-			   DisplayMode="CompactInline">
+	<SplitView
+		IsPaneOpen="{Binding IsSidebarOpen}"
+		OpenPaneLength="250"
+		CompactPaneLength="46.5"
+		DisplayMode="CompactInline">
 
 		<SplitView.Pane>
 
 			<Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, *" Margin="8">
 				<Button Grid.Row="0" Classes="nav" Command="{Binding NavigateTo}"
-						CommandParameter="ToggleSidebarPane">
+				        CommandParameter="ToggleSidebarPane">
 					<PathIcon Data="{DynamicResource Geometry.Menu600}" Width="16" Height="16" />
 				</Button>
 
@@ -61,7 +61,7 @@
 				</Button>
 
 				<Button Grid.Row="5" Classes="nav" VerticalAlignment="Bottom" Command="{Binding NavigateTo}"
-						CommandParameter="Settings">
+				        CommandParameter="Settings">
 					<StackPanel>
 						<PathIcon Data="{DynamicResource Geometry.Settings600}" Width="16" Height="16" />
 						<TextBlock Text="{x:Static strings:Resources.Menu_Settings}" />

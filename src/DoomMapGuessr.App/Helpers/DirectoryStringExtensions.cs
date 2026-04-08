@@ -6,7 +6,7 @@ namespace DoomMapGuessr.Helpers
 {
 
 	/// <summary>
-	/// Generic extensions for <see cref="System.String"/>s that represent directory paths.
+	/// Generic extensions for <see cref="System.String" />s that represent directory paths.
 	/// </summary>
 	internal static class DirectoryStringExtensions
 	{

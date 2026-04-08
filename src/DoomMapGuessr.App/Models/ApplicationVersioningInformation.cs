@@ -13,7 +13,7 @@ namespace DoomMapGuessr.Models
 
 		/// <summary>
 		/// Initializes a new instance of the
-		/// <see cref="ApplicationVersioningInformation"/>
+		/// <see cref="ApplicationVersioningInformation" />
 		/// class.
 		/// </summary>
 		/// <param name="assembly">The assembly where the version information is located</param>

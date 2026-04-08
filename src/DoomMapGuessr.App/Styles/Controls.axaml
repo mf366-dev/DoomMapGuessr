@@ -1,5 +1,5 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Design.PreviewWith>
 		<Border Padding="20">
 			<Grid RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="Auto, Auto, Auto, Auto">
@@ -75,7 +75,6 @@
 				</StackPanel>
 
 
-
 				<StackPanel Grid.Column="1" Grid.Row="0" Margin="8" Orientation="Vertical" Spacing="4">
 					<TextBlock Classes="title">TextBlock (Heading 1)</TextBlock>
 					<TextBlock Classes="h2">Heading 2</TextBlock>
@@ -102,12 +101,12 @@
 				<StackPanel Grid.Column="1" Grid.Row="1" Margin="8" Orientation="Vertical" Spacing="4">
 					<TextBlock Classes="h1">TextBox</TextBlock>
 					<TextBox>Regular Text Box</TextBox>
-					<TextBox Watermark="Regular Text Box (watermark)"></TextBox>
+					<TextBox Watermark="Regular Text Box (watermark)" />
 					<TextBox Classes="secret">password field</TextBox>
 					<TextBox Width="300" Classes="italic bold">Regular TextBlock formatting is available. By the way, these regular text boxes have word wrap enabled! Pretty good for when you have long text in such a short text box, like this one.</TextBox>
-					<TextBox Classes="code" Text="def this_is_code(x: int, y: int) -> int:&#10;    # this stupid function sums numbers&#10;    return x + y" />
+					<TextBox Classes="code"
+					         Text="def this_is_code(x: int, y: int) -> int:&#10;    # this stupid function sums numbers&#10;    return x + y" />
 				</StackPanel>
-
 
 
 				<!--
@@ -136,7 +135,7 @@
 
 			<Setter Property="Transitions">
 				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0.4"/>
+					<BrushTransition Property="Background" Duration="0:0:0.4" />
 				</Transitions>
 			</Setter>
 		</Style>
@@ -146,7 +145,7 @@
 
 			<Setter Property="Transitions">
 				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0.4"/>
+					<BrushTransition Property="Background" Duration="0:0:0.4" />
 				</Transitions>
 			</Setter>
 		</Style>
@@ -160,7 +159,7 @@
 
 			<Setter Property="Transitions">
 				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0.4"/>
+					<BrushTransition Property="Background" Duration="0:0:0.4" />
 				</Transitions>
 			</Setter>
 		</Style>
@@ -174,13 +173,14 @@
 
 			<Setter Property="Transitions">
 				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0.4"/>
+					<BrushTransition Property="Background" Duration="0:0:0.4" />
 				</Transitions>
 			</Setter>
 		</Style>
 	</Style>
 	<!-- Primary Button (hovered) -->
-	<Style Selector="Button.primary:pointerover /template/ ContentPresenter, Button[IsDefault=true]:pointerover /template/ ContentPresenter">
+	<Style
+		Selector="Button.primary:pointerover /template/ ContentPresenter, Button[IsDefault=true]:pointerover /template/ ContentPresenter">
 		<Setter Property="Background" Value="{DynamicResource Brush.PrimaryHover}" />
 	</Style>
 	<!-- Destructive Button (hovered) -->
@@ -192,7 +192,8 @@
 		<Setter Property="Background" Value="{DynamicResource Brush.PrimaryHoverIntense}" />
 	</Style>
 	<!-- Circle Button (hovered) -->
-	<Style Selector="Button.circle:pointerover /template/ ContentPresenter, Button[IsDefault=true]:pointerover /template/ ContentPresenter">
+	<Style
+		Selector="Button.circle:pointerover /template/ ContentPresenter, Button[IsDefault=true]:pointerover /template/ ContentPresenter">
 		<Setter Property="Background" Value="{DynamicResource Brush.PrimaryHover}" />
 	</Style>
 	<!-- Any Button Style with Icons -->
@@ -376,7 +377,7 @@
 
 		<Setter Property="Transitions">
 			<Transitions>
-				<BrushTransition Property="Background" Duration="0:0:0.4"/>
+				<BrushTransition Property="Background" Duration="0:0:0.4" />
 			</Transitions>
 		</Setter>
 		<!-- Unchecked -->

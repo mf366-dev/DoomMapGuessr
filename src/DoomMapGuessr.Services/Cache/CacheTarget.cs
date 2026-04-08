@@ -25,7 +25,7 @@ namespace DoomMapGuessr.Services.Cache
 		/// <summary>
 		/// Persistent cache.
 		/// </summary>
-		Persistent = 4,
+		Persistent = 4
 
 	}
 

@@ -29,7 +29,7 @@ namespace DoomMapGuessr.Helpers
 
 				};
 
-				using Process? _ = Process.Start(psi);
+				using var _ = Process.Start(psi);
 
 				return true;
 			}

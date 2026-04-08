@@ -4,7 +4,7 @@
 	/// <summary>
 	/// View model for GeoGuessr mode page (Geomode page).
 	/// </summary>
-	public partial class GeoModeViewModel : ViewModelBase
+	public class GeoModeViewModel : ViewModelBase
 	{
 
 		/// <summary>

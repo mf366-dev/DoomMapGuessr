@@ -13,7 +13,7 @@ namespace DoomMapGuessr.Views
 		/// <summary>
 		/// Initializes the achievements page.
 		/// </summary>
-		public AchievementsUnlockablesPage() => InitializeComponent();
+		public AchievementsUnlockablesPage() { InitializeComponent(); }
 
 	}
 

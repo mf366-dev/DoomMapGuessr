@@ -13,7 +13,7 @@ namespace DoomMapGuessr.Views
 		/// <summary>
 		/// Initializes the home page.
 		/// </summary>
-		public HomePage() => InitializeComponent();
+		public HomePage() { InitializeComponent(); }
 
 		private void UserControl_SizeChanged(object? sender, SizeChangedEventArgs e)
 		{

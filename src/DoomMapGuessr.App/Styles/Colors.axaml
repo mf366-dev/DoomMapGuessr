@@ -1,39 +1,39 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:system="using:System">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="using:System">
 	<!-- Designer Preview -->
 	<Design.PreviewWith>
 		<Border Padding="10">
 			<Grid ColumnDefinitions="Auto, Auto, Auto, Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto">
-				<Button Grid.Column="0" Grid.Row="0" Width="20" Height="20"></Button>
-				<Button Grid.Column="0" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource CoralRed}"></Button>
-				<Button Grid.Column="0" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Red}"></Button>
-				<Button Grid.Column="0" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource DarkRed}"></Button>
-				<Button Grid.Column="0" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource DarkerRed}"></Button>
+				<Button Grid.Column="0" Grid.Row="0" Width="20" Height="20" />
+				<Button Grid.Column="0" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource CoralRed}" />
+				<Button Grid.Column="0" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Red}" />
+				<Button Grid.Column="0" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource DarkRed}" />
+				<Button Grid.Column="0" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource DarkerRed}" />
 
-				<Button Grid.Column="1" Grid.Row="0" Width="20" Height="20" Background="{DynamicResource Color.Text}"></Button>
-				<Button Grid.Column="1" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource Color.TextAlt}"></Button>
-				<Button Grid.Column="1" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Brush.Yellow}"></Button>
-				<Button Grid.Column="1" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource Brush.Red}"></Button>
-				<Button Grid.Column="1" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource Brush.Magenta}"></Button>
+				<Button Grid.Column="1" Grid.Row="0" Width="20" Height="20" Background="{DynamicResource Color.Text}" />
+				<Button Grid.Column="1" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource Color.TextAlt}" />
+				<Button Grid.Column="1" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Brush.Yellow}" />
+				<Button Grid.Column="1" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource Brush.Red}" />
+				<Button Grid.Column="1" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource Brush.Magenta}" />
 
-				<Button Grid.Column="2" Grid.Row="0" Width="20" Height="20" Background="{DynamicResource Brush.White}"></Button>
-				<Button Grid.Column="2" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource Brush.Black}"></Button>
-				<Button Grid.Column="2" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Brush.Green}"></Button>
-				<Button Grid.Column="2" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource Brush.Cyan}"></Button>
-				<Button Grid.Column="2" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource Brush.Blue}"></Button>
+				<Button Grid.Column="2" Grid.Row="0" Width="20" Height="20" Background="{DynamicResource Brush.White}" />
+				<Button Grid.Column="2" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource Brush.Black}" />
+				<Button Grid.Column="2" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Brush.Green}" />
+				<Button Grid.Column="2" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource Brush.Cyan}" />
+				<Button Grid.Column="2" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource Brush.Blue}" />
 
-				<Button Grid.Column="3" Grid.Row="0" Width="20" Height="20" Background="{DynamicResource Brush.Gray100}"></Button>
-				<Button Grid.Column="3" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource Brush.Gray200}"></Button>
-				<Button Grid.Column="3" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Brush.Gray300}"></Button>
-				<Button Grid.Column="3" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource Brush.Gray400}"></Button>
-				<Button Grid.Column="3" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource Brush.Gray500}"></Button>
+				<Button Grid.Column="3" Grid.Row="0" Width="20" Height="20" Background="{DynamicResource Brush.Gray100}" />
+				<Button Grid.Column="3" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource Brush.Gray200}" />
+				<Button Grid.Column="3" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Brush.Gray300}" />
+				<Button Grid.Column="3" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource Brush.Gray400}" />
+				<Button Grid.Column="3" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource Brush.Gray500}" />
 
-				<Button Grid.Column="4" Grid.Row="0" Width="20" Height="20"></Button>
-				<Button Grid.Column="4" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource Brush.Gray900}"></Button>
-				<Button Grid.Column="4" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Brush.Gray800}"></Button>
-				<Button Grid.Column="4" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource Brush.Gray700}"></Button>
-				<Button Grid.Column="4" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource Brush.Gray600}"></Button>
+				<Button Grid.Column="4" Grid.Row="0" Width="20" Height="20" />
+				<Button Grid.Column="4" Grid.Row="1" Width="20" Height="20" Background="{DynamicResource Brush.Gray900}" />
+				<Button Grid.Column="4" Grid.Row="2" Width="20" Height="20" Background="{DynamicResource Brush.Gray800}" />
+				<Button Grid.Column="4" Grid.Row="3" Width="20" Height="20" Background="{DynamicResource Brush.Gray700}" />
+				<Button Grid.Column="4" Grid.Row="4" Width="20" Height="20" Background="{DynamicResource Brush.Gray600}" />
 			</Grid>
 		</Border>
 	</Design.PreviewWith>
@@ -74,7 +74,7 @@
 
 		<!-- Dark Theme -->
 		<ResourceDictionary x:Key="Dark">
-			<SolidColorBrush x:Key="Brush.Translucid" Opacity="0.8" Color="#000"></SolidColorBrush>
+			<SolidColorBrush x:Key="Brush.Translucid" Opacity="0.8" Color="#000" />
 
 			<SolidColorBrush x:Key="Brush.Destructive" Color="#E81212" />
 			<SolidColorBrush x:Key="Brush.DestructiveHover" Color="#C41B1B" />
