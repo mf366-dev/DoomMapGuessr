@@ -1,5 +1,8 @@
 ﻿using System;
 
+using Avalonia.Controls;
+
+using DoomMapGuessr.Common;
 using DoomMapGuessr.Models;
 using DoomMapGuessr.Services;
 using DoomMapGuessr.ViewModels;
@@ -46,7 +49,7 @@ namespace DoomMapGuessr
 		/// <returns>The service</returns>
 		public static T Get<T>()
 			where T : notnull =>
-			Root.GetRequiredService<T>();
+			typeof(T) is null ? throw new NullReferenceException($"Service {typeof(T).FullName} is null") : Root.GetRequiredService<T>();
 
 	}
 

@@ -1,8 +1,10 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
@@ -11,6 +13,8 @@ using Avalonia.Styling;
 using DoomMapGuessr.Services.Settings;
 using DoomMapGuessr.ViewModels;
 using DoomMapGuessr.Views;
+
+using Microsoft.Extensions.Hosting;
 
 
 namespace DoomMapGuessr
@@ -57,6 +61,18 @@ namespace DoomMapGuessr
 		public override void OnFrameworkInitializationCompleted()
 		{
 
+			if (Design.IsDesignMode)
+			{
+
+				var host = Program.CreateHostBuilder([]).Build();
+				host.Start();
+				ApplicationServices.Root = host.Services;
+				ApplicationServices.VersionInfo = new(Assembly.GetExecutingAssembly());
+
+				Program.PrepareApplicationSettings(ApplicationServices.Get<ISettingsService>());
+
+			}
+
 			// Theme
 			RequestedThemeVariant = ApplicationServices.Get<ISettingsService>().GetBoolean("GUI.FollowSystem")
 										? ThemeVariant.Default
@@ -84,8 +100,6 @@ namespace DoomMapGuessr
 				};
 
 			}
-			else
-				throw new PlatformNotSupportedException("DoomMapGuessr is currently only supported on desktop");
 
 			base.OnFrameworkInitializationCompleted();
 

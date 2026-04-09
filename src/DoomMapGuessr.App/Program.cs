@@ -16,6 +16,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using Avalonia;
@@ -77,6 +78,72 @@ namespace DoomMapGuessr
 
 										}
 					 );
+
+		public static void PrepareApplicationSettings(
+        			ISettingsService settings
+        		)
+        		{
+
+        			if (settings is IniSettingsService { IsIniParsed: false } ini)
+        				ini.Load().Parse();
+
+        			#region Language Settings
+
+        			if (!settings.Contains("Language.?"))
+        				settings.Set<string?>("Language.*", null);
+
+        			if (!settings.Contains("Language.Culture"))
+        			{
+
+        				settings.Set(
+        					"Language.Culture", App.AllowedCultures.Contains(App.SystemCulture.Name, StringComparer.OrdinalIgnoreCase)
+        											? App.SystemCulture.Name
+        											: App.AllowedCultures[0]
+        				);
+
+        			}
+
+        			#endregion
+
+        			#region GUI Settings
+
+        			if (!settings.Contains("GUI.?"))
+        				settings.Set<string?>("GUI.*", null);
+
+        			if (!settings.Contains("GUI.FollowSystem"))
+        				settings.Set("GUI.FollowSystem", 1);
+
+        			if (!settings.Contains("GUI.DarkTheme"))
+        				settings.Set("GUI.DarkTheme", 1);
+
+        			#endregion
+
+        			#region Database Settings
+
+        			if (!settings.Contains("Database.?"))
+        				settings.Set<string?>("Database.*", null);
+
+        			if (!settings.Contains("Database.CheckPeriodicityMode"))
+        				settings.Set("Database.CheckPeriodicityMode", 4); // check weekly
+
+        			if (!settings.Contains("Database.DateOfLastCheck"))
+        				settings.Set("Database.DateOfLastCheck", new DateTime(0).Ticks.ToString());
+
+        			#endregion
+
+        			#region Update Settings
+
+        			if (!settings.Contains("Update.?"))
+        				settings.Set<string?>("Update.*", null);
+
+        			if (!settings.Contains("Update.Check"))
+        				settings.Set("Update.Check", 1); // 1 for always check, 0 for never check
+
+        			#endregion
+
+        			settings.Save();
+
+        		}
 
 		public static async Task PrepareApplicationSettingsAsync(
 			ISettingsService settings
