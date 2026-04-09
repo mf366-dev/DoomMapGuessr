@@ -1,3 +1,0 @@
-files:
-  - source: src/DoomMapGuessr.App/Strings/Resources.resx
-    translation: src/DoomMapGuessr.App/Strings/Resources.%locale%.resx
