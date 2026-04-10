@@ -34,6 +34,18 @@ namespace DoomMapGuessr.Helpers
 		/// <param name="owner">The repository owner</param>
 		/// <param name="repo">The repository name</param>
 		/// <returns>The release</returns>
+		public static Release FetchLatest(
+			string owner,
+			string repo
+		) =>
+			client.Repository.Release.GetLatest(owner, repo).Result;
+
+		/// <summary>
+		/// Fetches the latest release from a repository.
+		/// </summary>
+		/// <param name="owner">The repository owner</param>
+		/// <param name="repo">The repository name</param>
+		/// <returns>The release</returns>
 		public static async Task<Release> FetchLatestAsync(
 			string owner,
 			string repo

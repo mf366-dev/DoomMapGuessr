@@ -198,6 +198,14 @@ namespace DoomMapGuessr.Services.Settings
 				: -1;
 
 		/// <inheritdoc />
+		public long GetInt64(
+			string key
+		) =>
+			Int64.TryParse(GetString(key), out long result)
+				? result
+				: -1;
+
+		/// <inheritdoc />
 		public string GetString(
 			string key
 		)

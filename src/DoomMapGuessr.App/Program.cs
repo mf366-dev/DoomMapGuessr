@@ -14,7 +14,10 @@
  */
 
 using System;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -37,7 +40,11 @@ namespace DoomMapGuessr
 	internal sealed class Program
 	{
 
+		private const string TRUE = "1";
+		private const string FALSE = "0";
+
 		private const string DB_URL = "https://raw.githubusercontent.com/MF366-Coding/DoomMapGuessr/refs/heads/main/data/MAPDAT3.db";
+		private const string CACHED_DB_ENTRYNAME = "iDBcV30";
 
 		public static IHost Host { get; private set; } = null!;
 
@@ -66,7 +73,7 @@ namespace DoomMapGuessr
 																					)
 											);
 
-											services.AddSingleton<ICachingService>(_ => new CachingService(Path.Join(AppDataDirectory, "AppCache")));
+											services.AddSingleton<IFullCachingService>(_ => new CachingService(Path.Join(AppDataDirectory, "AppCache")));
 
 											services.AddSingleton<MainWindowViewModel>();
 											services.AddSingleton<MainWindowViewModel>();
@@ -145,7 +152,7 @@ namespace DoomMapGuessr
 
         		}
 
-		public static async Task PrepareApplicationSettingsAsync(
+		private static async Task PrepareApplicationSettingsAsync(
 			ISettingsService settings
 		)
 		{
@@ -158,7 +165,14 @@ namespace DoomMapGuessr
 			if (!settings.Contains("Language.?"))
 				settings.Set<string?>("Language.*", null);
 
-			if (!settings.Contains("Language.Culture"))
+			if (!settings.Contains("Language.Culture") ||
+				!CultureInfo.GetCultures(CultureTypes.AllCultures)
+					.Any(
+						c => String.Equals(settings.GetString("Language.Culture"),
+							c.Name,
+							StringComparison.OrdinalIgnoreCase)
+					)
+				)
 			{
 
 				settings.Set(
@@ -176,10 +190,14 @@ namespace DoomMapGuessr
 			if (!settings.Contains("GUI.?"))
 				settings.Set<string?>("GUI.*", null);
 
-			if (!settings.Contains("GUI.FollowSystem"))
+			var followSystem = settings.GetString("GUI.FollowSystem");
+
+			if (!settings.Contains("GUI.FollowSystem") || (followSystem != FALSE && followSystem != TRUE))
 				settings.Set("GUI.FollowSystem", 1);
 
-			if (!settings.Contains("GUI.DarkTheme"))
+			var darkTheme = settings.GetString("GUI.DarkTheme");
+
+			if (!settings.Contains("GUI.DarkTheme") || (darkTheme != FALSE && darkTheme != TRUE))
 				settings.Set("GUI.DarkTheme", 1);
 
 			#endregion
@@ -189,10 +207,12 @@ namespace DoomMapGuessr
 			if (!settings.Contains("Database.?"))
 				settings.Set<string?>("Database.*", null);
 
-			if (!settings.Contains("Database.CheckPeriodicityMode"))
+			var periodicity = settings.GetInt32("Database.CheckPeriodicityMode");
+
+			if (!settings.Contains("Database.CheckPeriodicityMode") || periodicity < 1 || periodicity > 9)
 				settings.Set("Database.CheckPeriodicityMode", 4); // check weekly
 
-			if (!settings.Contains("Database.DateOfLastCheck"))
+			if (!settings.Contains("Database.DateOfLastCheck") || settings.GetInt64("Database.DateOfLastCheck") == -1)
 				settings.Set("Database.DateOfLastCheck", new DateTime(0).Ticks.ToString());
 
 			#endregion
@@ -202,7 +222,9 @@ namespace DoomMapGuessr
 			if (!settings.Contains("Update.?"))
 				settings.Set<string?>("Update.*", null);
 
-			if (!settings.Contains("Update.Check"))
+			var checkUpd = settings.GetString("Update.Check");
+
+			if (!settings.Contains("Update.Check") || (checkUpd != TRUE && checkUpd != FALSE))
 				settings.Set("Update.Check", 1); // 1 for always check, 0 for never check
 
 			#endregion
@@ -211,15 +233,72 @@ namespace DoomMapGuessr
 
 		}
 
-		public static async Task DownloadSqliteDatabaseAsync()
+		public static async Task<DatabaseFetchResult> DownloadSqliteDatabaseAsync()
 		{
 
 			// todo: fetch the database (even if it's the first time playing DoomMapGuessr)
 
 			// xxx: make sure to respect caching settings
+			var settings = ApplicationServices.Get<ISettingsService>();
+			var cache = ApplicationServices.Get<IFullCachingService>();
+
+			byte[] databaseBytes = [];
+
+			DateTime dateOfLastCheck = new(settings.GetInt64("Database.DateOfLastCheck"));
+
+			switch (ApplicationServices.Get<ISettingsService>().GetInt32("Database.CheckPeriodicityMode"))
+			{
+
+				// Always check, no cache
+				case 1:
+					try
+					{
+						databaseBytes = await DatabaseFetcher.FetchBytesAsync(DB_URL, default);
+					}
+					catch (HttpRequestException)
+					{
+						return DatabaseFetchResult.CheckErrorNoCache; // critical error
+					}
+
+					return DatabaseFetchResult.CheckNoCache;
+
+				// Always check and cache
+				case 2:
+					try
+					{
+
+						databaseBytes = await DatabaseFetcher.FetchBytesAsync(DB_URL, default);
+
+						// todo: check whether the downloaded database is actually more recent
+						//		 if it is, cache it; if not, do not cache it
+						await cache.SetAsync(CACHED_DB_ENTRYNAME, databaseBytes, CacheTarget.Persistent);
+
+					}
+					catch (HttpRequestException)
+					{
+
+						var bytes = await cache.GetBytesAsync(CACHED_DB_ENTRYNAME);
+
+						if (bytes is null)
+							return DatabaseFetchResult.CheckErrorNoCache; // critical error
+
+						databaseBytes = bytes;
+
+					}
+
+					return DatabaseFetchResult.CheckAndCache;
+
+
+				// todo: handle the remaining setting's values
+
+			}
 
 			/*
-			// for now this simply downloads even if its already cached
+			
+			// xxx: what is below, in this comment, is not valid
+			//      as we are going to use the dedicated project
+			//		(DoomMapGuessr.Data) instead :)
+	
 			byte[] bytes = await client.GetByteArrayAsync(DB_URL);
 			await ApplicationState.Shared.Cache!.SetAsync("__cached_db", bytes);
 
@@ -229,6 +308,10 @@ namespace DoomMapGuessr
 
 			ApplicationState.Shared.SqliteConnection.Open();
 			*/
+
+			// todo: remove this "everything is valid" ahh return statement
+			//		 after implementing all necessary features
+			return default;
 
 		}
 
@@ -247,10 +330,61 @@ namespace DoomMapGuessr
 		)
 		{
 
-			// Host and DI
+			await PrepareRequirementsAsync(args);
+
+			BuildAvaloniaApp()
+				#if DEBUG
+				.WithDeveloperTools()
+				#endif
+				.StartWithClassicDesktopLifetime(args);
+
+			return 0;
+
+		}
+
+		private static void PrepareDependencyInjection(string[] args)
+		{
+
+			Host = CreateHostBuilder(args).Build();
+			Host.Start();
+			ApplicationServices.Root = Host.Services;
+
+		}
+
+		private static async Task PrepareDependencyInjectionAsync(string[] args)
+		{
+
 			Host = CreateHostBuilder(args).Build();
 			await Host.StartAsync();
 			ApplicationServices.Root = Host.Services;
+
+		}
+
+		public static void PrepareRequirements(string[] args)
+		{
+
+			// Host and DI
+			PrepareDependencyInjection(args);
+			ApplicationServices.VersionInfo = new(Assembly.GetExecutingAssembly());
+
+			PrepareApplicationSettings(ApplicationServices.Get<ISettingsService>());
+
+			// Fetch latest release
+			if (ApplicationServices.Get<ISettingsService>().GetBoolean("Update.Check"))
+				ApplicationServices.SavedRelease = ReleaseFetcher.FetchLatest("mf366-dev", "DoomMapGuessr");
+
+			DownloadSqliteDatabase();
+
+		}
+
+		// todo: implement this method (see DownloadSqliteDatabaseAsync in this file)
+		private static void DownloadSqliteDatabase() => throw new NotImplementedException();
+
+		public static async Task PrepareRequirementsAsync(string[] args)
+		{
+
+			// Host and DI
+			await PrepareDependencyInjectionAsync(args);
 			ApplicationServices.VersionInfo = new(Assembly.GetExecutingAssembly());
 
 			await PrepareApplicationSettingsAsync(ApplicationServices.Get<ISettingsService>());
@@ -260,14 +394,6 @@ namespace DoomMapGuessr
 				ApplicationServices.SavedRelease = await ReleaseFetcher.FetchLatestAsync("mf366-dev", "DoomMapGuessr");
 
 			await DownloadSqliteDatabaseAsync();
-
-			BuildAvaloniaApp()
-				#if DEBUG
-				.WithDeveloperTools()
-				#endif
-				.StartWithClassicDesktopLifetime(args);
-
-			return 0;
 
 		}
 

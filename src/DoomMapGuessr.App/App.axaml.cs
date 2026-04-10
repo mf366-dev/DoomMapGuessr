@@ -61,17 +61,12 @@ namespace DoomMapGuessr
 		public override void OnFrameworkInitializationCompleted()
 		{
 
+			#region Design Mode Setup
+
 			if (Design.IsDesignMode)
-			{
+				Program.PrepareRequirements([]);
 
-				var host = Program.CreateHostBuilder([]).Build();
-				host.Start();
-				ApplicationServices.Root = host.Services;
-				ApplicationServices.VersionInfo = new(Assembly.GetExecutingAssembly());
-
-				Program.PrepareApplicationSettings(ApplicationServices.Get<ISettingsService>());
-
-			}
+			#endregion
 
 			// Theme
 			RequestedThemeVariant = ApplicationServices.Get<ISettingsService>().GetBoolean("GUI.FollowSystem")

@@ -74,6 +74,15 @@ namespace DoomMapGuessr.Services.Settings
 		);
 
 		/// <summary>
+		/// Gets a stored long integer.
+		/// </summary>
+		/// <param name="key">The key</param>
+		/// <returns>The long integer</returns>
+		long GetInt64(
+			string key
+		);
+
+		/// <summary>
 		/// Gets a stored string.
 		/// </summary>
 		/// <param name="key">The key</param>
